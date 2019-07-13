@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A69F285C-46F0-40A0-A320-442D9BB6C9F3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DB_Architect</RootNamespace>
+    <AssemblyName>DB Architect</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>Architect.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutArchitect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutArchitect.Designer.cs">
+      <DependentUpon>AboutArchitect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.Designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog.Designer.cs">
+      <DependentUpon>Dialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="New Table.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="New Table.Designer.cs">
+      <DependentUpon>New Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Database.cs" />
+    <Compile Include="Key.cs" />
+    <Compile Include="NewQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewQuery.Designer.cs">
+      <DependentUpon>NewQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewDatabase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewDatabase.Designer.cs">
+      <DependentUpon>NewDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties_Dialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties_Dialog.Designer.cs">
+      <DependentUpon>Properties_Dialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Server.cs" />
+    <Compile Include="SettingsParser.cs" />
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutArchitect.resx">
+      <DependentUpon>AboutArchitect.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog.resx">
+      <DependentUpon>Dialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="New Table.resx">
+      <DependentUpon>New Table.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewQuery.resx">
+      <DependentUpon>NewQuery.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewDatabase.resx">
+      <DependentUpon>NewDatabase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties_Dialog.resx">
+      <DependentUpon>Properties_Dialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TablePreview.resx">
+      <DependentUpon>TablePreview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DesignView.resx">
+      <DependentUpon>DesignView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TreeView.resx">
+      <DependentUpon>TreeView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeScreen.resx">
+      <DependentUpon>WelcomeScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window.resx">
+      <DependentUpon>Window.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Table.cs" />
+    <Compile Include="TablePreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TablePreview.Designer.cs">
+      <DependentUpon>TablePreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DesignView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesignView.Designer.cs">
+      <DependentUpon>DesignView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TransitAgent\TransitAgent.cs" />
+    <Compile Include="TreeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TreeView.Designer.cs">
+      <DependentUpon>TreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WelcomeScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WelcomeScreen.Designer.cs">
+      <DependentUpon>WelcomeScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Architect.ico" />
+    <Content Include="Icon.ico" />
+    <None Include="Resources\QueryFileHighlight.png" />
+    <None Include="Resources\QueryFile.png" />
+    <None Include="Resources\Execute Higlihht.png" />
+    <None Include="Resources\Execute.png" />
+    <None Include="Resources\SaveHighlight.png" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\ViewRecords.png" />
+    <None Include="Resources\EditRecords.png" />
+    <None Include="Resources\DesignView.png" />
+    <None Include="Resources\RelationShips2.png" />
+    <None Include="Resources\RelationShips1.png" />
+    <None Include="Resources\RelationShips.png" />
+    <None Include="Resources\AboutAero112.png" />
+    <None Include="Resources\AboutAero.png" />
+    <None Include="Resources\AeroEffect28.png" />
+    <None Include="Resources\AeroEffect27.png" />
+    <None Include="Resources\AeroEffect26.png" />
+    <None Include="Resources\AeroEffect25.png" />
+    <None Include="Resources\AeroEffect24.png" />
+    <None Include="Resources\AeroEffect23.png" />
+    <None Include="Resources\AeroEffect2.png" />
+    <None Include="Resources\AeroEffect22.png" />
+    <None Include="Resources\AeroEffect21.png" />
+    <None Include="Resources\AeroEffect1.png" />
+    <None Include="Resources\AboutIco.png" />
+    <None Include="Resources\About.png" />
+    <None Include="Resources\Options Gear.png" />
+    <None Include="Resources\Setings.png" />
+    <None Include="Resources\Disconnect.png" />
+    <None Include="Resources\Help.png" />
+    <None Include="Resources\AddNew.png" />
+    <None Include="Resources\MenuBG.png" />
+    <None Include="Resources\TableHighlight.png" />
+    <None Include="Resources\Table.png" />
+    <None Include="Resources\Server.png" />
+    <None Include="Resources\Question.png" />
+    <None Include="Resources\Query Highlight.png" />
+    <None Include="Resources\Query Frameless.png" />
+    <None Include="Resources\Query.png" />
+    <None Include="Resources\Database Highlight.png" />
+    <None Include="Resources\Database Frameless.png" />
+    <None Include="Resources\Database Activity.png" />
+    <None Include="Resources\Database.png" />
+    <None Include="Resources\Activity.png" />
+    <None Include="Resources\Architect Logo Highlight.png" />
+    <None Include="Resources\Error Icon.png" />
+    <None Include="Resources\Background.png" />
+    <None Include="Resources\MasterHighlight.png" />
+    <None Include="Resources\Untitled-2.png" />
+    <None Include="Resources\Home.png" />
+    <None Include="Resources\Bar1.png" />
+    <None Include="Resources\AeroEffect.png" />
+    <None Include="Resources\Architect Logo.png" />
+    <None Include="Resources\Architect Welcome Screen1.png" />
+    <None Include="Resources\Splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
