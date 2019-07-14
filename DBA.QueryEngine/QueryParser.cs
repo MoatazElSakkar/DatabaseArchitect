@@ -89,15 +89,15 @@ namespace DBA.QueryEngine
             return Input;
         }
 
-        public Query Reorder()
+        public QueryTree Reorder()
         {
-            Query PostProcess = new Query();
+            QueryTree PostProcess = new QueryTree();
 
             while (currentToken < Subject.QueryTokens.Count && Peak.Type!=TokenType.SemiColon)
             {
                 if (Parsers.ContainsKey(Subject.QueryTokens[currentToken].Type))
                 {
-                    Parsers[Subject.QueryTokens[currentToken].Type]();
+                    PostProcess.Root=Parsers[Subject.QueryTokens[currentToken].Type]();
                 }
             }
             return PostProcess;
@@ -272,6 +272,7 @@ namespace DBA.QueryEngine
                     if (Path[currentToken].Type == TokenType.RBracket)
                         break;
                     Match(Path[currentToken], TokenType.Comma);
+                    currentToken++;
                 }
             }
 
@@ -286,12 +287,16 @@ namespace DBA.QueryEngine
         private Node VALUES()
         {
             Node N = new Node(Read);
-            Match(Peak, TokenType.LBracket);
+            Match(Read, TokenType.LBracket);
             while(currentToken < Path.Count)
             {
                 Match(Peak, TokenType.Immediate_value);
                 N.Children.Add(new Node(Read));
-                if (Peak.Type == TokenType.RBracket) { break; }
+                if (Peak.Type == TokenType.RBracket)
+                {
+                    currentToken++;
+                    break;
+                }
                 Match(Read, TokenType.Comma);
             }
             return N;
@@ -310,9 +315,9 @@ namespace DBA.QueryEngine
                 N.Children.Add(Expression);
 
                 if (Peak.Type == TokenType.Boolean_OR)
-                    WhereRecursive(N);
+                    WhereRecursive(N.Children.Last());
                 else if (Peak.Type == TokenType.Boolean_And)
-                    continue;
+                    currentToken++;
                 else
                     break;
 
@@ -324,6 +329,8 @@ namespace DBA.QueryEngine
 
         private void WhereRecursive(Node N)
         {
+            N.Children.Add(new Node(new Token("", TokenType.Composite)));
+            N = N.Children.Last();
             currentToken++;
             while (currentToken < Path.Count)
             {
@@ -334,9 +341,9 @@ namespace DBA.QueryEngine
                 N.Children.Add(Expression);
 
                 if (Peak.Type == TokenType.Boolean_OR)
-                    WhereRecursive(N);
+                    WhereRecursive(Expression);
                 else if (Peak.Type == TokenType.Boolean_And)
-                    continue;
+                    currentToken++;
                 else
                     break;
 
@@ -358,14 +365,15 @@ namespace DBA.QueryEngine
             Node N = new Node(Read);
             for (; currentToken < Path.Count; currentToken++)
             {
-                Match(Peak, TokenType.Identifier_Key);
+                if (Peak.Type != TokenType.Closure)
+                    Match(Peak, TokenType.Identifier_Key);
 
                 N.Children.Add(new Node(Read));
 
-                if (currentToken < Path.Count - 1 && 
-                    Path[currentToken + 1].Type != TokenType.Comma)
+                if (currentToken < Path.Count && 
+                     Peak.Type != TokenType.Comma)
                 {
-                    Match(Path[currentToken + 1], TokenType.FROM_KW);
+                    Match(Peak, TokenType.FROM_KW);
                     break;
                 }
             }

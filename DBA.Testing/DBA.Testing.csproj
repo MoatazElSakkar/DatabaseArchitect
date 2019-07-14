@@ -50,17 +50,34 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="QueryTests.cs" />
     <Compile Include="Serialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DB Architect\DB Architect\DB Architect.csproj">
+      <Project>{a69f285c-46f0-40a0-a320-442d9bb6c9f3}</Project>
+      <Name>DB Architect</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DBA Server Test\DBA Server Test\DBA Server Test.csproj">
       <Project>{7e644d71-2413-4727-87a3-f718ee6f8704}</Project>
       <Name>DBA Server Test</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DBA.Arithmetic\DBA.Arithmetic.csproj">
+      <Project>{f54c0f2f-e10b-4dbd-9016-2402c7ecaa10}</Project>
+      <Name>DBA.Arithmetic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DBA.QueryEngine\DBA.QueryEngine.csproj">
       <Project>{73742b8e-35cd-4a67-a9f8-f4d6cf858413}</Project>
       <Name>DBA.QueryEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBA.Refrences\DBA.Refrences.csproj">
+      <Project>{66393b23-41f6-488c-8f75-c7e9c62f4cf9}</Project>
+      <Name>DBA.Refrences</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBA.RelationalModel\DBA.RelationalModel.csproj">
+      <Project>{ef3e3415-9200-45e4-bc61-5960a765df2f}</Project>
+      <Name>DBA.RelationalModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\DBA.Structure\DBA.Structure.csproj">
       <Project>{5ab1c737-0455-4974-ab1a-3fdaedf8450c}</Project>

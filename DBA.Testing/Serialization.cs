@@ -18,14 +18,6 @@ namespace DBA.Testing
             {
                 Tb.ReadRecords();
             }
-        }
-
-        [TestMethod]
-        public void QueryEngineTest1()
-        {
-            Query Q = new Query("SELECT * FROM PROJECTS WHERE w>90;");
-            QueryScanner QS = new QueryScanner(Q);
-            Q=QS.Scan();
-        }
+        } 
     }
 }

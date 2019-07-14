@@ -84,9 +84,9 @@ namespace DBA.QueryEngine
 
                 {",",TokenType.Comma          },        // ''
                 {"*",TokenType.Closure        },        // '*'
-                {";",TokenType.SemiColon      },        // ';'
-                {"\'",TokenType.SingleQuote   },        // '''
-                {"\"",TokenType.DoubleQuote   },        // '"'
+                //{";",TokenType.SemiColon      },        // ';'
+                //{"\'",TokenType.SingleQuote   },        // '''
+                //{"\"",TokenType.DoubleQuote   },        // '"'
 
                 {"+",TokenType.Addition       },        // '+'
                 {"-",TokenType.Subtraction    },        // '-'
@@ -95,14 +95,14 @@ namespace DBA.QueryEngine
                 {"=",TokenType.Equal },                 // '='
 
                 {">",TokenType.GreaterThan    },        // '>'
-                {"<",TokenType.LessThan       }         // '<'
+                {"<",TokenType.LessThan       },         // '<'
+                {"(",TokenType.LBracket       },        // '<'
+                {")",TokenType.RBracket       },         // '<'
         };
 
-        char[] delimiters = {',',' ','\t','\n','\r'};
+        char[] delimiters = {' ','\t','\n','\r',';'};
 
         public delegate void ParserFunction(List<Token> Path, string Literal);
-
-        List<Token> QueryTokens;
 
         static Dictionary<string, ParserFunction> Parsers;
         
@@ -137,6 +137,10 @@ namespace DBA.QueryEngine
                 //Register Inconsistency
                 return string.Empty;
             }
+            else if (Current==';')
+            {
+                return ";";
+            }
 
             while (delimiters.Contains(Current)) { currentLocation++; }
             if (OpRefrence.ContainsKey(Current.ToString()))
@@ -150,12 +154,16 @@ namespace DBA.QueryEngine
             if (Literal) { currentLocation++; }
             bool Escape = false;
 
-            while (!EndOfText&&Current!=' ' && !OpRefrence.ContainsKey(Current.ToString()) || Literal && Current!='\"' || Escape)
+            while (!EndOfText&&
+                (!delimiters.Contains(Current)||Literal) && 
+                !OpRefrence.ContainsKey(Current.ToString()) &&
+                (!Literal || Current!='\"') || Escape)
             {
                 Escape = (Current == '\\') && !Escape;
                 bufferText += Current;
                 currentLocation++;
             }
+            if (Literal) { currentLocation++; }
             return bufferText;
         }
 
@@ -389,7 +397,7 @@ namespace DBA.QueryEngine
             string Token = getToken();
             if (Token.ToUpper()!="INTO")
             {
-                //Register Inconsistency
+                throw new Exception("Expected keyword INTO");
             }
             Path.Add(new Token(Token, TokenType.INTO_KW));
 
@@ -404,13 +412,14 @@ namespace DBA.QueryEngine
                 if (Token != ")")
                     while (true)
                     {
-                        Token = getToken();
-                        Path.Add(new Token(Token, TokenType.Identifier_Key));
                         if (Token == ",")
                             Path.Add(new Token(Token, TokenType.Comma));
                         else if (Token == ")")
                             break;
-                        //else register inconsistency
+                        else
+                           Path.Add(new Token(Token, TokenType.Identifier_Key));
+
+                        Token = getToken();
                     }
                 Path.Add(new Token(Token, TokenType.RBracket));
                 Token = getToken();
@@ -434,16 +443,19 @@ namespace DBA.QueryEngine
             {/*Register Inconsistency*/ }
             else
             {
+                Path.Add(new Token(Token, TokenType.LBracket));
+                Token = getToken();
                 while (true)
                 {
-                    Token = getToken();
-                    Path.Add(new Token(Token, TokenType.Identifier_Key));
                     if (Token == ",")
                         Path.Add(new Token(Token, TokenType.Comma));
                     else if (Token == ")")
                         break;
-                    //else register inconsistency
+                    else
+                        Path.Add(new Token(Token, TokenType.Immediate_value));
+                    Token = getToken();
                 }
+                Path.Add(new Token(Token, TokenType.RBracket));
             }
         }
 
@@ -463,6 +475,7 @@ namespace DBA.QueryEngine
                 }
                 Parsers[Command](Q.QueryTokens, Command);
             }
+            Q.QueryTokens.Add(new Token(";", TokenType.SemiColon));
             return Q;
         }
 
@@ -473,19 +486,24 @@ namespace DBA.QueryEngine
             if (Token=="*")
             {
                 Path.Add(new Token(Token, TokenType.Closure));
+                Token = getToken();
             }
-            else if (Parsers.ContainsKey(Token))
+            else if (!Parsers.ContainsKey(Token))
                 while (true)
                 {
                     Path.Add(new Token(Token, TokenType.Identifier_Key));
                     Token = getToken();
 
-                    if (Token == ",") { continue; }
-                    else if (Parsers.ContainsKey(Token)) { break; }
-                    else { /*Register Inconsistency*/}
+                    if (Token == ",")
+                    {
+                        Path.Add(new Token(Token, TokenType.Comma));
+                        Token = getToken();
+                        continue;
+                    }
+                    else if (Parsers.ContainsKey(Token.ToUpper())) { break; }
+                    else { throw new Exception("Unexpected lexim encountered"); }
                 }
-            else
-               Parsers[Token](Path, Token);
+            Parsers[Token](Path, Token);
         }
 
         void From(List<Token> Path, string Literal)
@@ -509,9 +527,19 @@ namespace DBA.QueryEngine
         void Where(List<Token> Path, string Literal)
         {
             Path.Add(new Token(Literal, TokenType.WHERE_KW));
-            string Token = getToken();
-            while (Token!=";")
+            string Token = "";
+            while (true)
             {
+                Token = getToken();
+                if (OpRefrence.ContainsKey(Token.ToUpper()))
+                {
+                    Path.Add(new Token(Token.ToUpper(), OpRefrence[Token.ToUpper()]));
+                    Token = getToken();
+                }
+                else if (Token==";")
+                {
+                    break;
+                }
                 Path.Add(new Token(Token, TokenType.Identifier_Key));
 
                 Token = getToken();
@@ -519,8 +547,6 @@ namespace DBA.QueryEngine
 
                 Token = getToken();
                 Path.Add(new Token(Token, TokenType.Immediate_value));
-
-                Token = getToken();
             }
             Path.Add(new Token(Token, TokenType.SemiColon));
         }
