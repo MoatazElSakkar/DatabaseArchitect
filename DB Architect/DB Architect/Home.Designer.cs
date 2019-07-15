@@ -95,10 +95,11 @@
             // 
             // Status
             // 
+            this.Status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Status.AutoSize = true;
             this.Status.BackColor = System.Drawing.Color.Gray;
             this.Status.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Status.Location = new System.Drawing.Point(1122, 640);
+            this.Status.Location = new System.Drawing.Point(1218, 714);
             this.Status.Name = "Status";
             this.Status.Size = new System.Drawing.Size(95, 13);
             this.Status.TabIndex = 5;
@@ -117,8 +118,9 @@
             // 
             // StatusPic
             // 
+            this.StatusPic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.StatusPic.BackColor = System.Drawing.Color.Gray;
-            this.StatusPic.Location = new System.Drawing.Point(1103, 639);
+            this.StatusPic.Location = new System.Drawing.Point(1199, 713);
             this.StatusPic.Name = "StatusPic";
             this.StatusPic.Size = new System.Drawing.Size(15, 15);
             this.StatusPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -146,9 +148,9 @@
             this.QueryBtn.Name = "QueryBtn";
             this.QueryBtn.Size = new System.Drawing.Size(188, 45);
             this.QueryBtn.TabIndex = 15;
-            this.QueryBtn.MouseLeave += new System.EventHandler(this.QueryBtn_MouseLeave);
             this.QueryBtn.Click += new System.EventHandler(this.QueryBtn_Click);
             this.QueryBtn.MouseEnter += new System.EventHandler(this.QueryBtn_MouseEnter);
+            this.QueryBtn.MouseLeave += new System.EventHandler(this.QueryBtn_MouseLeave);
             // 
             // pictureBox7
             // 
@@ -168,7 +170,7 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(43, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 17);
+            this.label3.Size = new System.Drawing.Size(46, 17);
             this.label3.TabIndex = 1;
             this.label3.Text = "Query";
             // 
@@ -181,9 +183,9 @@
             this.TableBtn.Name = "TableBtn";
             this.TableBtn.Size = new System.Drawing.Size(188, 45);
             this.TableBtn.TabIndex = 14;
-            this.TableBtn.MouseLeave += new System.EventHandler(this.TableBtn_MouseLeave);
             this.TableBtn.Click += new System.EventHandler(this.TableBtn_Click);
             this.TableBtn.MouseEnter += new System.EventHandler(this.TableBtn_MouseEnter);
+            this.TableBtn.MouseLeave += new System.EventHandler(this.TableBtn_MouseLeave);
             // 
             // pictureBox1
             // 
@@ -203,7 +205,7 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(43, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 17);
+            this.label2.Size = new System.Drawing.Size(41, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Table";
             // 
@@ -216,9 +218,9 @@
             this.DatabaseBtn.Name = "DatabaseBtn";
             this.DatabaseBtn.Size = new System.Drawing.Size(188, 45);
             this.DatabaseBtn.TabIndex = 13;
-            this.DatabaseBtn.MouseLeave += new System.EventHandler(this.DatabaseBtn_MouseLeave);
             this.DatabaseBtn.Click += new System.EventHandler(this.DatabaseBtn_Click);
             this.DatabaseBtn.MouseEnter += new System.EventHandler(this.DatabaseBtn_MouseEnter);
+            this.DatabaseBtn.MouseLeave += new System.EventHandler(this.DatabaseBtn_MouseLeave);
             // 
             // pictureBox6
             // 
@@ -252,9 +254,9 @@
             this.ArchitectLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ArchitectLogo.TabIndex = 0;
             this.ArchitectLogo.TabStop = false;
-            this.ArchitectLogo.MouseLeave += new System.EventHandler(this.ArchitectLogo_MouseLeave);
             this.ArchitectLogo.Click += new System.EventHandler(this.ArchitectLogo_Click);
             this.ArchitectLogo.MouseEnter += new System.EventHandler(this.ArchitectLogo_MouseEnter);
+            this.ArchitectLogo.MouseLeave += new System.EventHandler(this.ArchitectLogo_MouseLeave);
             // 
             // Menu
             // 
@@ -279,9 +281,9 @@
             this.Disconnect.Name = "Disconnect";
             this.Disconnect.Size = new System.Drawing.Size(188, 45);
             this.Disconnect.TabIndex = 13;
-            this.Disconnect.MouseLeave += new System.EventHandler(this.Disconnect_MouseLeave);
             this.Disconnect.Click += new System.EventHandler(this.Disconnect_Click);
             this.Disconnect.MouseEnter += new System.EventHandler(this.Disconnect_MouseEnter);
+            this.Disconnect.MouseLeave += new System.EventHandler(this.Disconnect_MouseLeave);
             // 
             // Man_lbl4
             // 
@@ -315,9 +317,9 @@
             this.Options.Name = "Options";
             this.Options.Size = new System.Drawing.Size(188, 45);
             this.Options.TabIndex = 12;
-            this.Options.MouseLeave += new System.EventHandler(this.Options_MouseLeave);
             this.Options.Click += new System.EventHandler(this.Options_Click);
             this.Options.MouseEnter += new System.EventHandler(this.Options_MouseEnter);
+            this.Options.MouseLeave += new System.EventHandler(this.Options_MouseLeave);
             // 
             // Men_lbl3
             // 
@@ -351,9 +353,9 @@
             this.About.Name = "About";
             this.About.Size = new System.Drawing.Size(188, 45);
             this.About.TabIndex = 11;
-            this.About.MouseLeave += new System.EventHandler(this.Help_MouseLeave);
             this.About.Click += new System.EventHandler(this.About_Click);
             this.About.MouseEnter += new System.EventHandler(this.Help_MouseEnter);
+            this.About.MouseLeave += new System.EventHandler(this.Help_MouseLeave);
             // 
             // Men_lbl2
             // 
@@ -388,8 +390,8 @@
             this.AddNew.Name = "AddNew";
             this.AddNew.Size = new System.Drawing.Size(188, 45);
             this.AddNew.TabIndex = 10;
-            this.AddNew.MouseLeave += new System.EventHandler(this.AddNew_MouseLeave);
             this.AddNew.MouseEnter += new System.EventHandler(this.AddNew_MouseEnter);
+            this.AddNew.MouseLeave += new System.EventHandler(this.AddNew_MouseLeave);
             // 
             // Arrow_lbl
             // 
@@ -428,27 +430,33 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.Image = global::DB_Architect.Properties.Resources.Untitled_2;
-            this.pictureBox4.Location = new System.Drawing.Point(-11, 638);
+            this.pictureBox4.Location = new System.Drawing.Point(-11, 712);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(1265, 21);
+            this.pictureBox4.Size = new System.Drawing.Size(1367, 21);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 3;
             this.pictureBox4.TabStop = false;
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.Image = global::DB_Architect.Properties.Resources.Bar1;
             this.pictureBox2.Location = new System.Drawing.Point(-5, 50);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1306, 18);
+            this.pictureBox2.Size = new System.Drawing.Size(1361, 18);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
             // ServerData
             // 
+            this.ServerData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerData.BackgroundImage = global::DB_Architect.Properties.Resources.Untitled_2;
             this.ServerData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ServerData.Controls.Add(this.ChangePass);
@@ -457,24 +465,26 @@
             this.ServerData.Controls.Add(this.Server);
             this.ServerData.Location = new System.Drawing.Point(-10, 68);
             this.ServerData.Name = "ServerData";
-            this.ServerData.Size = new System.Drawing.Size(1265, 5);
+            this.ServerData.Size = new System.Drawing.Size(1360, 87);
             this.ServerData.TabIndex = 11;
             this.ServerData.Visible = false;
             // 
             // ChangePass
             // 
+            this.ChangePass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ChangePass.AutoSize = true;
             this.ChangePass.BackColor = System.Drawing.Color.Transparent;
             this.ChangePass.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChangePass.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.ChangePass.Location = new System.Drawing.Point(1132, 6);
+            this.ChangePass.Location = new System.Drawing.Point(1205, 3);
             this.ChangePass.Name = "ChangePass";
-            this.ChangePass.Size = new System.Drawing.Size(130, 20);
+            this.ChangePass.Size = new System.Drawing.Size(129, 20);
             this.ChangePass.TabIndex = 6;
             this.ChangePass.Text = "Change Password";
-            this.ChangePass.MouseLeave += new System.EventHandler(this.ChangePass_MouseLeave);
             this.ChangePass.Click += new System.EventHandler(this.ChangePass_Click);
             this.ChangePass.MouseEnter += new System.EventHandler(this.ChangePass_MouseEnter);
+            this.ChangePass.MouseLeave += new System.EventHandler(this.ChangePass_MouseLeave);
             // 
             // IPA
             // 
@@ -496,7 +506,7 @@
             this.ServerName.ForeColor = System.Drawing.Color.White;
             this.ServerName.Location = new System.Drawing.Point(151, 17);
             this.ServerName.Name = "ServerName";
-            this.ServerName.Size = new System.Drawing.Size(132, 30);
+            this.ServerName.Size = new System.Drawing.Size(133, 30);
             this.ServerName.TabIndex = 4;
             this.ServerName.Text = "ServerName";
             // 
@@ -512,19 +522,23 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox5.Image = global::DB_Architect.Properties.Resources.Background;
             this.pictureBox5.Location = new System.Drawing.Point(-1, 68);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(1255, 573);
+            this.pictureBox5.Size = new System.Drawing.Size(1357, 647);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 4;
             this.pictureBox5.TabStop = false;
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.BackColor = System.Drawing.Color.Black;
             this.pictureBox3.Image = global::DB_Architect.Properties.Resources.AeroEffect26;
-            this.pictureBox3.Location = new System.Drawing.Point(1, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(91, 0);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(1260, 50);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -535,7 +549,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1254, 655);
+            this.ClientSize = new System.Drawing.Size(1350, 729);
             this.Controls.Add(this.StatusPic);
             this.Controls.Add(this.AddMenu);
             this.Controls.Add(this.ArchitectLogo);
@@ -553,8 +567,8 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Database Architect";
-            this.Load += new System.EventHandler(this.Home_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Home_FormClosing);
+            this.Load += new System.EventHandler(this.Home_Load);
             ((System.ComponentModel.ISupportInitialize)(this.StatusPic)).EndInit();
             this.AddMenu.ResumeLayout(false);
             this.QueryBtn.ResumeLayout(false);

@@ -354,26 +354,33 @@ namespace DBA.QueryEngine
         private void Update(List<Token> Path, string Literal)
         {
             Path.Add(new Token(Literal, TokenType.UPDATE_cmd));
-            string Token = getToken();
 
+            string Token = getToken();
+            Path.Add(new Token(Token, TokenType.Identifier_Table));
+
+            Token = getToken();
             if (Token.ToUpper()!="SET")
             {
-                //Register Inconsistency
-                return;
+                throw new Exception("Keyword unrecognized, SET Expected");
             }
             Path.Add(new Token(Token, TokenType.SET_cmd));
 
-            while(true)
+            while(!EndOfText)
             {
                 Token = getToken();
-                if (!EndOfText && (Token.ToUpper() == "WHERE" || Token==";")) { break; }
+                if (Token==",")
+                {
+                    Path.Add(new Token(Token, TokenType.Comma));
+                    continue;
+                }
+                else if (Token.ToUpper() == "WHERE" || Token==";") { break; }
+                
                 Path.Add(new Token(Token, TokenType.Identifier_Key));
 
                 Token = getToken();
                 if (Token!="=")
                 {
-                    //register Inconsistency
-                    return;
+                    throw new Exception("Unrecognized operator, \'=\' Expected");
                 }
                 Path.Add(new Token(Token, TokenType.Equal));
 
@@ -548,7 +555,6 @@ namespace DBA.QueryEngine
                 Token = getToken();
                 Path.Add(new Token(Token, TokenType.Immediate_value));
             }
-            Path.Add(new Token(Token, TokenType.SemiColon));
         }
     }
 }

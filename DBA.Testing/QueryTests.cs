@@ -41,5 +41,25 @@ namespace DBA.Testing
             QueryParser QP = new QueryParser(Q);
             QueryTree QT = QP.Reorder();
         }
+
+        [TestMethod]
+        public void UpdateTest()
+        {
+            Query Q = new Query("UPDATE Projects SET ID=1, Name=\"Database Architect\", Rating=100 WHERE ID=1;");
+            QueryScanner QS = new QueryScanner(Q);
+            Q = QS.Scan();
+            QueryParser QP = new QueryParser(Q);
+            QueryTree QT = QP.Reorder();
+        }
+
+        [TestMethod]
+        public void UpdateTest2()
+        {
+            Query Q = new Query("UPDATE Projects SET ID=1, Name=\"Database Architect\", Rating=100;");
+            QueryScanner QS = new QueryScanner(Q);
+            Q = QS.Scan();
+            QueryParser QP = new QueryParser(Q);
+            QueryTree QT = QP.Reorder();
+        }
     }
 }

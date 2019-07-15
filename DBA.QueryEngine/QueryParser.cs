@@ -224,25 +224,28 @@ namespace DBA.QueryEngine
             N.Children.Add(new Node(Match(Read, TokenType.Identifier_Table)));
             Match(Peak, TokenType.SET_cmd);
             N.Children.Add(SetParse());
-            N.Children.Add(Where());
+            if (Peak.Type == TokenType.WHERE_KW)
+                N.Children.Add(Where());
             return N;
         }
 
         private Node SetParse()
         {
             Node N = new Node(new Token(Peak.TokenData, Peak.Type));
-            while (currentToken < Path.Count &&
-                Peak.Type != TokenType.WHERE_KW || Peak.Type != TokenType.SemiColon)
+            while (currentToken < Path.Count)
             {
                 Node tmp = new Node(new Token("", TokenType.Composite));
                 currentToken++;
 
                 tmp.Children.Add(new Node(Match(Read, TokenType.Identifier_Key)));
-                Match(Peak, TokenType.Equal);
+                Match(Read, TokenType.Equal);
                 tmp.Children.Add(new Node(Match(Read, TokenType.Immediate_value)));
                 N.Children.Add(tmp);
-                Match(Peak, TokenType.Comma);
 
+                if (Peak.Type != TokenType.WHERE_KW && Peak.Type != TokenType.SemiColon)
+                    Match(Peak, TokenType.Comma);
+                else
+                    break;
             }
             return N;
         }
@@ -262,7 +265,7 @@ namespace DBA.QueryEngine
             N.Children.Add(new Node(new Token("", TokenType.Composite)));
             currentToken++;
 
-            for (;currentToken < Path.Count;)
+            while(currentToken < Path.Count)
             {
                 Match(Peak, TokenType.Identifier_Key);
                 N.Children.Last().Children.Add(new Node(Read));
