@@ -177,18 +177,21 @@ namespace DBA.Refrences
             {DATATYPE.TIMESTAMP ,DateTimeDecoder  },
             {DATATYPE.YEAR      ,DateTimeDecoder  },
             {DATATYPE.CHAR      ,SingleByteDecoder},
-            {DATATYPE.STRING    ,VarcharDecoder   },
+            {DATATYPE.STRING    ,VarcharCompare   },
             {DATATYPE.BOOLEAN   ,SingleByteDecoder},
-            {DATATYPE.BINARY    ,BinFileDecoder   }
+            {DATATYPE.BINARY    ,BinFileCompare   }
         };
-        public static int BinFileDecoder(byte[] A, byte[] B)
+        public static int BinFileCompare(byte[] A, byte[] B)
         {
+            //Use MD5 For files comparison
             throw new NotImplementedException();
         }
 
-        public static int VarcharDecoder(byte[] A, byte[] B)
+        public static int VarcharCompare(byte[] A, byte[] B)
         {
-            throw new NotImplementedException();
+            string a = Encoding.Default.GetString(A);
+            string b = Encoding.Default.GetString(B);
+            return a == b ? 0 : 1;
         }
 
         public static int  DateTimeDecoder(byte[] A, byte[] B)

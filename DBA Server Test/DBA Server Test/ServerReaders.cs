@@ -67,6 +67,7 @@ namespace DBA_Server_Test
                 DB.Tables.Add(new Table(s));
                 DB.Tables.Last().Read();
             }
+            Reader.Close();
         }
 
         public static void Read(this Table Tableu)
@@ -101,6 +102,7 @@ namespace DBA_Server_Test
                         break;
                 }
             }
+            Reader.Close();
         }
 
         public static void ReadRecords(this Table Tableu)

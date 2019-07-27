@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DBA.QueryEngine;
+using DBA.Structure;
+using DBA_Server_Test;
 
 namespace DBA.Testing
 {
@@ -14,11 +16,19 @@ namespace DBA.Testing
         [TestMethod]
         public void SELECT1()
         {
+            Database DB = new Database(@"C:\Users\Moataz\Workspace\Software\Database Architect\Active Code\DatabaseArchitect\Southwind\Database.db.txt");
+            DB.Read();
+            foreach (Table T in DB.Tables)
+            {
+                T.ReadRecords();
+            }
             Query Q = new Query("SELECT * FROM Projects WHERE Rating=90 or Name=\"DatabaseArchitect\";");
             QueryScanner QS = new QueryScanner(Q);
             Q=QS.Scan();
             QueryParser QP = new QueryParser(Q);
-            QueryTree QT=QP.Reorder();   
+            QueryTree QT=QP.Reorder();
+            QueryExecutioner QE = new QueryExecutioner(QT, DB);
+            QE.ExecuteQuery();
         }
 
         [TestMethod]

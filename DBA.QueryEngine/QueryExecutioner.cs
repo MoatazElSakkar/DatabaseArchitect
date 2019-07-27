@@ -8,13 +8,13 @@ using DBA.Refrences;
 
 namespace DBA.QueryEngine
 {
-    class QueryExecutioner
+    public class QueryExecutioner
     {
         string Result = "";
 
         public delegate void Execution(Node Root);
 
-        static Dictionary<TokenType, Execution> Parsers;
+        static Dictionary<TokenType, Execution> Execs;
 
         List<Key> KeyIDs = new List<Key>();
         List<Table> Tables = new List<Table>();
@@ -27,7 +27,7 @@ namespace DBA.QueryEngine
         {
             Query = Q_Entry;
             Target = DB;
-            Parsers = new Dictionary<TokenType, Execution>()
+            Execs = new Dictionary<TokenType, Execution>()
             {
                 {TokenType.SELECT_cmd,Select },
                 {TokenType.FROM_KW,From },
@@ -81,7 +81,7 @@ namespace DBA.QueryEngine
 
         private class Comparison
         {
-            Token Condition;
+            public Token Condition;
             public Comparison(Key i1,Key i2,bool i, Token C)
             {
                 K1 = i1;
@@ -97,6 +97,22 @@ namespace DBA.QueryEngine
                 Immediate = i;
                 Condition = C;
                 ChildCondition = Child;
+            }
+
+            public int Capacity
+            {
+                get
+                {
+                    return K1.DATA.Count;
+                }
+            }
+
+            public DATATYPE Datatype
+            {
+                get
+                {
+                    return K1.Type;
+                }
             }
 
             public Key K1
@@ -127,6 +143,14 @@ namespace DBA.QueryEngine
             public Node ChildCondition;
         }
 
+        public Table ExecuteQuery()
+        {
+            Table Tableu = new Table("Query output");
+            Execs[Query.Root.HostedToken.Type](Query.Root);
+
+            return Tableu;
+        }
+
         private Comparison CompileComparison(Node N)
         {
             Key ID = Tables.Last().getKey(N.Children[0].HostedToken.TokenData);
@@ -154,24 +178,70 @@ namespace DBA.QueryEngine
             PartialFilters = Enumerable.Range(0, Tables.Last().Records).ToList();
 
             foreach (Node N in Root.Children)
-            {
                 PartialFilters=AndCombine(PartialFilters,WhereSearch(CompileComparison(N)));
-            }
         }
 
         private List<int> WhereSearch(Comparison C)
         {
-            throw new NotImplementedException();
-            //List<int> Filter = Enumerable.Range(0, K1.DATA.Count).ToList();
+            List<int> Filter = new List<int>();
+            
+            for (int i1 = 0, i2 = 0;i1<C.Capacity;i1++)
+            {
+                if (Datatypes.CompareFunctions[C.Datatype](C.K1.DATA[i1], C.K2.DATA[i2])==ComparisonDecoder[C.Condition.TokenData[0]])
+                {
+                    Filter.Add(i1);
+                }
+                else if (C.hasChildCondition)
+                {
+                    if (WhereSearch(C.ChildCondition, i1))
+                    {
+                        Filter.Add(i1);
+                    }
+                }
+            }
+            return Filter;
+        }
 
-            //Note to self **IMPORTANT** When ORING create a single descent function
-            //compare with child compare only with a wheresearch recurse
- 
+        private bool WhereSearch(Node Ni, int index)
+        {
+            bool allTrue = true;
+            foreach (Node Ci in Ni.Children)
+            {
+                Comparison C = CompileComparison(Ci);
+                int i1 = index, i2 = C.Immediate ? 0 : index;
+                if (Datatypes.CompareFunctions[C.Datatype](C.K1.DATA[i1], C.K2.DATA[i2]) == ComparisonDecoder[C.Condition.TokenData[0]])
+                {
+                    continue;
+                }
+                else if (C.hasChildCondition)
+                {
+                    if (WhereSearch(C.ChildCondition, i1))
+                    {
+                        continue;
+                    }
+                }
+                allTrue = false;
+            }
+            return allTrue;
         }
 
         private List<int> AndCombine(List<int> a,List<int> b)
         {
-            throw new NotImplementedException();
+            List<int> Combined = new List<int>();
+            for (int i1=0,i2=0;i1<a.Count && i2<b.Count;)
+            {
+                if (a[i1] == b[i2])
+                {
+                    Combined.Add(a[i1]);
+                    i1++;
+                    i2++;
+                }
+                else if (a[i1] < b[i2])
+                    i1++;
+                else if (a[i1] > b[i2])
+                    i2++;
+            }
+            return Combined;
         }
 
         private void Insert(Node Root)
@@ -197,15 +267,6 @@ namespace DBA.QueryEngine
         private void Alter(Node Root)
         {
             throw new NotImplementedException();
-        }
-
-        public Table ExecuteQuery(Node Root)
-        {
-            Table Tableu = new Table("Query output");
-
-
-
-            return Tableu;
         }
     }
 }
