@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DBA.Structure;
+using DBA.Refrences;
 
 namespace DBA.QueryEngine
 {
@@ -71,19 +72,106 @@ namespace DBA.QueryEngine
             if (Root.Children.Count == 3) { Where(Root.Children[2]); }
         }
 
+        private Dictionary<char, int> ComparisonDecoder = new Dictionary<char, int>()
+        {
+            { '<' ,-1  },
+            { '>' , 1  },
+            { '=' , 0  }
+        };
+
+        private class Comparison
+        {
+            Token Condition;
+            public Comparison(Key i1,Key i2,bool i, Token C)
+            {
+                K1 = i1;
+                K2 = i2;
+                Immediate = i;
+                Condition = C;
+            }
+
+            public Comparison(Key i1, Key i2, bool i, Token C, Node Child)
+            {
+                K1 = i1;
+                K2 = i2;
+                Immediate = i;
+                Condition = C;
+                ChildCondition = Child;
+            }
+
+            public Key K1
+            {
+                get;
+                set;
+            }
+
+            public Key K2
+            {
+                get;
+                set;
+            }
+
+            public bool Immediate
+            {
+                get;
+                set;
+            }
+
+            public bool hasChildCondition
+            {
+                get
+                {
+                    return ChildCondition!=null;
+                }
+            }
+            public Node ChildCondition;
+        }
+
+        private Comparison CompileComparison(Node N)
+        {
+            Key ID = Tables.Last().getKey(N.Children[0].HostedToken.TokenData);
+            Key ID2;
+            bool Immediate = false;
+            if (N.Children[2].HostedToken.Type == TokenType.Identifier_Key)
+            {
+                ID2 = Tables.Last().getKey(N.Children[2].HostedToken.TokenData);
+            }
+            //else if (ReservedValues.contains()) //*Future Work
+            else
+            {
+                ID2 = new Key("~TEMP", ID.Type, ID.Constraint);
+                ID2.AddRecord(Datatypes.ConverterFunctions[ID.Type](N.Children[2].HostedToken.TokenData));
+                Immediate = true;
+            }
+            if (N.Children.Count>3)
+                return new Comparison(ID, ID2, Immediate, N.Children[1].HostedToken,N.Children[3]);
+            return new Comparison(ID, ID2,Immediate, N.Children[1].HostedToken);
+        }
+
         private void Where(Node Root)
         {
-            List<Key> Sources = new List<Key>();
             List<int> PartialFilters = new List<int>();
+            PartialFilters = Enumerable.Range(0, Tables.Last().Records).ToList();
+
             foreach (Node N in Root.Children)
             {
-                
+                PartialFilters=AndCombine(PartialFilters,WhereSearch(CompileComparison(N)));
             }
+        }
+
+        private List<int> WhereSearch(Comparison C)
+        {
+            throw new NotImplementedException();
+            //List<int> Filter = Enumerable.Range(0, K1.DATA.Count).ToList();
+
+            //Note to self **IMPORTANT** When ORING create a single descent function
+            //compare with child compare only with a wheresearch recurse
+ 
         }
 
         private List<int> AndCombine(List<int> a,List<int> b)
         {
-            
+            throw new NotImplementedException();
         }
 
         private void Insert(Node Root)

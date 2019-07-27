@@ -50,7 +50,7 @@ namespace DBA.Refrences
 
         public static byte[] FloatConverter(string input)
         {
-            return BitConverter.GetBytes(float.Parse(input));
+            return BitConverter.GetBytes(double.Parse(input));
         }
 
         public static byte[] Int64Converter(string input)
@@ -113,5 +113,114 @@ namespace DBA.Refrences
             {"BOOLEAN"  ,DATATYPE.BOOLEAN  },
             {"BINARY"   ,DATATYPE.BINARY   }
         };
+
+        public delegate string ByteDecoder(byte[] input);
+        public static Dictionary<DATATYPE, ByteDecoder> DecoderFunctions = new Dictionary<DATATYPE, ByteDecoder>()
+        {
+            {DATATYPE.BYTE      ,SingleByteDecoder},
+            {DATATYPE.INT32     ,Int32Decoder     },
+            {DATATYPE.INT64     ,Int64Decoder     },
+            {DATATYPE.FLOAT     ,FloatDecoder     },
+            {DATATYPE.DATE      ,DateTimeDecoder  },
+            {DATATYPE.TIME      ,DateTimeDecoder  },
+            {DATATYPE.TIMESTAMP ,DateTimeDecoder  },
+            {DATATYPE.YEAR      ,DateTimeDecoder  },
+            {DATATYPE.CHAR      ,SingleByteDecoder},
+            {DATATYPE.STRING    ,VarcharDecoder   },
+            {DATATYPE.BOOLEAN   ,SingleByteDecoder},
+            {DATATYPE.BINARY    ,BinFileDecoder   }
+        };
+        public static string BinFileDecoder(byte[] input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static string VarcharDecoder(byte[] input)
+        {
+            return Encoding.ASCII.GetString(input);
+        }
+
+        public static string DateTimeDecoder(byte[] input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static string FloatDecoder(byte[] input)
+        {
+            return BitConverter.ToString(input,0);
+        }
+
+        public static string Int64Decoder(byte[] input)
+        {
+            return BitConverter.ToString(input, 0);
+        }
+
+        public static string Int32Decoder(byte[] input)
+        {
+            return BitConverter.ToString(input, 0);
+        }
+
+        public static string SingleByteDecoder(byte[] input)
+        {
+            return BitConverter.ToString(input, 0);
+        }
+
+        public delegate int Compare(byte[] A,byte[] B);
+        public static Dictionary<DATATYPE, Compare> CompareFunctions = new Dictionary<DATATYPE, Compare>()
+        {
+            {DATATYPE.BYTE      ,SingleByteDecoder},
+            {DATATYPE.INT32     ,Int32Decoder     },
+            {DATATYPE.INT64     ,Int64Decoder     },
+            {DATATYPE.FLOAT     ,FloatDecoder     },
+            {DATATYPE.DATE      ,DateTimeDecoder  },
+            {DATATYPE.TIME      ,DateTimeDecoder  },
+            {DATATYPE.TIMESTAMP ,DateTimeDecoder  },
+            {DATATYPE.YEAR      ,DateTimeDecoder  },
+            {DATATYPE.CHAR      ,SingleByteDecoder},
+            {DATATYPE.STRING    ,VarcharDecoder   },
+            {DATATYPE.BOOLEAN   ,SingleByteDecoder},
+            {DATATYPE.BINARY    ,BinFileDecoder   }
+        };
+        public static int BinFileDecoder(byte[] A, byte[] B)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static int VarcharDecoder(byte[] A, byte[] B)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static int  DateTimeDecoder(byte[] A, byte[] B)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static int  FloatDecoder(byte[] A, byte[] B)
+        {
+            double a = BitConverter.ToDouble(A, 0);
+            double b = BitConverter.ToDouble(B, 0);
+            return a != b ? (int)((a - b) / Math.Abs(a - b)) : 0;
+
+        }
+
+        public static int  Int64Decoder(byte[] A, byte[] B)
+        {
+            long a = BitConverter.ToInt64(A, 0);
+            long b = BitConverter.ToInt64(B, 0);
+            return a!=b?(int)((a - b)/ Math.Abs(a- b)):0;
+        }
+
+        public static int  Int32Decoder(byte[] A, byte[] B)
+        {
+            int a = BitConverter.ToInt32(A, 0);
+            int b = BitConverter.ToInt32(B, 0);
+            return a != b ? (int)((a - b) / Math.Abs(a - b)) : 0;
+        }
+
+        public static int  SingleByteDecoder(byte[] A, byte[] B)
+        {
+            return A[0] != B[0] ? (int)((A[0] - B[0]) / Math.Abs(A[0] - B[0])) : 0;
+        }
     }
 }
