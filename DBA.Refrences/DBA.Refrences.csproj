@@ -40,13 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datatype.cs" />
     <Compile Include="Datatypes.cs" />
     <Compile Include="CustomDatatypes\Date.cs" />
+    <Compile Include="PrimitiveClass\Binary.cs" />
+    <Compile Include="PrimitiveClass\Boolean.cs" />
+    <Compile Include="PrimitiveClass\Byte.cs" />
+    <Compile Include="PrimitiveClass\Char.cs" />
+    <Compile Include="PrimitiveClass\Float.cs" />
+    <Compile Include="PrimitiveClass\Int32.cs" />
+    <Compile Include="PrimitiveClass\Int64.cs" />
+    <Compile Include="PrimitiveClass\String.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Standards.cs" />
     <Compile Include="CustomDatatypes\Time.cs" />
     <Compile Include="CustomDatatypes\TimeStamp.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -87,6 +87,19 @@ namespace DBA.Structure
                     Keys[i].AddRecord(Datatypes.Intializations[Keys[i].Type]);
             }
         }
+
+        public Key getKey(string KeyName)
+        {
+            foreach (Key K in Keys)
+            {
+                if (K.Name==KeyName)
+                {
+                    return K;
+                }
+            }
+            return null;
+        }
+
         public Table(string input)
         {
             if (!input.Contains('\\'))

@@ -56,5 +56,17 @@ namespace DBA.Structure
         }
 
         public List<Table> Tables = new List<Table>();
+
+        public Table getTable(string TableName)
+        {
+            foreach (Table T in Tables)
+            {
+                if (T.Name==TableName)
+                {
+                    return T;
+                }
+            }
+            return null;
+        }
     }
 }

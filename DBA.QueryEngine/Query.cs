@@ -11,6 +11,15 @@ namespace DBA.QueryEngine
         bool parsed = false;
 
         public List<Token> QueryTokens;
+
+        bool isParsed
+        {
+            get
+            {
+                return parsed;
+            }
+        }
+
         public string Literal
         {
             get;
@@ -25,6 +34,5 @@ namespace DBA.QueryEngine
         {
             parsed = true;
         }
-
     }
 }

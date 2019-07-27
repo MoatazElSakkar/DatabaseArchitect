@@ -53,7 +53,7 @@ namespace DBA.QueryEngine
         {
             get
             {
-                return currentToken < Path.Count;
+                return currentToken >= Path.Count;
             }
         }
         public Token Peak
@@ -178,9 +178,11 @@ namespace DBA.QueryEngine
                         Node Pair = new Node(new Token("", TokenType.Composite));
                         Pair.Children.Add(new Node(Match(Read,TokenType.Identifier_Key)));
                         Pair.Children.Add(new Node(Match(Read, TokenType.DATATYPE)));
-                        Match(Read, TokenType.Comma);
+                        if (Peak.Type != TokenType.RBracket)
+                            Match(Read, TokenType.Comma);
                         N.Children.Add(Pair);
                     }
+                    Match(Read, TokenType.RBracket);
                     break;
                 case TokenType.KEY_KW:
                     N.Children.Add(new Node(Match(Read, TokenType.Identifier_Key)));
@@ -194,23 +196,10 @@ namespace DBA.QueryEngine
         private Node Delete()
         {
             Node N = new Node(Read);
-            for (; currentToken < Path.Count; currentToken++)
-            {
-                if (Peak.Type == TokenType.Identifier_Key)
-                {
-                    N.Children.Add(new Node(Read));
-                }
-                if (currentToken < Subject.QueryTokens.Count && Peak.Type != TokenType.Comma)
-                {
-                    Match(Peak, TokenType.FROM_KW);
-                    break;
-                }
-            }
+            Match(Peak, TokenType.FROM_KW);
             N.Children.Add(From());
 
-            currentToken++;
-
-            if (Peak.Type != TokenType.WHERE_KW)
+            if (Peak.Type == TokenType.WHERE_KW)
             {
                 N.Children.Add(Where());
             }
@@ -366,12 +355,13 @@ namespace DBA.QueryEngine
         private Node Select()
         {
             Node N = new Node(Read);
+            Node Keys = new Node(new Token("",TokenType.Composite));
             for (; currentToken < Path.Count; currentToken++)
             {
                 if (Peak.Type != TokenType.Closure)
                     Match(Peak, TokenType.Identifier_Key);
 
-                N.Children.Add(new Node(Read));
+                Keys.Children.Add(new Node(Read));
 
                 if (currentToken < Path.Count && 
                      Peak.Type != TokenType.Comma)
@@ -380,6 +370,7 @@ namespace DBA.QueryEngine
                     break;
                 }
             }
+            N.Children.Add(Keys);
             N.Children.Add(From());
 
             if (Peak.Type == TokenType.WHERE_KW)

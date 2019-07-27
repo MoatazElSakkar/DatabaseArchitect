@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Query.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryExecutioner.cs" />
     <Compile Include="QueryParser.cs" />
     <Compile Include="QueryScan.cs" />
   </ItemGroup>
@@ -49,6 +50,10 @@
     <ProjectReference Include="..\DBA.Refrences\DBA.Refrences.csproj">
       <Project>{66393b23-41f6-488c-8f75-c7e9c62f4cf9}</Project>
       <Name>DBA.Refrences</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBA.Structure\DBA.Structure.csproj">
+      <Project>{5ab1c737-0455-4974-ab1a-3fdaedf8450c}</Project>
+      <Name>DBA.Structure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

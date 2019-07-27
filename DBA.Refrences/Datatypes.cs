@@ -68,7 +68,7 @@ namespace DBA.Refrences
             return BitConverter.GetBytes(byte.Parse(input));
         }
 
-        public static Dictionary<DATATYPE, Type> DatatypePreConverter = new Dictionary<DATATYPE, Type>()
+        public static Dictionary<DATATYPE, Type> DatatypeReConverter = new Dictionary<DATATYPE, Type>()
         {
             {DATATYPE.BYTE      ,typeof(byte)   },
             {DATATYPE.INT32     ,typeof(int)    },

@@ -12,7 +12,7 @@ namespace DBA.Testing
         [TestMethod]
         public void DatabaseDeserializing()
         {
-            Database DB = new Database(@"C:\Users\Moataz\Workspace\Software\Database Architect\Source Code\Build 113 - Copy - Copy\Southwind\Database.db.txt");
+            Database DB = new Database(@"C:\Users\Moataz\Workspace\Software\Database Architect\Active Code\DatabaseArchitect\Southwind\Database.db.txt");
             DB.Read();
             foreach (Table Tb in DB.Tables)
             {

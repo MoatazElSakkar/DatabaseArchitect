@@ -291,9 +291,13 @@ namespace DBA.QueryEngine
             {
                 case "DATABASE":
                     Path.Add(new Token(Token, TokenType.DATABASE_KW));
+                    Token = getToken();
+                    Path.Add(new Token(Token, TokenType.DATABASE_KW));
                     return;
                 case "TABLE":
                     Path.Add(new Token(Token, TokenType.TABLE_KW));
+                    Token = getToken();
+                    Path.Add(new Token(Token, TokenType.Identifier_Table));
                     break;
                 default:
                     //register inconsistency
@@ -303,29 +307,34 @@ namespace DBA.QueryEngine
             Token = getToken();
             if (Token!="(")
             {
-                //register inconsistency
+                throw new Exception("( Expected but " + Token + " encountered");
             }
-
+            Path.Add(new Token("(", TokenType.LBracket));
             Token = getToken();
-            while (Token != ")" && Token!=string.Empty)
+            while (Token != ")" && !EndOfText)
             {
                 Path.Add(new Token(Token, TokenType.Identifier_Key));
                 Token = getToken();
-                if (!Refrences.Datatypes.Datatype_str.Keys.Contains(Token.ToUpper()))
+                if (!Datatypes.Datatype_str.Keys.Contains(Token.ToUpper()))
                 {
-                    //register inconconsistency
+                    throw new Exception("Datatype invalid");
                 }
-                else
-                {
-                    Path.Add(new Token(Token, TokenType.Identifier_Key));
-                }
+                Path.Add(new Token(Token, TokenType.DATATYPE));
+                Token = getToken();
+                if (Token == ",")
+                    Path.Add(new Token(Token, TokenType.Comma));
+                else if (Token == ")")
+                    break;
+
+
                 Token = getToken();
             }
+            if (EndOfText) { throw new Exception("End of file encountered prematurly"); }
+            Path.Add(new Token(")", TokenType.RBracket));
             Token = getToken();
             if (Token!=";")
             {
-                //register inconconsistency
-
+                throw new Exception("Ivalid termination");
             }
         }
 
