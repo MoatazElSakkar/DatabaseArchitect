@@ -22,13 +22,13 @@ namespace DBA.Testing
             {
                 T.ReadRecords();
             }
-            Query Q = new Query("SELECT * FROM Projects WHERE Rating=90 or Name=\"DatabaseArchitect\";");
+            Query Q = new Query("SELECT Rating,Name,Rating FROM Projects WHERE Rating=90 or Name=\"Software Architect\" or Name=\"DatabaseArchitect\";");
             QueryScanner QS = new QueryScanner(Q);
             Q=QS.Scan();
             QueryParser QP = new QueryParser(Q);
             QueryTree QT=QP.Reorder();
             QueryExecutioner QE = new QueryExecutioner(QT, DB);
-            QE.ExecuteQuery();
+            Table Ti=QE.ExecuteQuery();
         }
 
         [TestMethod]

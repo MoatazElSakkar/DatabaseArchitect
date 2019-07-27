@@ -52,19 +52,21 @@ namespace DBA.Structure
             Constraint = C;
         }
 
-        public Key(Key CopyKey)
+        public Key(Key CopyKey, bool shallow=false)
         {
             Name = CopyKey.Name;
-            foreach (byte[] DATAITEM in CopyKey.DATA)
-            {
-                byte[] temp = new byte[DATAITEM.Length];
-                int i = 0;
-                foreach (byte b in DATAITEM)
+            Type = CopyKey.Type;
+            if (!shallow)
+                foreach (byte[] DATAITEM in CopyKey.DATA)
                 {
-                    temp[i++] = b;
+                    byte[] temp = new byte[DATAITEM.Length];
+                    int i = 0;
+                    foreach (byte b in DATAITEM)
+                    {
+                        temp[i++] = b;
+                    }
+                    DATA.Add(temp);
                 }
-                DATA.Add(temp);
-            }
             Constraint = CopyKey.Constraint;
         }
 

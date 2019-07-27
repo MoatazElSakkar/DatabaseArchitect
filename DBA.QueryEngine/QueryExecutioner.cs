@@ -12,11 +12,12 @@ namespace DBA.QueryEngine
     {
         string Result = "";
 
-        public delegate void Execution(Node Root);
+        public delegate Table Executive(Node Root);
 
-        static Dictionary<TokenType, Execution> Execs;
+        static Dictionary<TokenType, Executive> Execs;
 
         List<Key> KeyIDs = new List<Key>();
+        List<int> KeyCodes = new List<int>();
         List<Table> Tables = new List<Table>();
         List<int> Filter = new List<int>();
 
@@ -27,10 +28,9 @@ namespace DBA.QueryEngine
         {
             Query = Q_Entry;
             Target = DB;
-            Execs = new Dictionary<TokenType, Execution>()
+            Execs = new Dictionary<TokenType, Executive>()
             {
                 {TokenType.SELECT_cmd,Select },
-                {TokenType.FROM_KW,From },
                 {TokenType.INSERT_cmd,Insert },
                 {TokenType.UPDATE_cmd,Update },
                 {TokenType.DELETE_cmd,Delete },
@@ -50,7 +50,7 @@ namespace DBA.QueryEngine
             Tables.Add(T);
         }
 
-        private void Select(Node Root)
+        private Table Select(Node Root)
         {
             From(Root.Children[1]);
             if (Root.Children[0].Children.Count == 1 && Root.Children[0].Children[0].HostedToken.Type == TokenType.Closure)
@@ -68,8 +68,23 @@ namespace DBA.QueryEngine
                             Child.HostedToken.TokenData +
                             " was not found");
                     }
+                    KeyIDs.Add(Kt);
                 }
             if (Root.Children.Count == 3) { Where(Root.Children[2]); }
+            Table Response = new Table("Query Response");
+            List<int> KIndices = new List<int>();
+            foreach (Key Ki in KeyIDs)
+            {
+                Response.Keys.Add(new Key(Ki,true));
+                KIndices.Add(Tables.Last().getKeyIndex(Ki.Name));
+            }
+
+            for (int i=0;i<Filter.Count;i++)
+            {
+                List<byte[]> Record = Tables.Last().RetrieveRecord(KIndices, i);
+                Response.AppendRecord(Enumerable.Range(0,KIndices.Count).ToList(), Record);
+            }
+            return Response;
         }
 
         private Dictionary<char, int> ComparisonDecoder = new Dictionary<char, int>()
@@ -145,10 +160,7 @@ namespace DBA.QueryEngine
 
         public Table ExecuteQuery()
         {
-            Table Tableu = new Table("Query output");
-            Execs[Query.Root.HostedToken.Type](Query.Root);
-
-            return Tableu;
+            return Execs[Query.Root.HostedToken.Type](Query.Root);
         }
 
         private Comparison CompileComparison(Node N)
@@ -179,6 +191,8 @@ namespace DBA.QueryEngine
 
             foreach (Node N in Root.Children)
                 PartialFilters=AndCombine(PartialFilters,WhereSearch(CompileComparison(N)));
+
+            Filter = PartialFilters;
         }
 
         private List<int> WhereSearch(Comparison C)
@@ -244,27 +258,27 @@ namespace DBA.QueryEngine
             return Combined;
         }
 
-        private void Insert(Node Root)
+        private Table Insert(Node Root)
         {
             throw new NotImplementedException();
         }
 
-        private void Update(Node Root)
+        private Table Update(Node Root)
         {
             throw new NotImplementedException();
         }
 
-        private void Delete(Node Root)
+        private Table Delete(Node Root)
         {
             throw new NotImplementedException();
         }
 
-        private void Create(Node Root)
+        private Table Create(Node Root)
         {
             throw new NotImplementedException();
         }
 
-        private void Alter(Node Root)
+        private Table Alter(Node Root)
         {
             throw new NotImplementedException();
         }

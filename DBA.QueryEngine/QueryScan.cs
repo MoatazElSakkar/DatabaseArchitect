@@ -498,13 +498,13 @@ namespace DBA.QueryEngine
         void Select(List<Token> Path,string Literal)
         {
             Path.Add(new Token(Literal, TokenType.SELECT_cmd));
-            string Token = getToken().ToUpper();
+            string Token = getToken();
             if (Token=="*")
             {
                 Path.Add(new Token(Token, TokenType.Closure));
                 Token = getToken();
             }
-            else if (!Parsers.ContainsKey(Token))
+            else if (!Parsers.ContainsKey(Token.ToUpper()))
                 while (true)
                 {
                     Path.Add(new Token(Token, TokenType.Identifier_Key));

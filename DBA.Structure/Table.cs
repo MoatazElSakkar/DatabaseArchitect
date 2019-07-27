@@ -88,6 +88,45 @@ namespace DBA.Structure
             }
         }
 
+        public void AppendRecord(List<int>KIndex,List<byte[]> Data)
+        {
+            for(int i=0;i<KIndex.Count;i++)
+            {
+                if (!Keys[KIndex[i]].Verify(Data[i]))
+                {
+                    throw new Exception("Record append failed, invalid data!");
+                }
+            }
+            for (int i = 0; i < Keys.Count; i++)
+            {
+                if (KIndex.Contains(i))
+                    Keys[i].AddRecord(Data[i]);
+                else
+                    Keys[i].AddRecord(Datatypes.Intializations[Keys[i].Type]);
+            }
+        }
+
+        public List<byte[]> RetrieveRecord(List<int> keys, int Record)
+        {
+            List<byte[]> Output = new List<byte[]>();
+            foreach (int si in keys)
+            {
+                Output.Add(Keys[si].DATA[Record]);
+            }
+            return Output;
+        }
+
+        public int getKeyIndex(string KeyName)
+        {
+            for(int i=0;i<Keys.Count;i++)
+            {
+                if (Keys[i].Name == KeyName)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
         public Key getKey(string KeyName)
         {
             foreach (Key K in Keys)
