@@ -54,7 +54,25 @@ namespace DBA.Testing
         [TestMethod]
         public void UpdateTest()
         {
+            Database DB = new Database(@"C:\Users\Moataz\Workspace\Software\Database Architect\Active Code\DatabaseArchitect\Southwind\Database.db.txt");
+            DB.Read();
+            foreach (Table T in DB.Tables)
+            {
+                T.ReadRecords();
+            }
             Query Q = new Query("UPDATE Projects SET ID=1, Name=\"Database Architect\", Rating=100 WHERE ID=1;");
+            QueryScanner QS = new QueryScanner(Q);
+            Q = QS.Scan();
+            QueryParser QP = new QueryParser(Q);
+            QueryTree QT = QP.Reorder();
+            QueryExecutioner QE = new QueryExecutioner(QT, DB);
+            QE.ExecuteQuery();
+        }
+
+        [TestMethod]
+        public void AlterTest()
+        {
+            Query Q = new Query("Alter Table Projects Add Year string;");
             QueryScanner QS = new QueryScanner(Q);
             Q = QS.Scan();
             QueryParser QP = new QueryParser(Q);

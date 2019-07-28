@@ -10,11 +10,72 @@ namespace DBA.QueryEngine
 {
     public class QueryExecutioner
     {
-        string Result = "";
+        public string Result = "";
+        private class Comparison
+        {
+            public Token Condition;
+            public Comparison(Key i1, Key i2, bool i, Token C)
+            {
+                K1 = i1;
+                K2 = i2;
+                Immediate = i;
+                Condition = C;
+            }
 
-        public delegate Table Executive(Node Root);
+            public Comparison(Key i1, Key i2, bool i, Token C, Node Child)
+            {
+                K1 = i1;
+                K2 = i2;
+                Immediate = i;
+                Condition = C;
+                ChildCondition = Child;
+            }
 
-        static Dictionary<TokenType, Executive> Execs;
+            public int Capacity
+            {
+                get
+                {
+                    return K1.DATA.Count;
+                }
+            }
+
+            public DATATYPE Datatype
+            {
+                get
+                {
+                    return K1.Type;
+                }
+            }
+
+            public Key K1
+            {
+                get;
+                set;
+            }
+
+            public Key K2
+            {
+                get;
+                set;
+            }
+
+            public bool Immediate
+            {
+                get;
+                set;
+            }
+
+            public bool hasChildCondition
+            {
+                get
+                {
+                    return ChildCondition != null;
+                }
+            }
+            public Node ChildCondition;
+        }
+
+
 
         List<Key> KeyIDs = new List<Key>();
         List<int> KeyCodes = new List<int>();
@@ -24,6 +85,9 @@ namespace DBA.QueryEngine
         QueryTree Query;
         Database Target;
 
+
+        public delegate Table Executive(Node Root);
+        static Dictionary<TokenType, Executive> Execs;
         public QueryExecutioner(QueryTree Q_Entry, Database DB)
         {
             Query = Q_Entry;
@@ -87,77 +151,6 @@ namespace DBA.QueryEngine
             return Response;
         }
 
-        private Dictionary<char, int> ComparisonDecoder = new Dictionary<char, int>()
-        {
-            { '<' ,-1  },
-            { '>' , 1  },
-            { '=' , 0  }
-        };
-
-        private class Comparison
-        {
-            public Token Condition;
-            public Comparison(Key i1,Key i2,bool i, Token C)
-            {
-                K1 = i1;
-                K2 = i2;
-                Immediate = i;
-                Condition = C;
-            }
-
-            public Comparison(Key i1, Key i2, bool i, Token C, Node Child)
-            {
-                K1 = i1;
-                K2 = i2;
-                Immediate = i;
-                Condition = C;
-                ChildCondition = Child;
-            }
-
-            public int Capacity
-            {
-                get
-                {
-                    return K1.DATA.Count;
-                }
-            }
-
-            public DATATYPE Datatype
-            {
-                get
-                {
-                    return K1.Type;
-                }
-            }
-
-            public Key K1
-            {
-                get;
-                set;
-            }
-
-            public Key K2
-            {
-                get;
-                set;
-            }
-
-            public bool Immediate
-            {
-                get;
-                set;
-            }
-
-            public bool hasChildCondition
-            {
-                get
-                {
-                    return ChildCondition!=null;
-                }
-            }
-            public Node ChildCondition;
-        }
-
         public Table ExecuteQuery()
         {
             return Execs[Query.Root.HostedToken.Type](Query.Root);
@@ -195,6 +188,13 @@ namespace DBA.QueryEngine
             Filter = PartialFilters;
         }
 
+
+        private Dictionary<char, int> ComparisonDecoder = new Dictionary<char, int>()
+        {
+            { '<' ,-1  },
+            { '>' , 1  },
+            { '=' , 0  }
+        };
         private List<int> WhereSearch(Comparison C)
         {
             List<int> Filter = new List<int>();
@@ -260,12 +260,49 @@ namespace DBA.QueryEngine
 
         private Table Insert(Node Root)
         {
-            throw new NotImplementedException();
+            From(Root.Children[0]);
+            Dictionary<int, byte[]> Record = new Dictionary<int, byte[]>();
+
+            for(int i =0;i<Root.Children[1].Children.Count;i++)
+            {
+                Key Ki = Tables.Last().getKey(Root.Children[1].Children[i].HostedToken.TokenData);
+                int index= Tables.Last().getKeyIndex(Root.Children[1].Children[i].HostedToken.TokenData);
+                Record.Add(index,
+                    Datatypes.ConverterFunctions[Ki.Type](Root.Children[2].Children[i].HostedToken.TokenData));
+            }
+            Tables.Last().AppendRecord(Record);
+            Result = "1 Record Appended";
+            return null;
         }
 
         private Table Update(Node Root)
         {
-            throw new NotImplementedException();
+            From(Root);
+            if (Root.Children.Count > 2) { Where(Root.Children[2]); }
+            Dictionary<Key, byte[]> Values = new Dictionary<Key, byte[]>();
+            foreach (Node ni in Root.Children[1].Children)
+            {
+                Key Ki = Tables.Last().getKey(ni.Children[0].literal);
+                if (Ki == null)
+                    throw new Exception("Invalid key name");
+                try
+                {
+                    Values.Add(Ki, Datatypes.ConverterFunctions[Ki.Type](ni.Children[1].literal));
+                }
+                catch
+                {
+                    throw new Exception("Invalid input data");
+                }
+            }
+            foreach (Key Ki in Values.Keys)
+            {
+                foreach (int i in Filter)
+                {
+                    Ki.DATA[i] = Values[Ki];
+                }
+            }
+            Result = Filter.Count.ToString() + " records affected";
+            return null;
         }
 
         private Table Delete(Node Root)

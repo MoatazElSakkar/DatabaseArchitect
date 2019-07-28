@@ -15,6 +15,14 @@ namespace DBA.QueryEngine
         {
             HostedToken = TEntry;
         }
+
+        public string literal
+        {
+            get
+            {
+                return HostedToken.TokenData;
+            }
+        }
     }
 
     public class QueryTree
