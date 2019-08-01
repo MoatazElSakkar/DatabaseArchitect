@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBA.QueryEngine
 {
+    [SerializableAttribute]
     public class Query
     {
         bool parsed = false;

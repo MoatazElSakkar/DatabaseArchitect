@@ -38,53 +38,53 @@ namespace DB_Architect
             {
                 ParentWindow.changeStatus("Syncrionizing...", 3);
                 e.Node.TreeView.BeginUpdate();
-                List<string> Recd = Program.TA.Survey(e.Node.Text, "Database Tables");
+                //List<string> Recd = Program.TA.Survey(e.Node.Text, "Database Tables");
 
-                for (int i = 0; i < Recd.Count; i++)
-                {
-                    e.Node.Nodes.Add("Table" + i.ToString(), Recd[i]);
-                    e.Node.Nodes["Table" + i.ToString()].ImageIndex = 3;
-                    e.Node.Nodes["Table" + i.ToString()].SelectedImageIndex = 3;
-                }
-                e.Node.Nodes["LoadingPlaceHolder"].Remove();
-                if (Recd.Count == 0)
-                {
-                    e.Node.Nodes.Add("Error 109", "No Items Found");
-                    e.Node.Nodes["Error 109"].ImageIndex = 4;
-                    e.Node.Nodes["Error 109"].SelectedImageIndex = 4;
-                }
-                Program.server.DBS.Find(X => X.Name == e.Node.Text).Charted = true;
-                e.Node.TreeView.EndUpdate();
-            }
+            //    for (int i = 0; i < Recd.Count; i++)
+            //    {
+            //        e.Node.Nodes.Add("Table" + i.ToString(), Recd[i]);
+            //        e.Node.Nodes["Table" + i.ToString()].ImageIndex = 3;
+            //        e.Node.Nodes["Table" + i.ToString()].SelectedImageIndex = 3;
+            //    }
+            //    e.Node.Nodes["LoadingPlaceHolder"].Remove();
+            //    if (Recd.Count == 0)
+            //    {
+            //        e.Node.Nodes.Add("Error 109", "No Items Found");
+            //        e.Node.Nodes["Error 109"].ImageIndex = 4;
+            //        e.Node.Nodes["Error 109"].SelectedImageIndex = 4;
+            //    }
+            //    Program.server.DBS.Find(X => X.Name == e.Node.Text).Charted = true;
+            //    e.Node.TreeView.EndUpdate();
+            //}
 
-            else if (e.Node.ImageIndex == 0 && Program.server.Charted == false)
-            {
-                Program.server.DBS.Clear();
-                Program.server.Databases = 0;
-                ParentWindow.changeStatus("Syncrionizing...", 3);
-                Tree.BeginUpdate();
-                Tree.Nodes["%Server"].Nodes.Clear();
-                List<string> Recd = Program.TA.Survey(Program.server.Name, "Server");
-                for (int i = 0; i < Recd.Count; i++)
-                {
-                    Tree.Nodes["%Server"].Nodes.Add("%Database" + i.ToString(), Recd[i]);
-                    Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].Nodes.Add("LoadingPlaceHolder", "Loading...");
-                    Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].Nodes["LoadingPlaceHolder"].ImageIndex = 5;
-                    Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].Nodes["LoadingPlaceHolder"].SelectedImageIndex = 5;
-                    Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].ImageIndex = 1;
-                    Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].SelectedImageIndex = 1;
-                    Database db = new Database();
-                    db.Charted = false;
-                    db.Name = Recd[i];
-                    Program.server.DBS.Add(db);
-                }
-                if (Recd.Count == 0)
-                {
-                    e.Node.Nodes.Add("Error 109", "No Items Found");
-                    e.Node.Nodes["Error 109"].ImageIndex = 4;
-                    e.Node.Nodes["Error 109"].SelectedImageIndex = 4;
-                }
-                Tree.EndUpdate();
+            //else if (e.Node.ImageIndex == 0 && Program.server.Charted == false)
+            //{
+            //    Program.server.DBS.Clear();
+            //    Program.server.Databases = 0;
+            //    ParentWindow.changeStatus("Syncrionizing...", 3);
+            //    Tree.BeginUpdate();
+            //    Tree.Nodes["%Server"].Nodes.Clear();
+            //    List<string> Recd = Program.TA.Survey(Program.server.Name, "Server");
+            //    for (int i = 0; i < Recd.Count; i++)
+            //    {
+            //        Tree.Nodes["%Server"].Nodes.Add("%Database" + i.ToString(), Recd[i]);
+            //        Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].Nodes.Add("LoadingPlaceHolder", "Loading...");
+            //        Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].Nodes["LoadingPlaceHolder"].ImageIndex = 5;
+            //        Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].Nodes["LoadingPlaceHolder"].SelectedImageIndex = 5;
+            //        Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].ImageIndex = 1;
+            //        Tree.Nodes["%Server"].Nodes["%Database" + i.ToString()].SelectedImageIndex = 1;
+            //        Database db = new Database();
+            //        db.Charted = false;
+            //        db.Name = Recd[i];
+            //        Program.server.DBS.Add(db);
+            //    }
+            //    if (Recd.Count == 0)
+            //    {
+            //        e.Node.Nodes.Add("Error 109", "No Items Found");
+            //        e.Node.Nodes["Error 109"].ImageIndex = 4;
+            //        e.Node.Nodes["Error 109"].SelectedImageIndex = 4;
+            //    }
+            //    Tree.EndUpdate();
             }
         }
 
@@ -93,7 +93,7 @@ namespace DB_Architect
             List<string> Recd=new List<string>();
             if (e.Node.ImageIndex == 1)
             {
-                Recd = Program.TA.Survey(e.Node.Text, "Database Tables");
+                //Recd = Program.TA.Survey(e.Node.Text, "Database Tables");
                 foreach (Database DB in Program.server.DBS)
                 {
                     DB.Charted = false;
@@ -101,7 +101,7 @@ namespace DB_Architect
             }
             else if (e.Node.ImageIndex == 1)
             {
-                Recd = Program.TA.Survey(Program.server.Name, "Server");
+                //Recd = Program.TA.Survey(Program.server.Name, "Server");
                 Program.server.Charted = false;
             }
             ParentWindow.changeStatus("Syncrionizing...", 3);
@@ -196,8 +196,8 @@ namespace DB_Architect
             {
                 if (F.DialogRes)
                 {
-                    string Script = "Drop Database";
-                    Program.TA.ExecuteNonQueryScript(Script, Tree.SelectedNode.Text);
+                    //string Script = "Drop Database";
+                    //Program.TA.ExecuteNonQueryScript(Script, Tree.SelectedNode.Text);
                     Tree.CollapseAll();
                     Tree.SelectedNode.Expand();
                 }
@@ -233,10 +233,10 @@ namespace DB_Architect
             try
             {
                 string Script = "Select * From " + Tree.SelectedNode.Text;
-                Table Tcx = Program.TA.Query(Script, Tree.SelectedNode.Parent.Text);
-                Tcx.Name = Tree.SelectedNode.Text;
-                Form F = new TablePreview(Tcx, ParentWindow, true, Tree.SelectedNode.Parent.Text);
-                F.Show();
+                //Table Tcx = Program.TA.Query(Script, Tree.SelectedNode.Parent.Text);
+                //Tcx.Name = Tree.SelectedNode.Text;
+                //Form F = new TablePreview(Tcx, ParentWindow, true, Tree.SelectedNode.Parent.Text);
+                //F.Show();
             }
             catch
             {
@@ -253,9 +253,9 @@ namespace DB_Architect
             try
             {
                 string Script = "Select * From " + Tree.SelectedNode.Text;
-                Table Tcx = Program.TA.Query(Script, Tree.SelectedNode.Parent.Text);
-                Form F = new TablePreview(Tcx, ParentWindow);
-                F.Show();
+                //Table Tcx = Program.TA.Query(Script, Tree.SelectedNode.Parent.Text);
+                //Form F = new TablePreview(Tcx, ParentWindow);
+                //F.Show();
             }
             catch
             {
@@ -276,7 +276,6 @@ namespace DB_Architect
                     if (F.DialogRes)
                     {
                         string Script = "Drop Table " + Tree.SelectedNode.Text;
-                        Program.TA.ExecuteNonQueryScript(Script, Tree.SelectedNode.Parent.Text);
                         Tree.SelectedNode.Parent.Collapse();
                         Tree.SelectedNode.Expand();
                     }
@@ -308,7 +307,6 @@ namespace DB_Architect
                     string TableI = Tree.SelectedNode.Text;
                     Tree.SelectedNode.Text = Tx.Text;
                     string Script = "Edit Table " + TableI + " (" + Tx.Text + ")";
-                    Program.TA.ExecuteNonQueryScript(Script, Tree.SelectedNode.Parent.Text);
                     this.Controls.Remove(Tx);
                 };
         }

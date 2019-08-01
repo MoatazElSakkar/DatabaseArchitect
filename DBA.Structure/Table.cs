@@ -8,6 +8,7 @@ using DBA.Refrences;
 
 namespace DBA.Structure
 {
+    [SerializableAttribute]
     public partial class Table
     {
         public string SchemaFile
@@ -103,6 +104,14 @@ namespace DBA.Structure
                     Keys[i].AddRecord(Data[i]);
                 else
                     Keys[i].AddRecord(Datatypes.Intializations[Keys[i].Type]);
+            }
+        }
+
+        public void RemoveRecord(int Record)
+        {
+            foreach (Key Ki in Keys)
+            {
+                Ki.DATA.RemoveAt(Record);
             }
         }
 

@@ -155,13 +155,13 @@ namespace DB_Architect
 
         private void ArchitectLogo_Click(object sender, EventArgs e)
         {
-            if (Menu.Visible == false)
+            if (MenuPnl.Visible == false)
             {
-                Menu.Visible = true;
+                MenuPnl.Visible = true;
             }
             else
             {
-                Menu.Visible = false;
+                MenuPnl.Visible = false;
                 AddMenu.Visible = false;
             }
         }
@@ -204,7 +204,7 @@ namespace DB_Architect
 
         private void QueryBtn_Click(object sender, EventArgs e)
         {
-            Menu.Visible = false;
+            MenuPnl.Visible = false;
             AddMenu.Visible = false;
             Form F = new NewQuery(this);
             F.Show();
@@ -212,7 +212,7 @@ namespace DB_Architect
 
         private void TableBtn_Click(object sender, EventArgs e)
         {
-            Menu.Visible = false;
+            MenuPnl.Visible = false;
             AddMenu.Visible = false;
             Form F = new NewTable(this);
             F.Show();
@@ -220,7 +220,7 @@ namespace DB_Architect
 
         private void DatabaseBtn_Click(object sender, EventArgs e)
         {
-            Menu.Visible = false;
+            MenuPnl.Visible = false;
             AddMenu.Visible = false;
             Form F = new NewDatabase(this);
             F.Show();
@@ -228,7 +228,7 @@ namespace DB_Architect
 
         private void Options_Click(object sender, EventArgs e)
         {
-            Menu.Visible = false;
+            MenuPnl.Visible = false;
             AddMenu.Visible = false;
             Form F = new Options(this);
             F.Show();
@@ -236,7 +236,7 @@ namespace DB_Architect
 
         private void About_Click(object sender, EventArgs e)
         {
-            Menu.Visible = false;
+            MenuPnl.Visible = false;
             AddMenu.Visible = false;
             Form F = new AboutArchitect(this);
             F.Show();
@@ -245,7 +245,6 @@ namespace DB_Architect
         private void Disconnect_Click(object sender, EventArgs e)
         {
             changeStatus("Disconnecting...", 3);
-            Program.TA.Terminate();
             Application.Exit();
         }
 
@@ -253,7 +252,7 @@ namespace DB_Architect
         {
             try
             {
-                Program.TA.Terminate();
+                //Program.TA.Terminate();
             }
             catch
             {

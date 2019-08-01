@@ -30,7 +30,7 @@ namespace DB_Architect
 
         private void TableView_Load(object sender, EventArgs e)
         {
-            Keys=Program.TA.Survey(Tabname + "." + DBname, "Table Keys");
+            //Keys=Program.TA.Survey(Tabname + "." + DBname, "Table Keys");
             ExtendAero(this.Handle,32);
             KeysBackup = new List<string>(Keys);
 
@@ -248,19 +248,16 @@ namespace DB_Architect
                 foreach (string S in Keys)
                 {
                     string Script = "Edit Key " + KeysBackup[Keys.IndexOf(S)].Split('-')[0] + " (" + S.Split(new char[] { '-' }, 2)[0] + ",-" + S.Split(new char[] { '-' }, 2)[1] + "," + Tabname + ")";
-                    Program.TA.ExecuteNonQueryScript(Script, DBname);
                 }
 
                 foreach (string S in DeletedKeys)
                 {
                     string Script = "Drop Key " + S.Split('-')[0] + "." + Tabname;
-                    Program.TA.ExecuteNonQueryScript(Script, DBname);
                 }
 
                 foreach (string S in AddedKeys)
                 {
                     string Script = "Create Key" + " (" + S.Split(new char[] { '-' }, 2)[0] + ",-" + S.Split(new char[] { '-' }, 2)[1].Replace(int.MaxValue.ToString(), "%") + "," + Tabname + ")";
-                    Program.TA.ExecuteNonQueryScript(Script, DBname);
                 }
             }
             catch
@@ -282,7 +279,5 @@ namespace DB_Architect
                 AddedKeys.RemoveAt(e.RowIndex - (Keys.Count + DeletedKeys.Count));
             }
         }
-
-
     }
 }

@@ -44,7 +44,7 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ArchitectLogo = new System.Windows.Forms.PictureBox();
-            this.Menu = new System.Windows.Forms.Panel();
+            this.MenuPnl = new System.Windows.Forms.Panel();
             this.Disconnect = new System.Windows.Forms.Panel();
             this.Man_lbl4 = new System.Windows.Forms.Label();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
@@ -76,7 +76,7 @@
             this.DatabaseBtn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ArchitectLogo)).BeginInit();
-            this.Menu.SuspendLayout();
+            this.MenuPnl.SuspendLayout();
             this.Disconnect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.Options.SuspendLayout();
@@ -260,17 +260,17 @@
             // 
             // Menu
             // 
-            this.Menu.BackgroundImage = global::DB_Architect.Properties.Resources.MenuBG;
-            this.Menu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Menu.Controls.Add(this.Disconnect);
-            this.Menu.Controls.Add(this.Options);
-            this.Menu.Controls.Add(this.About);
-            this.Menu.Controls.Add(this.AddNew);
-            this.Menu.Location = new System.Drawing.Point(0, 50);
-            this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(200, 250);
-            this.Menu.TabIndex = 9;
-            this.Menu.Visible = false;
+            this.MenuPnl.BackgroundImage = global::DB_Architect.Properties.Resources.MenuBG;
+            this.MenuPnl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.MenuPnl.Controls.Add(this.Disconnect);
+            this.MenuPnl.Controls.Add(this.Options);
+            this.MenuPnl.Controls.Add(this.About);
+            this.MenuPnl.Controls.Add(this.AddNew);
+            this.MenuPnl.Location = new System.Drawing.Point(0, 50);
+            this.MenuPnl.Name = "Menu";
+            this.MenuPnl.Size = new System.Drawing.Size(200, 250);
+            this.MenuPnl.TabIndex = 9;
+            this.MenuPnl.Visible = false;
             // 
             // Disconnect
             // 
@@ -553,7 +553,7 @@
             this.Controls.Add(this.StatusPic);
             this.Controls.Add(this.AddMenu);
             this.Controls.Add(this.ArchitectLogo);
-            this.Controls.Add(this.Menu);
+            this.Controls.Add(this.MenuPnl);
             this.Controls.Add(this.Status);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox2);
@@ -581,7 +581,7 @@
             this.DatabaseBtn.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ArchitectLogo)).EndInit();
-            this.Menu.ResumeLayout(false);
+            this.MenuPnl.ResumeLayout(false);
             this.Disconnect.ResumeLayout(false);
             this.Disconnect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
@@ -613,7 +613,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
         public System.Windows.Forms.Label Status;
-        private System.Windows.Forms.Panel Menu;
+        private System.Windows.Forms.Panel MenuPnl;
         private System.Windows.Forms.Panel AddNew;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.Label Men_lbl1;

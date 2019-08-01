@@ -19,11 +19,11 @@ namespace DBA_Server_Test
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Thread Thread = new Thread(() => { commence(); });
+            Thread Thread = new Thread(() => { PrimalLoop(); });
             Thread.Start();
         }
 
-        void commence()
+        void PrimalLoop()
         {
             while (true)
             {

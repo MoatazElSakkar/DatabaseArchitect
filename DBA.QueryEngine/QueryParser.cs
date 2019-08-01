@@ -385,7 +385,6 @@ namespace DBA.QueryEngine
             {
                 N.Children.Add(Where());
             }
-
             return N;
         }
     }

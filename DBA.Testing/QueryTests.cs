@@ -143,5 +143,26 @@ namespace DBA.Testing
             QueryParser QP = new QueryParser(Q);
             QueryTree QT = QP.Reorder();
         }
+
+        [TestMethod]
+        public void CreateTest2()
+        {
+            TokenType[] Tokens = {TokenType.CREATE_cmd, TokenType.TABLE_KW, TokenType.Identifier_Table,TokenType.LBracket, TokenType.Identifier_Key,
+                TokenType.DATATYPE,TokenType.Comma,TokenType.Identifier_Key,TokenType.DATATYPE,TokenType.Comma,TokenType.Identifier_Key,
+                TokenType.DATATYPE,TokenType.RBracket,TokenType.SemiColon};
+            Query Q = new Query("CREATE TABLE Projects(ID int32,Name string,Rating int32);");
+            QueryScanner QS = new QueryScanner(Q);
+            Q = QS.Scan();
+            Assert.AreEqual(Q.QueryTokens.Count, Tokens.Count());
+            for (int i = 0; i < Q.QueryTokens.Count; i++)
+            {
+                if (Q.QueryTokens[i].Type != Tokens[i])
+                {
+                    throw new Exception("Scanner logic failure, Expected " + Tokens[i].ToString() + "recieved " + Q.QueryTokens[i].Type.ToString());
+                }
+            }
+            QueryParser QP = new QueryParser(Q);
+            QueryTree QT = QP.Reorder();
+        }
     }
 }

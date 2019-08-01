@@ -54,13 +54,11 @@ namespace DB_Architect
             if (DBstr == "")
             {
                 string Script = "Create Table (" + TableName.Text + ")";
-                Program.TA.ExecuteNonQueryScript(Script, DBBox.SelectedItem.ToString());
                 this.Close();
             }
             else
             {
                 string Script = "Create Table (" + TableName.Text + ")";
-                Program.TA.ExecuteNonQueryScript(Script, DBstr);
                 this.Close();
             }
         }

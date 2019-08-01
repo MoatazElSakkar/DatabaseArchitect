@@ -7,6 +7,7 @@ using DBA.Refrences;
 
 namespace DBA.Structure
 {
+    [SerializableAttribute]
     public class Key
     {
         List<byte[]> CHECK_VARS;

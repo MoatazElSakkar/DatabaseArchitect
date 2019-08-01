@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using DBA;
 
 namespace DB_Architect
 {
@@ -22,19 +21,7 @@ namespace DB_Architect
         {
             try
             {
-                Program.TA = new TransitAgent(ServerName.Text);
-                if (Program.TA.Verified(Password.Text) == true)
-                {
-                    Error.Visible = false;
-                    Program.server.Name=ServerName.Text;
-                    ParentWindow.ResetForConnection();
-                    this.Close();
-                }
-                else
-                {
-                    Error.Visible = true;
-                    stats_lbl.Text = "Unable to establish connection, Server Response: Incorrect Credentials";
-                }
+
             }
             catch(Exception ex)
             {

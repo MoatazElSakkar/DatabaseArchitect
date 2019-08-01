@@ -81,7 +81,7 @@ namespace DB_Architect
                                 Script += " 0";
                             }
                         }
-                        Program.TA.ExecuteNonQueryScript(Script, Database);
+                        //Program.TA.ExecuteNonQueryScript(Script, Database);
                     }
                     //else
                     catch
@@ -104,7 +104,7 @@ namespace DB_Architect
                         }
                         Added.Add(DGEA.RowIndex);
                         string Script = "Add " + Subject.Name + " (" + Record + ")";
-                        Program.TA.ExecuteNonQueryScript(Script, Database);
+                        //Program.TA.ExecuteNonQueryScript(Script, Database);
                         StartRecCount = TablePreviewGrid.Rows.Count-1;
                     }
                 };
@@ -113,7 +113,7 @@ namespace DB_Architect
                     {
                         int i = 1 + DGVRREA.RowIndex;
                         string Script = "Drop Record " + Subject.Name + " [" + i.ToString() +"]";
-                        Program.TA.ExecuteNonQueryScript(Script, Database);
+                        //Program.TA.ExecuteNonQueryScript(Script, Database);
                     };
             }
         }

@@ -175,14 +175,14 @@ namespace DB_Architect
                     if (Script.Contains("Select"))
                     {
                         string[] Pars = CodeX.Split(new string[] { " => " }, StringSplitOptions.RemoveEmptyEntries);
-                        Table T = Program.TA.Query(Pars[1], Pars[0]);
-                        Form F = new TablePreview(T, ParentWindow);
-                        F.Show();
+                        //Table T = Program.TA.Query(Pars[1], Pars[0]);
+                        //Form F = new TablePreview(T, ParentWindow);
+                        //F.Show();
                     }
                     else
                     {
                         string[] Pars = CodeX.Split(new string[] { " => " }, StringSplitOptions.RemoveEmptyEntries);
-                        string response = Program.TA.ExecuteNonQueryScript(Pars[1], Pars[0]);
+                        //string response = Program.TA.ExecuteNonQueryScript(Pars[1], Pars[0]);
                     }
                 }
                 stats_lbl.Text = "ArchiScript Execution Complete";

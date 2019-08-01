@@ -20,7 +20,6 @@ namespace DB_Architect
         {
             if (OldPassword.Text == Program.server.Password)
             {
-                Program.TA.ExecuteServerScript("ServerScript~%Password%~" + NewPassword.Text);
                 this.Close();
             }
             else

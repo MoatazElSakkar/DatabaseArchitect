@@ -25,7 +25,7 @@ namespace DB_Architect
         private void Create_Click(object sender, EventArgs e)
         {
             string Script="~%Database%~"+DBnameBox.Text;
-            Program.TA.ExecuteServerScript(Script);
+            //Program.TA.ExecuteServerScript(Script);
             this.Close();
         }
     }

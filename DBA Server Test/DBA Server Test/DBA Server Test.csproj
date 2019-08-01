@@ -81,6 +81,7 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlaciaProtocol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form.resx">
@@ -109,7 +110,6 @@
     </Compile>
     <Compile Include="Server.cs" />
     <Compile Include="ServerReaders.cs" />
-    <Compile Include="Transit Agent\TransitAgent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Architect.ico" />
@@ -132,6 +132,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DBA.GlaciaProtocol\DBA.GlaciaProtocol.csproj">
+      <Project>{85d19e95-2a51-40c4-83c5-5745faf10a88}</Project>
+      <Name>DBA.GlaciaProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DBA.QueryEngine\DBA.QueryEngine.csproj">
+      <Project>{73742b8e-35cd-4a67-a9f8-f4d6cf858413}</Project>
+      <Name>DBA.QueryEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DBA.Refrences\DBA.Refrences.csproj">
       <Project>{66393b23-41f6-488c-8f75-c7e9c62f4cf9}</Project>
       <Name>DBA.Refrences</Name>

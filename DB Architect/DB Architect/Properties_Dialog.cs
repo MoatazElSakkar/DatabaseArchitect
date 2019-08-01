@@ -62,54 +62,54 @@ namespace DB_Architect
 
         void ServerProperties()
         {
-            string Recieved=Program.TA.AssumeProperties("Server");
-            string[] Data = Recieved.Split('~');
+            //string Recieved=Program.TA.AssumeProperties("Server");
+            //string[] Data = Recieved.Split('~');
 
-            int Delta = 0;
+            //int Delta = 0;
 
-            foreach (string S in Data)
-            {
-                Label L = new Label();
-                L.AutoSize = true;
-                L.Location = new Point(10, 110 + Delta);
-                Delta += 20;
-                L.Text = S;
-                this.Controls.Add(L);
-            }
+            //foreach (string S in Data)
+            //{
+            //    Label L = new Label();
+            //    L.AutoSize = true;
+            //    L.Location = new Point(10, 110 + Delta);
+            //    Delta += 20;
+            //    L.Text = S;
+            //    this.Controls.Add(L);
+            //}
         }
 
         void DBProperties()
         {
-            string Recieved = Program.TA.AssumeProperties("Database " + TargetName);
-            string[] Data = Recieved.Split('~');
-            int Delta = 0;
+            //string Recieved = Program.TA.AssumeProperties("Database " + TargetName);
+            //string[] Data = Recieved.Split('~');
+            //int Delta = 0;
 
-            foreach (string S in Data)
-            {
-                Label L = new Label();
-                L.AutoSize = true;
-                L.Location = new Point(10, 110 + Delta);
-                Delta += 20;
-                L.Text = S;
-                this.Controls.Add(L);
-            }
+            //foreach (string S in Data)
+            //{
+            //    Label L = new Label();
+            //    L.AutoSize = true;
+            //    L.Location = new Point(10, 110 + Delta);
+            //    Delta += 20;
+            //    L.Text = S;
+            //    this.Controls.Add(L);
+            //}
         }
 
         void TableProperties()
         {
-            string Recieved = Program.TA.AssumeProperties("Table " + TargetName + " " + parentName);
-            string[] Data = Recieved.Split('~');
-            int Delta = 0;
+            //string Recieved = Program.TA.AssumeProperties("Table " + TargetName + " " + parentName);
+            //string[] Data = Recieved.Split('~');
+            //int Delta = 0;
 
-            foreach (string S in Data)
-            {
-                Label L = new Label();
-                L.AutoSize = true;
-                L.Location = new Point(10, 110 + Delta);
-                Delta += 20;
-                L.Text = S;
-                this.Controls.Add(L);
-            }
+            //foreach (string S in Data)
+            //{
+            //    Label L = new Label();
+            //    L.AutoSize = true;
+            //    L.Location = new Point(10, 110 + Delta);
+            //    Delta += 20;
+            //    L.Text = S;
+            //    this.Controls.Add(L);
+            //}
         }
 
         private void Close_Click(object sender, EventArgs e)

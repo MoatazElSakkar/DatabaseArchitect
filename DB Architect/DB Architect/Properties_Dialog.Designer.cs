@@ -31,7 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.Lbl1 = new System.Windows.Forms.Label();
             this.Iconic = new System.Windows.Forms.PictureBox();
-            this.Close = new System.Windows.Forms.Button();
+            this.Close_btn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -74,13 +74,13 @@
             // 
             // Close
             // 
-            this.Close.Location = new System.Drawing.Point(347, 230);
-            this.Close.Name = "Close";
-            this.Close.Size = new System.Drawing.Size(75, 23);
-            this.Close.TabIndex = 2;
-            this.Close.Text = "Close";
-            this.Close.UseVisualStyleBackColor = true;
-            this.Close.Click += new System.EventHandler(this.Close_Click);
+            this.Close_btn.Location = new System.Drawing.Point(347, 230);
+            this.Close_btn.Name = "Close";
+            this.Close_btn.Size = new System.Drawing.Size(75, 23);
+            this.Close_btn.TabIndex = 2;
+            this.Close_btn.Text = "Close";
+            this.Close_btn.UseVisualStyleBackColor = true;
+            this.Close_btn.Click += new System.EventHandler(this.Close_Click);
             // 
             // label1
             // 
@@ -110,7 +110,7 @@
             this.ClientSize = new System.Drawing.Size(434, 265);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Close);
+            this.Controls.Add(this.Close_btn);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -133,7 +133,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox Iconic;
         private System.Windows.Forms.Label Lbl1;
-        private System.Windows.Forms.Button Close;
+        private System.Windows.Forms.Button Close_btn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
     }

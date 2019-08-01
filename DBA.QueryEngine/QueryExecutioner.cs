@@ -83,7 +83,7 @@ namespace DBA.QueryEngine
         List<int> Filter = new List<int>();
 
         QueryTree Query;
-        Database Target;
+        Database database;
 
 
         public delegate Table Executive(Node Root);
@@ -91,7 +91,7 @@ namespace DBA.QueryEngine
         public QueryExecutioner(QueryTree Q_Entry, Database DB)
         {
             Query = Q_Entry;
-            Target = DB;
+            database = DB;
             Execs = new Dictionary<TokenType, Executive>()
             {
                 {TokenType.SELECT_cmd,Select },
@@ -105,7 +105,7 @@ namespace DBA.QueryEngine
 
         private void From(Node Root)
         {
-            Table T = Target.getTable(Root.Children[0].HostedToken.TokenData);
+            Table T = database.getTable(Root.Children[0].HostedToken.TokenData);
             if (T==null) {
                 throw new Exception("Designated table " + 
                     Root.Children[0].HostedToken.TokenData + 
@@ -135,6 +135,7 @@ namespace DBA.QueryEngine
                     KeyIDs.Add(Kt);
                 }
             if (Root.Children.Count == 3) { Where(Root.Children[2]); }
+
             Table Response = new Table("Query Response");
             List<int> KIndices = new List<int>();
             foreach (Key Ki in KeyIDs)
@@ -142,12 +143,12 @@ namespace DBA.QueryEngine
                 Response.Keys.Add(new Key(Ki,true));
                 KIndices.Add(Tables.Last().getKeyIndex(Ki.Name));
             }
-
             for (int i=0;i<Filter.Count;i++)
             {
                 List<byte[]> Record = Tables.Last().RetrieveRecord(KIndices, i);
                 Response.AppendRecord(Enumerable.Range(0,KIndices.Count).ToList(), Record);
             }
+
             return Response;
         }
 
@@ -271,7 +272,7 @@ namespace DBA.QueryEngine
                     Datatypes.ConverterFunctions[Ki.Type](Root.Children[2].Children[i].HostedToken.TokenData));
             }
             Tables.Last().AppendRecord(Record);
-            Result = "1 Record Appended";
+            Result = "1 record appended";
             return null;
         }
 
@@ -307,12 +308,49 @@ namespace DBA.QueryEngine
 
         private Table Delete(Node Root)
         {
-            throw new NotImplementedException();
+            From(Root.Children[0]);
+            if (Root.Children.Count > 1) { Where(Root.Children[1]); }
+            foreach (int i in Filter)
+            {
+                Tables.Last().RemoveRecord(i);
+            }
+            Result = Filter.Count.ToString() + " records affected";
+            return null;
         }
 
         private Table Create(Node Root)
         {
-            throw new NotImplementedException();
+            string res = "Unknown Error";
+            switch(Root.Children[0].HostedToken.Type)
+            {
+                case TokenType.TABLE_KW:
+                    Table Tx=CreateTable(Root);
+                    if (database.getTable(Tx.Name) != null)
+                        throw new Exception("Table with duplicate name exists");
+                    database.Tables.Add(Tx);
+                    res = "1 table added";
+                    break;
+            }
+            Result = res;
+            return null;
+        }
+
+        private Table CreateTable(Node Root)
+        {
+            Table Ti = new Table(Root.Children[1].literal);
+            for (int i=2;i<Root.Children.Count;i++)
+            {
+                if (Ti.getKey(Root.Children[i].Children[0].literal) != null)
+                    throw new Exception("Key with duplicate name exists");
+
+                if (!Datatypes.Datatype_str.ContainsKey(Root.Children[i].Children[1].literal))
+                    throw new Exception("Datatype invalid");
+
+                Ti.AddKey(Root.Children[i].Children[0].literal,
+                    Datatypes.Datatype_str[Root.Children[i].Children[1].literal],false);
+
+            }
+            return Ti;
         }
 
         private Table Alter(Node Root)
