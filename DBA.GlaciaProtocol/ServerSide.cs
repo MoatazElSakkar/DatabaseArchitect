@@ -12,7 +12,7 @@ namespace DBA.GlaciaProtocol
     [SerializableAttribute()]
     public class Response
     {
-        public Response Header
+        public ResponseType Header
         {
             get;
             set;
@@ -24,6 +24,8 @@ namespace DBA.GlaciaProtocol
         public Socket Listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         public delegate void CallBackFunction(ServerSocket PrimarySocket);
+
+        public bool elevated = false;
 
         public ServerSocket(CallBackFunction AfterConnect)
         {

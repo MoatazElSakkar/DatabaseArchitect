@@ -40,20 +40,56 @@ namespace DBA_Server_Test
             {
                 object buffer = PrimarySocket.recieve();
                 if (buffer is Request)
-                    ProcessRequest(buffer as Request);
+                    switch ((buffer as Request).Header)
+                    {
+                        case RequestType.Connect:
+                            break;
+                        case RequestType.Disconnect:
+                            break;
+                        case RequestType.Feedback:
+                            break;
+                        case RequestType.ModifyServerSettings:
+                            break;
+                        case RequestType.Query:
+                            break;
+                        case RequestType.ReadServerSettings:
+                            break;
+                        case RequestType.RetrieveServerInfo:
+                            if (!PrimarySocket.elevated)
+                                PrimarySocket.send(CreateResponse(ResponseType.OperationFailed, "Session not verified!"));
+                            break;
+                        case RequestType.VerifyIdentity:
+                            if (Verify(buffer as Request))
+                                PrimarySocket.elevated = true;
+                            //else log
+                            break;
+                    }
 
             
             }
         }
 
-        static void ProcessRequest(Request Rq)
+        static Response CreateResponse(ResponseType Type, object Attache)
         {
-            string s=Rq.Header.ToString();
+            Response R = new Response();
+            R.Header = Type;
+            R.Attachment = Attache;
+            return R;
+        }
+
+        static bool Verify(Request Rq)
+        {
+            RequestType s = Rq.Header;
             if (Rq.Attachment is string)
             {
-                string ix = (string)Rq.Attachment;
+                string InputPassword = (string)Rq.Attachment;
+                if (InputPassword == Server.Password)
+                    return true;
             }
+            return false;
         }
+
+        
 
         static void ProcessQuery(Query Q)
         {

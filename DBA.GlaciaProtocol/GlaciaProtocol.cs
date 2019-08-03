@@ -18,7 +18,8 @@ namespace DBA.GlaciaProtocol
         FalseCredentials,
         QueryResponse,
         ServerSettings,
-        OperationFeedback
+        OperationFeedback,
+        OperationFailed
     }
 
     public enum RequestType
