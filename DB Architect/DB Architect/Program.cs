@@ -25,11 +25,21 @@ namespace DB_Architect
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Request Rq = new Request();
-            Rq.Header = RequestType.Connect;
-            Rq.Attachment = "SELECT * FROM PROJECTS WHERE i<90;";
-            ClientSocket CS = new ClientSocket("Apex");
-            CS.send(Rq);
+
+            //Request Rq1 = new Request();
+            //ClientSocket CS = new ClientSocket("Apex");
+            //Rq1.Header = RequestType.VerifyIdentity;
+            //Rq1.Attachment = "1234567";
+            //CS.send(Rq1);
+            //Response Rs = CS.recieve() as Response;
+
+
+            //Request Rq2 = new Request();
+            //Rq2.Header = RequestType.RetrieveServerInfo;
+            //CS.send(Rq2);
+            //Response Rs2= CS.recieve() as Response;
+
+
             Application.Run(new Home());
 
         }

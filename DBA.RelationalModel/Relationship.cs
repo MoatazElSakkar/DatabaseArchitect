@@ -13,8 +13,9 @@ namespace DBA.RelationalModel
         Repeated, //one to many
         Random //many to many
     }
-    
 
+
+    [SerializableAttribute]
     public class Relationship
     {
         public bool conditional

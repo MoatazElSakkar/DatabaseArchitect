@@ -70,5 +70,17 @@ namespace DBA.Structure
             }
             return null;
         }
+
+        public Database GetShallowCopy()
+        {
+            Database DB = new Database("");
+            DB.TablesCount = TablesCount;
+            DB.Name = Name;
+            foreach (Table T in Tables)
+            {
+                DB.Tables.Add(T.GetShallowCopy());
+            }
+            return DB;
+        }
     }
 }

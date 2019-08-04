@@ -15,7 +15,6 @@ namespace DBA_Server_Test
         /// </summary>
         static void Main()
         {
-            Server.ServerFile = "File.xml"; //Should add a setting to adjust it later
             Thread Thread = new Thread(() => { PrimaryLoop(); });
             Thread.Start();
         }
@@ -25,6 +24,7 @@ namespace DBA_Server_Test
         /// </summary>
         static void PrimaryLoop()
         {
+            string s=Server.Password;
             while (true)
             {
                 ServerSocket S = new ServerSocket(Standby);
@@ -56,12 +56,21 @@ namespace DBA_Server_Test
                             break;
                         case RequestType.RetrieveServerInfo:
                             if (!PrimarySocket.elevated)
-                                PrimarySocket.send(CreateResponse(ResponseType.OperationFailed, "Session not verified!"));
+                                PrimarySocket.send(CreateResponse(ResponseType.OperationFailed, "Session not verified"));
+                            else
+                                PrimarySocket.send(CreateResponse(ResponseType.ServerInformation, Server.GetDatabaseSkeleton()));
                             break;
                         case RequestType.VerifyIdentity:
                             if (Verify(buffer as Request))
+                            {
+                                PrimarySocket.send(CreateResponse(ResponseType.IdentityVerified, "Session verified successfully"));
                                 PrimarySocket.elevated = true;
-                            //else log
+                            }
+                            else
+                            {
+                                //Log Access attempt;
+                                PrimarySocket.send(CreateResponse(ResponseType.FalseCredentials, "False Credentials"));
+                            }
                             break;
                     }
 

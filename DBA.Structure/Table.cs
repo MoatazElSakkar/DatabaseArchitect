@@ -48,14 +48,14 @@ namespace DBA.Structure
             set;
         }
 
-        public Table(Table T)
+        public Table(Table T, bool Shallow=false)
         {
             Name = T.Name;
             Records = T.Records;
             KeysCount = T.KeysCount;
             foreach (Key k in T.Keys)
             {
-                Keys.Add(new Key(k));
+                Keys.Add(new Key(k,Shallow));
             }
             foreach(Relationship R in T.Relationships)
             {
@@ -87,6 +87,11 @@ namespace DBA.Structure
                 else
                     Keys[i].AddRecord(Datatypes.Intializations[Keys[i].Type]);
             }
+        }
+
+        internal Table GetShallowCopy()
+        {
+            return new Table(this, true);
         }
 
         public void AppendRecord(List<int>KIndex,List<byte[]> Data)

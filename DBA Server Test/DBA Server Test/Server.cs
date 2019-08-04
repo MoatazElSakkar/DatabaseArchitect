@@ -22,6 +22,7 @@ namespace DBA_Server_Test
 
         static Server()
         {
+            ServerFile = "Server.srv.txt";
             if (!File.Exists(ServerFile))
             {
                 //Register Inconsistency
@@ -30,8 +31,8 @@ namespace DBA_Server_Test
             FileStream Reader = new FileStream(ServerFile, FileMode.Open);
             while (Reader.Position < Reader.Length)
             {
-                string bufferStr = ServerReaders.ReadRecord(Reader);
-                string[] bufferSplit = bufferStr.Split(new char[] { ':', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                string bufferStr = ServerReaders.ReadRecord(Reader,'\r');
+                string[] bufferSplit = bufferStr.Split(new char[] { ':', '\n', '\r' },2, StringSplitOptions.RemoveEmptyEntries);
                 switch (bufferSplit[0])
                 {
                     case "SRVNAME":
@@ -76,9 +77,10 @@ namespace DBA_Server_Test
                 Password = newPassword;
         }
 
-        public static string GetInfo()
+        public static Database GetDatabaseSkeleton()
         {
-            return "Name=";
+            Database DB = Database.GetShallowCopy();
+            return DB;
         }
     }
 }
