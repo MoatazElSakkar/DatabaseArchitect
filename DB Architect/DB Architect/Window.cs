@@ -12,106 +12,40 @@ namespace DB_Architect
 {
     public class Window:Form
     {
-        bool Aero = false;
-        public IntPtr Handlerdata;
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct MARGINS
-        {
-            public int Left;
-            public int Right;
-            public int Top;
-            public int Bottom;
-        }
-
-        [DllImport("dwmapi.dll", PreserveSig = false)]
-        static extern void DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS margins);
-
-        private MARGINS margins;
-
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            if (Aero == true)
-            {
-                base.OnPaint(e);
-                e.Graphics.Clear(Color.Black);
-                Rectangle clientArea = new Rectangle(
-                        margins.Left,
-                        margins.Top,
-                        this.ClientRectangle.Width - margins.Left - margins.Right,
-                        this.ClientRectangle.Height - margins.Top - margins.Bottom
-                    );
-                Brush b = new SolidBrush(this.BackColor);
-                e.Graphics.FillRectangle(b, clientArea);
-            }
-            else
-            {
-                base.OnPaintBackground(e);
-            }
-        }
-
-
-        public Home ParentWindow
-        {
-            get;
-            set;
-        }
-
-        public string InstanceName
-        {
-            get;
-            set;
-        }
-
         public Window()
         {
+            this.TopLevel = false;
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
-        public Window(Home Par,string Inst)
+        private const int cGrip = 16;      // Grip size
+        private const int cCaption = 32;   // Caption bar height;
+
+        protected override void OnPaint(PaintEventArgs e)
         {
-            ParentWindow = Par;
-            this.Owner = ParentWindow;
-            InstanceName = Inst;
-            if (Program.Settings.Windows.Keys.Contains(InstanceName))
-            {
-                this.Location = Program.Settings.Windows[InstanceName];
+            e.Graphics.DrawRectangle(Pens.LightGray, new Rectangle(0, 0, this.Width - 1, this.Height - 1));
+            Rectangle rc = new Rectangle(this.ClientSize.Width - cGrip, this.ClientSize.Height - cGrip, cGrip, cGrip);
+            ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x84)
+            {  // Trap WM_NCHITTEST
+                Point pos = new Point(m.LParam.ToInt32());
+                pos = this.PointToClient(pos);
+                if (pos.Y < cCaption)
+                {
+                    m.Result = (IntPtr)2;  // HTCAPTION
+                    return;
+                }
+                if (pos.X >= this.ClientSize.Width - cGrip && pos.Y >= this.ClientSize.Height - cGrip)
+                {
+                    m.Result = (IntPtr)17; // HTBOTTOMRIGHT
+                    return;
+                }
             }
-
-            this.Move += (object obj, EventArgs EA) =>
-            {
-                if (Program.Settings.Windows.Keys.Contains(InstanceName))
-                {
-                    Program.Settings.Windows[InstanceName] = this.Location;
-                }
-                else
-                {
-                    Program.Settings.Windows.Add(InstanceName, this.Location);
-                }
-            };
-        }
-
-        public void ExtendAero(IntPtr Data,int margin)
-        {
-            Aero = true;
-            Handlerdata = Data;
-            margins = new MARGINS();
-            margins.Top = margin;
-            margins.Left = 0;
-            DwmExtendFrameIntoClientArea(Handlerdata, ref margins);
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Window
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 265);
-            this.Name = "Window";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.ResumeLayout(false);
-
+            base.WndProc(ref m);
         }
     }
 }

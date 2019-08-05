@@ -36,11 +36,11 @@
             this.Password = new System.Windows.Forms.TextBox();
             this.ServerName = new System.Windows.Forms.TextBox();
             this.Error = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.statusImage = new System.Windows.Forms.PictureBox();
             this.stats_lbl = new System.Windows.Forms.Label();
             this.Credentials.SuspendLayout();
             this.Error.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statusImage)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -115,7 +115,7 @@
             // Error
             // 
             this.Error.BackColor = System.Drawing.Color.LightYellow;
-            this.Error.Controls.Add(this.pictureBox1);
+            this.Error.Controls.Add(this.statusImage);
             this.Error.Controls.Add(this.stats_lbl);
             this.Error.Location = new System.Drawing.Point(-1, 305);
             this.Error.Name = "Error";
@@ -125,13 +125,13 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::DB_Architect.Properties.Resources.Error_Icon;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(22, 22);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.statusImage.Image = global::DB_Architect.Properties.Resources.Exclaim;
+            this.statusImage.Location = new System.Drawing.Point(3, 0);
+            this.statusImage.Name = "pictureBox1";
+            this.statusImage.Size = new System.Drawing.Size(22, 22);
+            this.statusImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.statusImage.TabIndex = 1;
+            this.statusImage.TabStop = false;
             // 
             // stats_lbl
             // 
@@ -154,7 +154,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.Error);
             this.Controls.Add(this.Credentials);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Location = new System.Drawing.Point(300, 120);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -167,7 +167,7 @@
             this.Credentials.PerformLayout();
             this.Error.ResumeLayout(false);
             this.Error.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statusImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -182,7 +182,7 @@
         private System.Windows.Forms.Label lbl1;
         private System.Windows.Forms.Panel Error;
         private System.Windows.Forms.Label stats_lbl;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox statusImage;
         private System.Windows.Forms.Label info1;
     }
 }

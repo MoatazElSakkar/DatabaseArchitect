@@ -267,7 +267,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::DB_Architect.Properties.Resources.Error_Icon;
+            this.pictureBox1.Image = global::DB_Architect.Properties.Resources.ErrorIcon;
             this.pictureBox1.Location = new System.Drawing.Point(2, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(22, 22);

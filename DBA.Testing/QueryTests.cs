@@ -27,7 +27,7 @@ namespace DBA.Testing
             Q=QS.Scan();
             QueryParser QP = new QueryParser(Q);
             QueryTree QT=QP.Reorder();
-            QueryExecutioner QE = new QueryExecutioner(QT, DB);
+            QueryExecutioner QE = new QueryExecutioner(QT, DB,null);
             Table Ti=QE.ExecuteQuery();
         }
 
@@ -65,7 +65,7 @@ namespace DBA.Testing
             Q = QS.Scan();
             QueryParser QP = new QueryParser(Q);
             QueryTree QT = QP.Reorder();
-            QueryExecutioner QE = new QueryExecutioner(QT, DB);
+            QueryExecutioner QE = new QueryExecutioner(QT, DB,null);
             QE.ExecuteQuery();
         }
 

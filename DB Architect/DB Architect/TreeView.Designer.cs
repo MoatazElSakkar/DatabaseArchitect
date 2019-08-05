@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TreeView));
             this.Tree = new System.Windows.Forms.TreeView();
             this.TreeViewIcons = new System.Windows.Forms.ImageList(this.components);
-            this.ServerName = new System.Windows.Forms.Label();
             this.ServerMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SrvrMen_AddDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.SrvrMen_Seprator = new System.Windows.Forms.ToolStripSeparator();
@@ -54,47 +53,39 @@
             this.Tblmen_ViewRecords_Drop = new System.Windows.Forms.ToolStripMenuItem();
             this.Tblmen_Rename = new System.Windows.Forms.ToolStripMenuItem();
             this.Tblmen_Properties = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ServerMenu.SuspendLayout();
             this.DatabaseMenu.SuspendLayout();
             this.TableMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Tree
             // 
+            this.Tree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tree.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Tree.ImageIndex = 0;
             this.Tree.ImageList = this.TreeViewIcons;
-            this.Tree.Location = new System.Drawing.Point(12, 83);
+            this.Tree.Location = new System.Drawing.Point(0, 3);
             this.Tree.Name = "Tree";
             this.Tree.SelectedImageIndex = 0;
-            this.Tree.Size = new System.Drawing.Size(260, 370);
+            this.Tree.Size = new System.Drawing.Size(285, 460);
             this.Tree.TabIndex = 0;
-            this.Tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseDoubleClick);
-            this.Tree.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.Tree_BeforeExpand);
             this.Tree.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.Tree_BeforeCollapse);
+            this.Tree.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.Tree_BeforeExpand);
             this.Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseClick);
+            this.Tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseDoubleClick);
             // 
             // TreeViewIcons
             // 
             this.TreeViewIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("TreeViewIcons.ImageStream")));
             this.TreeViewIcons.TransparentColor = System.Drawing.Color.Transparent;
-            this.TreeViewIcons.Images.SetKeyName(0, "Server.png");
-            this.TreeViewIcons.Images.SetKeyName(1, "Database Frameless.png");
-            this.TreeViewIcons.Images.SetKeyName(2, "Query.png");
-            this.TreeViewIcons.Images.SetKeyName(3, "Table.png");
-            this.TreeViewIcons.Images.SetKeyName(4, "Error Icon.png");
-            this.TreeViewIcons.Images.SetKeyName(5, "Activity.png");
-            // 
-            // ServerName
-            // 
-            this.ServerName.AutoSize = true;
-            this.ServerName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ServerName.Location = new System.Drawing.Point(83, 46);
-            this.ServerName.Name = "ServerName";
-            this.ServerName.Size = new System.Drawing.Size(121, 25);
-            this.ServerName.TabIndex = 1;
-            this.ServerName.Text = "ServerName";
+            this.TreeViewIcons.Images.SetKeyName(0, "Exclaim.png");
+            this.TreeViewIcons.Images.SetKeyName(1, "Activity.png");
+            this.TreeViewIcons.Images.SetKeyName(2, "syncronization.png");
+            this.TreeViewIcons.Images.SetKeyName(3, "Server.png");
+            this.TreeViewIcons.Images.SetKeyName(4, "Database_Frameless.png");
+            this.TreeViewIcons.Images.SetKeyName(5, "Table.png");
             // 
             // ServerMenu
             // 
@@ -105,13 +96,13 @@
             this.SrvMen_Refresh,
             this.SrvMen_Properties});
             this.ServerMenu.Name = "ServerMenu";
-            this.ServerMenu.Size = new System.Drawing.Size(157, 76);
+            this.ServerMenu.Size = new System.Drawing.Size(150, 76);
             // 
             // SrvrMen_AddDatabase
             // 
             this.SrvrMen_AddDatabase.Image = global::DB_Architect.Properties.Resources.Database_Frameless;
             this.SrvrMen_AddDatabase.Name = "SrvrMen_AddDatabase";
-            this.SrvrMen_AddDatabase.Size = new System.Drawing.Size(156, 22);
+            this.SrvrMen_AddDatabase.Size = new System.Drawing.Size(149, 22);
             this.SrvrMen_AddDatabase.Text = "New Database";
             this.SrvrMen_AddDatabase.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.SrvrMen_AddDatabase.Click += new System.EventHandler(this.SrvrMen_AddDatabase_Click);
@@ -119,13 +110,13 @@
             // SrvrMen_Seprator
             // 
             this.SrvrMen_Seprator.Name = "SrvrMen_Seprator";
-            this.SrvrMen_Seprator.Size = new System.Drawing.Size(153, 6);
+            this.SrvrMen_Seprator.Size = new System.Drawing.Size(146, 6);
             // 
             // SrvMen_Refresh
             // 
             this.SrvMen_Refresh.Image = global::DB_Architect.Properties.Resources.Activity;
             this.SrvMen_Refresh.Name = "SrvMen_Refresh";
-            this.SrvMen_Refresh.Size = new System.Drawing.Size(156, 22);
+            this.SrvMen_Refresh.Size = new System.Drawing.Size(149, 22);
             this.SrvMen_Refresh.Text = "Refresh";
             this.SrvMen_Refresh.Click += new System.EventHandler(this.SrvMen_Refresh_Click);
             // 
@@ -133,7 +124,7 @@
             // 
             this.SrvMen_Properties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.SrvMen_Properties.Name = "SrvMen_Properties";
-            this.SrvMen_Properties.Size = new System.Drawing.Size(156, 22);
+            this.SrvMen_Properties.Size = new System.Drawing.Size(149, 22);
             this.SrvMen_Properties.Text = "Properties";
             this.SrvMen_Properties.Click += new System.EventHandler(this.SrvMen_Properties_Click);
             // 
@@ -149,13 +140,13 @@
             this.DBMen_Refresh,
             this.DBmen_Prop});
             this.DatabaseMenu.Name = "DatabaseMenu";
-            this.DatabaseMenu.Size = new System.Drawing.Size(198, 142);
+            this.DatabaseMenu.Size = new System.Drawing.Size(191, 142);
             // 
             // DBMen_NewTable
             // 
             this.DBMen_NewTable.Image = global::DB_Architect.Properties.Resources.Table;
             this.DBMen_NewTable.Name = "DBMen_NewTable";
-            this.DBMen_NewTable.Size = new System.Drawing.Size(197, 22);
+            this.DBMen_NewTable.Size = new System.Drawing.Size(190, 22);
             this.DBMen_NewTable.Text = "New Table";
             this.DBMen_NewTable.Click += new System.EventHandler(this.DBMen_NewTable_Click);
             // 
@@ -163,7 +154,7 @@
             // 
             this.DBMen_NewQuery.Image = global::DB_Architect.Properties.Resources.Query_Frameless;
             this.DBMen_NewQuery.Name = "DBMen_NewQuery";
-            this.DBMen_NewQuery.Size = new System.Drawing.Size(197, 22);
+            this.DBMen_NewQuery.Size = new System.Drawing.Size(190, 22);
             this.DBMen_NewQuery.Text = "Query";
             this.DBMen_NewQuery.Click += new System.EventHandler(this.DBMen_NewQuery_Click);
             // 
@@ -171,19 +162,19 @@
             // 
             this.DBMen_Relt.Image = global::DB_Architect.Properties.Resources.RelationShips2;
             this.DBMen_Relt.Name = "DBMen_Relt";
-            this.DBMen_Relt.Size = new System.Drawing.Size(197, 22);
+            this.DBMen_Relt.Size = new System.Drawing.Size(190, 22);
             this.DBMen_Relt.Text = "Manage Relationships";
             this.DBMen_Relt.Click += new System.EventHandler(this.DBMen_Relt_Click);
             // 
             // DBmen_Sep
             // 
             this.DBmen_Sep.Name = "DBmen_Sep";
-            this.DBmen_Sep.Size = new System.Drawing.Size(194, 6);
+            this.DBmen_Sep.Size = new System.Drawing.Size(187, 6);
             // 
             // DBMen_Drop
             // 
             this.DBMen_Drop.Name = "DBMen_Drop";
-            this.DBMen_Drop.Size = new System.Drawing.Size(197, 22);
+            this.DBMen_Drop.Size = new System.Drawing.Size(190, 22);
             this.DBMen_Drop.Text = "Delete";
             this.DBMen_Drop.Click += new System.EventHandler(this.DBMen_Drop_Click);
             // 
@@ -191,14 +182,14 @@
             // 
             this.DBMen_Refresh.Image = global::DB_Architect.Properties.Resources.Activity;
             this.DBMen_Refresh.Name = "DBMen_Refresh";
-            this.DBMen_Refresh.Size = new System.Drawing.Size(197, 22);
+            this.DBMen_Refresh.Size = new System.Drawing.Size(190, 22);
             this.DBMen_Refresh.Text = "Refresh";
             this.DBMen_Refresh.Click += new System.EventHandler(this.DBMen_Refresh_Click);
             // 
             // DBmen_Prop
             // 
             this.DBmen_Prop.Name = "DBmen_Prop";
-            this.DBmen_Prop.Size = new System.Drawing.Size(197, 22);
+            this.DBmen_Prop.Size = new System.Drawing.Size(190, 22);
             this.DBmen_Prop.Text = "Properties";
             this.DBmen_Prop.Click += new System.EventHandler(this.DBmen_Prop_Click);
             // 
@@ -214,13 +205,13 @@
             this.Tblmen_Rename,
             this.Tblmen_Properties});
             this.TableMenu.Name = "Table_Menu";
-            this.TableMenu.Size = new System.Drawing.Size(150, 142);
+            this.TableMenu.Size = new System.Drawing.Size(145, 142);
             // 
             // Tblmen_DesignView
             // 
             this.Tblmen_DesignView.Image = global::DB_Architect.Properties.Resources.DesignView;
             this.Tblmen_DesignView.Name = "Tblmen_DesignView";
-            this.Tblmen_DesignView.Size = new System.Drawing.Size(149, 22);
+            this.Tblmen_DesignView.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_DesignView.Text = "Design View";
             this.Tblmen_DesignView.Click += new System.EventHandler(this.Tblmen_DesignView_Click);
             // 
@@ -228,7 +219,7 @@
             // 
             this.Tblmen_EditRecords.Image = global::DB_Architect.Properties.Resources.EditRecords;
             this.Tblmen_EditRecords.Name = "Tblmen_EditRecords";
-            this.Tblmen_EditRecords.Size = new System.Drawing.Size(149, 22);
+            this.Tblmen_EditRecords.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_EditRecords.Text = "Edit Records";
             this.Tblmen_EditRecords.Click += new System.EventHandler(this.Tblmen_EditRecords_Click);
             // 
@@ -236,45 +227,35 @@
             // 
             this.Tblmen_ViewRecords.Image = global::DB_Architect.Properties.Resources.ViewRecords;
             this.Tblmen_ViewRecords.Name = "Tblmen_ViewRecords";
-            this.Tblmen_ViewRecords.Size = new System.Drawing.Size(149, 22);
+            this.Tblmen_ViewRecords.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_ViewRecords.Text = "View Records";
             this.Tblmen_ViewRecords.Click += new System.EventHandler(this.Tblmen_ViewRecords_Click);
             // 
             // Tblmen_Sep
             // 
             this.Tblmen_Sep.Name = "Tblmen_Sep";
-            this.Tblmen_Sep.Size = new System.Drawing.Size(146, 6);
+            this.Tblmen_Sep.Size = new System.Drawing.Size(141, 6);
             // 
             // Tblmen_ViewRecords_Drop
             // 
             this.Tblmen_ViewRecords_Drop.Name = "Tblmen_ViewRecords_Drop";
-            this.Tblmen_ViewRecords_Drop.Size = new System.Drawing.Size(149, 22);
+            this.Tblmen_ViewRecords_Drop.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_ViewRecords_Drop.Text = "Delete";
             this.Tblmen_ViewRecords_Drop.Click += new System.EventHandler(this.Tblmen_Drop_Click);
             // 
             // Tblmen_Rename
             // 
             this.Tblmen_Rename.Name = "Tblmen_Rename";
-            this.Tblmen_Rename.Size = new System.Drawing.Size(149, 22);
+            this.Tblmen_Rename.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_Rename.Text = "Rename";
             this.Tblmen_Rename.Click += new System.EventHandler(this.Tblmen_Rename_Click);
             // 
             // Tblmen_Properties
             // 
             this.Tblmen_Properties.Name = "Tblmen_Properties";
-            this.Tblmen_Properties.Size = new System.Drawing.Size(149, 22);
+            this.Tblmen_Properties.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_Properties.Text = "Properties";
             this.Tblmen_Properties.Click += new System.EventHandler(this.Tblmen_Properties_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DB_Architect.Properties.Resources.Server;
-            this.pictureBox1.Location = new System.Drawing.Point(15, 14);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
             // 
             // TreeView
             // 
@@ -282,8 +263,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 465);
             this.ControlBox = false;
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.ServerName);
             this.Controls.Add(this.Tree);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -291,22 +270,17 @@
             this.Name = "TreeView";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "TreeView";
             this.Load += new System.EventHandler(this.TreeView_Load);
             this.ServerMenu.ResumeLayout(false);
             this.DatabaseMenu.ResumeLayout(false);
             this.TableMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.TreeView Tree;
-        private System.Windows.Forms.Label ServerName;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ImageList TreeViewIcons;
         private System.Windows.Forms.ContextMenuStrip ServerMenu;
         private System.Windows.Forms.ToolStripMenuItem SrvMen_Refresh;

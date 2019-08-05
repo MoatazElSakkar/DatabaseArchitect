@@ -93,6 +93,7 @@
     <Compile Include="ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client.cs" />
     <Compile Include="Dialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,8 +112,6 @@
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database.cs" />
-    <Compile Include="Key.cs" />
     <Compile Include="NewQuery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,14 +136,7 @@
     <Compile Include="Properties_Dialog.Designer.cs">
       <DependentUpon>Properties_Dialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Server.cs" />
     <Compile Include="SettingsParser.cs" />
-    <Compile Include="SplashScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SplashScreen.Designer.cs">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutArchitect.resx">
@@ -181,10 +173,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties_Dialog.resx">
       <DependentUpon>Properties_Dialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SplashScreen.resx">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -227,7 +215,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Table.cs" />
     <Compile Include="TablePreview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,6 +256,30 @@
   <ItemGroup>
     <Content Include="Architect.ico" />
     <Content Include="Icon.ico" />
+    <None Include="Resources\Exclaim.png" />
+    <None Include="Resources\syncronization.png" />
+    <None Include="Resources\DatabaseSync.png" />
+    <None Include="Resources\Execute1.png" />
+    <None Include="Resources\History_wider.png" />
+    <None Include="Resources\History1.png" />
+    <None Include="Resources\History.png" />
+    <None Include="Resources\DC.png" />
+    <None Include="Resources\QMark.png" />
+    <None Include="Resources\GearMetro.png" />
+    <None Include="Resources\Gear_Wider.png" />
+    <None Include="Resources\Gear24.png" />
+    <None Include="Resources\Gear.png" />
+    <None Include="Resources\Gear_new.png" />
+    <None Include="Resources\Maximize.png" />
+    <None Include="Resources\Minimiz.png" />
+    <None Include="Resources\Close.png" />
+    <None Include="Resources\Server.png" />
+    <None Include="Resources\MenustripBackground.png" />
+    <None Include="Resources\MenuBackground.png" />
+    <None Include="Resources\Database_Frameless.png" />
+    <None Include="Resources\Architect_Box.png" />
+    <None Include="Resources\Architect.png" />
+    <None Include="Resources\Titlebar.png" />
     <None Include="Resources\QueryFileHighlight.png" />
     <None Include="Resources\QueryFile.png" />
     <None Include="Resources\Execute Higlihht.png" />
@@ -303,7 +314,6 @@
     <None Include="Resources\MenuBG.png" />
     <None Include="Resources\TableHighlight.png" />
     <None Include="Resources\Table.png" />
-    <None Include="Resources\Server.png" />
     <None Include="Resources\Question.png" />
     <None Include="Resources\Query Highlight.png" />
     <None Include="Resources\Query Frameless.png" />
@@ -350,6 +360,10 @@
     <ProjectReference Include="..\..\DBA.Refrences\DBA.Refrences.csproj">
       <Project>{66393b23-41f6-488c-8f75-c7e9c62f4cf9}</Project>
       <Name>DBA.Refrences</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DBA.SplashScreen\DBA.SplashScreen.csproj">
+      <Project>{5af3e6aa-0cf7-4a82-9d01-465ffd0e8abf}</Project>
+      <Name>DBA.SplashScreen</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DBA.Structure\DBA.Structure.csproj">
       <Project>{5ab1c737-0455-4974-ab1a-3fdaedf8450c}</Project>

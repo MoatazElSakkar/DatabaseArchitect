@@ -5,6 +5,9 @@ using System.Windows.Forms;
 using System.Threading;
 using DBA.GlaciaProtocol;
 using DBA.QueryEngine;
+using DBA.Structure;
+using System.Net.Sockets;
+using System.Net;
 
 namespace DBA_Server_Test
 {
@@ -24,10 +27,15 @@ namespace DBA_Server_Test
         /// </summary>
         static void PrimaryLoop()
         {
-            string s=Server.Password;
+            Socket Listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Listener.Bind(new IPEndPoint(IPAddress.Any, 2271));
+            Listener.Listen(120);
+
             while (true)
             {
-                ServerSocket S = new ServerSocket(Standby);
+                Socket MidSocket = Listener.Accept();
+                new Thread(() =>
+                { ServerSocket S = new ServerSocket(MidSocket, Standby); }).Start();
             }
         }
 
@@ -45,12 +53,18 @@ namespace DBA_Server_Test
                         case RequestType.Connect:
                             break;
                         case RequestType.Disconnect:
-                            break;
+                            PrimarySocket.send(CreateResponse(ResponseType.disconnected, "Disconnected"));
+                            PrimarySocket.Transit.Close();
+                            return;
                         case RequestType.Feedback:
                             break;
                         case RequestType.ModifyServerSettings:
                             break;
                         case RequestType.Query:
+                            if (!PrimarySocket.elevated)
+                                PrimarySocket.send(CreateResponse(ResponseType.OperationFailed, "Session not verified"));
+                            else
+                                PrimarySocket.send(CreateResponse(ResponseType.QueryResponse, ProcessQuery(buffer as Request)));
                             break;
                         case RequestType.ReadServerSettings:
                             break;
@@ -70,6 +84,8 @@ namespace DBA_Server_Test
                             {
                                 //Log Access attempt;
                                 PrimarySocket.send(CreateResponse(ResponseType.FalseCredentials, "False Credentials"));
+                                PrimarySocket.Transit.Close();
+                                return;
                             }
                             break;
                     }
@@ -96,13 +112,33 @@ namespace DBA_Server_Test
                     return true;
             }
             return false;
-        }
+        }     
 
-        
-
-        static void ProcessQuery(Query Q)
+        static object ProcessQuery(Request Qr)
         {
-            string s = Q.Literal;
+            if (!(Qr.Attachment is string))
+                return "Invalid Query";
+            string Qs = Qr.Attachment as string;
+            Query Q = new Query(Qs);
+            try
+            {
+                QueryScanner QS = new QueryScanner(Q);
+                Q = QS.Scan();
+
+                QueryParser QP = new QueryParser(Q);
+                QueryTree Qt = QP.Reorder();
+
+                QueryExecutioner Qexec = new QueryExecutioner(Qt, Server.Database, ServerReaders.ReadRecords);
+                Table Ti = Qexec.ExecuteQuery();
+
+                if (Ti == null)
+                    return Qexec.Result;
+                return Ti;
+            }
+            catch(Exception Ex)
+            {
+                return Ex.Message;
+            }
         }
     }
 }

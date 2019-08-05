@@ -12,7 +12,7 @@ namespace DB_Architect
     public partial class AboutArchitect : Window
     {
 
-        public AboutArchitect(Home P):base (P,"AboutDBA")
+        public AboutArchitect(Home P):base ()
         {
             InitializeComponent();
         }

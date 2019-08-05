@@ -13,13 +13,12 @@ namespace DB_Architect
     {
         string DBstr = "";
 
-        public NewTable(Home P):base(P,"NewTable")
+        public NewTable(Home P)
         {
             InitializeComponent();
         }
 
         public NewTable(Home P,string DBname)
-            : base(P, "NewTable")
         {
             DBstr = DBname;
             InitializeComponent();
@@ -29,18 +28,6 @@ namespace DB_Architect
         {
             if (DBstr == "")
             {
-                foreach (Database DB in Program.server.DBS)
-                {
-                    DBBox.Items.Add(DB.Name);
-                    try
-                    {
-                        DBBox.SelectedIndex = 0;
-                    }
-                    catch
-                    {
-
-                    }
-                }
             }
             else
             {

@@ -1,0 +1,724 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SplashScr0001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0001.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0002" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0002.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0003" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0003.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0004" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0004.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0005" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0005.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0006" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0006.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0007" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0007.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0008" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0008.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0009" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0009.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0010" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0010.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0011" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0011.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0012" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0012.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0013" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0013.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0014" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0014.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0015" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0015.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0017" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0017.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0018" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0018.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0019" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0019.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0020" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0020.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0021" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0021.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0022" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0022.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0023" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0023.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0024" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0024.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0025" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0025.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0026" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0026.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0027" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0027.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0028" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0028.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0029" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0029.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0030" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0030.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0031" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0031.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0032" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0032.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0033" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0033.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0034" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0034.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0035" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0035.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0036" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0036.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0037" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0037.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0038" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0038.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0039" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0039.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0040" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0040.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0041" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0041.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0042" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0042.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0043" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0043.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0044" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0044.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0045" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0045.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0046" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0046.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0047" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0047.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0048" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0048.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0049" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0049.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0050" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0050.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0051" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0051.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0052" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0052.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0053" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0053.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0054" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0054.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0055" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0055.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0056" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0056.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0057" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0057.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0058" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0058.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0059" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0059.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0060" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0060.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0061" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0061.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0062" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0062.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0063" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0063.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0064" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0064.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0065" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0065.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0066" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0066.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0067" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0067.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0068" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0068.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0069" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0069.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0070" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0070.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0071" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0071.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0072" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0072.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0073" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0073.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0074" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0074.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0075" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0075.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0076" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0076.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0077" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0077.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0078" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0078.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0079" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0079.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0080" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0080.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0081" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0081.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0082" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0082.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0083" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0083.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0084" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0084.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0085" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0085.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0086" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0086.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0087" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0087.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0088" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0088.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0089" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0089.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0090" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0090.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0091" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0091.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0092" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0092.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0093" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0093.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0094" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0094.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0095" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0095.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0096" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0096.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0097" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0097.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0098" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0098.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0099" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0099.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0101" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0101.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0102" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0102.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0103" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0103.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0104" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0104.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0105" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0105.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0106" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0107" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0107.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0108" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0108.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0109" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0109.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0110" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0110.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0111" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0111.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0112" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0112.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0113" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0113.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0114" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0114.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0115" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0115.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0116" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0116.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0117" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0117.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0118" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0118.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0119" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0119.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0120" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0120.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0121" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0121.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0122" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0122.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0123" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0123.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0124" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0124.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0125" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0125.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0126" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0126.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0127" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0127.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0129" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0129.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0130" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0130.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0131" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0131.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0132" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0132.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0133" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0133.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0134" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0134.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0135" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0135.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0136" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0136.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0137" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0137.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0138" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0138.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0139" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0139.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0140" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0140.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0141" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0141.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0142" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0142.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0143" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0143.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0144" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0144.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0145" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0145.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0146" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0146.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0147" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0147.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0148" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0148.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0149" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0149.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0150" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0150.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0151" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0151.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0152" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0152.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0153" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0153.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0154" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0154.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0155" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0155.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0156" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0156.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0157" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0157.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0158" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0158.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0159" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0159.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0160" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0160.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0162" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0162.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0163" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0163.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0164" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0164.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0165" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0165.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0166" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0166.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0167" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0167.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0168" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0168.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0169" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0169.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0170" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0170.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0171" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0171.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0172" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0172.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0173" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0173.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0174" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0174.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0175" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0175.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0176" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0176.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0177" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0177.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0178" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0178.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0179" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0179.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0180" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0180.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0181" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0181.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0182" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0182.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0183" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0183.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0184" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0184.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0185" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0185.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0186" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0186.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0187" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0187.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0188" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0188.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0189" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0189.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0190" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0190.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0191" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0191.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0192" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0192.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0193" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0193.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0194" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0194.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0195" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0195.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0196" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0196.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0197" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0197.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0198" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0198.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0199" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0199.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0200" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SplashScr0201" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SplashScr0201.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

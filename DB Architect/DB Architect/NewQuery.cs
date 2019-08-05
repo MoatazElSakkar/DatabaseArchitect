@@ -14,13 +14,12 @@ namespace DB_Architect
     {
         string DBasic = "";
 
-        public NewQuery(Home P):base (P,"QueryAssembler")
+        public NewQuery(Home P)
         {
             InitializeComponent();
         }
 
         public NewQuery(Home P,string DBBasic)
-            : base(P, "QueryAssembler")
         {
             DBasic = DBBasic;
             InitializeComponent();
@@ -150,7 +149,6 @@ namespace DB_Architect
 
         private void NewQuery_Load(object sender, EventArgs e)
         {
-            ExtendAero(this.Handle, 30);
             if (DBasic != "")
             {
                 ArchiScript.AppendText(DBasic+" => ");
@@ -166,7 +164,6 @@ namespace DB_Architect
         {
             try
             {
-                ParentWindow.changeStatus("Syncrionizing...", 3);
                 string Script = ArchiScript.Text;
 
                 string[] Codes = Script.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);

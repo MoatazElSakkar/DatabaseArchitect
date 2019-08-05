@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DBA.Structure;
 
 namespace DB_Architect
 {
@@ -14,7 +15,7 @@ namespace DB_Architect
         Table Subject;
         List<int> Added=new List<int>();
         int StartRecCount = 0;
-        public TablePreview(Table T,Home P):base(P,"TablePreview")
+        public TablePreview(Table T,Home P):base()
         {
             Subject = T;
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace DB_Architect
         string Database = "";
 
         public TablePreview(Table T, Home P,bool Edit,string DB)
-            : base(P, "TablePreview")
+            : base()
         {
             editor = Edit;
             Database = DB;
@@ -39,13 +40,13 @@ namespace DB_Architect
             {
                 TablePreviewGrid.Columns.Add(K.Name, K.Name);
             }
-            for (int u=0;u< Subject.Keys[0].Records.Count;u++)
+            for (int u=0;u< Subject.Records;u++)
             {
                 List<string> RowContent = new List<string>();
 
                 foreach (Key K2 in Subject.Keys)
                 {
-                    RowContent.Add(K2.Records[RecordsIndex]);
+                    //RowContent.Add(K2.Records[RecordsIndex]);
                 }
                 RecordsIndex++;
 

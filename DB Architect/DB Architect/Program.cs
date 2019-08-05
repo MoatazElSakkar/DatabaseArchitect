@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Threading;
 using DBA.GlaciaProtocol;
+using DBA.SplashScreen;
 
 namespace DB_Architect
 {
@@ -11,8 +12,6 @@ namespace DB_Architect
     {
         public static int Port=0;
         public static SettingsParser Settings = new SettingsParser();
-        //public static TransitAgent TA;
-        public static Server server=new Server();
 
         public static string Version = "1.19a";
         public static string Build = "129";
@@ -39,7 +38,13 @@ namespace DB_Architect
             //CS.send(Rq2);
             //Response Rs2= CS.recieve() as Response;
 
+            //Request Rq2 = new Request();
+            //Rq1.Header = RequestType.Query;
+            //Rq1.Attachment = "SELECT * FROM Projects Where Name=\"DatabaseArchitect\";";
+            //CS.send(Rq1);
+            //Response Rs2 = CS.recieve() as Response;
 
+            Application.Run(new SplashScreen(90));
             Application.Run(new Home());
 
         }

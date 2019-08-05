@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5AF3E6AA-0CF7-4A82-9D01-465FFD0E8ABF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DBA.SplashScreen</RootNamespace>
+    <AssemblyName>DBA.SplashScreen</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Splashscreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Splashscreen.Designer.cs">
+      <DependentUpon>Splashscreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Splashscreen.resx">
+      <DependentUpon>Splashscreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0012.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0013.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0014.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0015.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0016.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0017.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0018.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0019.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0020.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0021.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0022.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0023.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0025.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0026.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0027.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0028.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0029.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0030.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0031.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0032.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0033.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0034.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0035.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0036.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0037.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0038.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0039.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0040.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0041.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0042.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0043.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0044.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0045.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0046.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0047.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0048.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0049.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0050.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0051.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0052.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0053.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0054.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0055.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0056.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0057.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0058.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0059.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0060.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0061.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0062.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0063.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0064.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0065.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0066.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0067.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0068.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0069.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0070.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0071.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0072.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0073.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0074.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0075.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0076.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0077.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0078.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0079.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0080.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0081.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0082.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0083.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0084.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0085.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0086.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0087.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0088.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0089.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0090.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0091.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0092.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0093.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0094.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0095.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0096.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0097.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0098.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0099.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0101.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0102.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0103.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0104.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0105.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0106.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0107.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0108.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0109.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0110.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0111.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0112.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0113.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0114.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0115.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0116.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0117.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0118.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0119.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0120.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0121.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0122.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0123.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0124.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0125.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0126.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0127.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0129.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0130.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0131.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0132.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0133.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0134.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0135.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0136.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0137.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0138.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0139.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0140.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0141.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0142.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0143.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0144.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0145.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0146.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0147.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0148.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0149.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0150.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0151.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0152.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0153.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0154.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0155.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0156.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0157.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0158.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0159.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0160.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0166.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0167.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0168.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0169.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0170.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0171.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0172.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0173.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0174.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0175.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0176.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0177.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0178.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0179.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0180.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0181.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0182.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0183.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0184.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0185.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0186.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0187.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0188.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0189.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0190.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0191.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0192.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0193.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0194.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0195.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0196.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0197.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0198.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0199.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplashScr0201.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

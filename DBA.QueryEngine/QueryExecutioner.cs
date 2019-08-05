@@ -10,6 +10,9 @@ namespace DBA.QueryEngine
 {
     public class QueryExecutioner
     {
+        public delegate void TouchTable(Table Tableu);
+        public TouchTable Touch;
+
         public string Result = "";
         private class Comparison
         {
@@ -88,8 +91,9 @@ namespace DBA.QueryEngine
 
         public delegate Table Executive(Node Root);
         static Dictionary<TokenType, Executive> Execs;
-        public QueryExecutioner(QueryTree Q_Entry, Database DB)
+        public QueryExecutioner(QueryTree Q_Entry, Database DB,TouchTable t)
         {
+            Touch = t;
             Query = Q_Entry;
             database = DB;
             Execs = new Dictionary<TokenType, Executive>()
@@ -111,6 +115,8 @@ namespace DBA.QueryEngine
                     Root.Children[0].HostedToken.TokenData + 
                     " was not found");
             }
+            if (!T.Survayed)
+                Touch(T);
             Tables.Add(T);
         }
 

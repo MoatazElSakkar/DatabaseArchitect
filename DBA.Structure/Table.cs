@@ -11,6 +11,7 @@ namespace DBA.Structure
     [SerializableAttribute]
     public partial class Table
     {
+        public bool Survayed = false;
         public string SchemaFile
         {
             get;

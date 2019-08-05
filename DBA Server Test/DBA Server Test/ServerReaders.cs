@@ -124,6 +124,7 @@ namespace DBA_Server_Test
                     Kx.AddRecord(bufferSplit[i]);
                 }
             }
+            Tableu.Survayed = true;
         }
     }
 }

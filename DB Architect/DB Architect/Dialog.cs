@@ -14,7 +14,7 @@ namespace DB_Architect
         public bool DialogRes;
         string message;
 
-        public Dialog(Home P,string msg):base(P,"Dialog")
+        public Dialog(Home P,string msg)
         {
             message = msg;
             InitializeComponent();

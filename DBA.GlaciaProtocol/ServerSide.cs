@@ -21,18 +21,21 @@ namespace DBA.GlaciaProtocol
     }
     public class ServerSocket:GlaciaProtocol
     {
-        public Socket Listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
         public delegate void CallBackFunction(ServerSocket PrimarySocket);
 
         public bool elevated = false;
 
-        public ServerSocket(CallBackFunction AfterConnect)
+        public ServerSocket(Socket Incoming,CallBackFunction AfterConnect)
         {
-            Listener.Bind(new IPEndPoint(IPAddress.Any, 2271));
-            Listener.Listen(120);
-            Transit = Listener.Accept();
-            AfterConnect(this);
+            Transit = Incoming;
+            try
+            {
+                AfterConnect(this);
+            }
+            catch
+            {
+
+            }
         }
 
     }

@@ -21,7 +21,7 @@ namespace DB_Architect
         List<string> DeletedKeys = new List<string>();
         List<string> KeysBackup = new List<string>();
 
-        public DesignView(Home P,string Database,string Table):base (P,"DesignView")
+        public DesignView(Home P,string Database,string Table)
         {
             DBname = Database;
             Tabname = Table;
@@ -31,7 +31,6 @@ namespace DB_Architect
         private void TableView_Load(object sender, EventArgs e)
         {
             //Keys=Program.TA.Survey(Tabname + "." + DBname, "Table Keys");
-            ExtendAero(this.Handle,32);
             KeysBackup = new List<string>(Keys);
 
             foreach (string Sx in Keys)

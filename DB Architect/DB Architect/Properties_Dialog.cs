@@ -16,7 +16,7 @@ namespace DB_Architect
         string TargetName;
         string[] Modes ={"Server","Database","Table"};
 
-        public Properties_Dialog(Home P,string a,string b):base(P,"PropertiesDialog")
+        public Properties_Dialog(Home P,string a,string b)
         {
             mode = 2;
             TargetName = a;
@@ -25,14 +25,12 @@ namespace DB_Architect
         }
 
         public Properties_Dialog(Home P, string a)
-            : base(P, "PropertiesDialog")
         {
             mode = 1;
             TargetName = a;
             InitializeComponent();
         }
         public Properties_Dialog(Home P)
-            : base(P, "PropertiesDialog")
         {
             mode = 0;
             InitializeComponent();

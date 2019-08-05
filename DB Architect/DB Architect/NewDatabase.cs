@@ -12,7 +12,7 @@ namespace DB_Architect
     public partial class NewDatabase : Window
     {
 
-        public NewDatabase(Home P):base(P,"NewDatabase")
+        public NewDatabase(Home P)
         {
             InitializeComponent();
         }

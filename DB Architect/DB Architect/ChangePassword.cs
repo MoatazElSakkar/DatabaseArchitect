@@ -11,21 +11,13 @@ namespace DB_Architect
 {
     public partial class ChangePassword : Window
     {
-        public ChangePassword(Home P):base(P,"Change Password Dialog")
+        public ChangePassword(Home P)
         {
             InitializeComponent();
         }
 
         private void Apply_Click(object sender, EventArgs e)
         {
-            if (OldPassword.Text == Program.server.Password)
-            {
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Incorrect Credential, Unable To Comply", "Unable To Comply", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
     }
 }

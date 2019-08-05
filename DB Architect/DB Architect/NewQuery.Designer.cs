@@ -64,7 +64,7 @@
             // 
             // ErrorSign
             // 
-            this.ErrorSign.Image = global::DB_Architect.Properties.Resources.Error_Icon;
+            this.ErrorSign.Image = global::DB_Architect.Properties.Resources.ErrorIcon;
             this.ErrorSign.Location = new System.Drawing.Point(5, -2);
             this.ErrorSign.Name = "ErrorSign";
             this.ErrorSign.Size = new System.Drawing.Size(22, 22);

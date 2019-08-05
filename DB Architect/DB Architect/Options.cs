@@ -11,7 +11,7 @@ namespace DB_Architect
 {
     public partial class Options : Window
     {
-        public Options(Home P):base (P,"OptionsWindow")
+        public Options(Home P)
         {
             InitializeComponent();
         }

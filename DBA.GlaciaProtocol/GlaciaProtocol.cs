@@ -19,7 +19,8 @@ namespace DBA.GlaciaProtocol
         QueryResponse,
         ServerSettings,
         OperationFeedback,
-        OperationFailed
+        OperationFailed,
+        disconnected
     }
 
     public enum RequestType

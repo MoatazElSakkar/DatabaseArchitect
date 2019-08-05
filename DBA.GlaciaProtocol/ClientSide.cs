@@ -21,18 +21,33 @@ namespace DBA.GlaciaProtocol
 
     public class ClientSocket:GlaciaProtocol
     {
+        public bool Intialized = false;
+
         public ClientSocket(string ServerName)
         {
-            IPAddress ServerIP;
-            bool RawIP = true;
-            foreach (char c in ServerName)
-                if (c < '0' && c > '9' || c != '.')
-                    RawIP = false;
-            if (RawIP)
-                ServerIP = IPAddress.Parse(ServerName);
-            else
-                ServerIP = Dns.GetHostAddresses(ServerName).First(x => x.ToString().Contains('.'));
-            Transit.Connect(ServerIP, 2271);
+            ClienSocketName = ServerName;
+        }
+
+        public ClientSocket()
+        {
+        }
+
+        public string ClienSocketName
+        {
+            set
+            {
+                IPAddress ServerIP;
+                bool RawIP = true;
+                foreach (char c in value)
+                    if (c < '0' && c > '9' || c != '.')
+                        RawIP = false;
+                if (RawIP)
+                    ServerIP = IPAddress.Parse(value);
+                else
+                    ServerIP = Dns.GetHostAddresses(value).First(x => x.ToString().Contains('.'));
+                Transit.Connect(ServerIP, 2271);
+                Intialized = true;
+            }
         }
     }
 }
