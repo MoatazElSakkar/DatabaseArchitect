@@ -7,116 +7,87 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DBA.Structure;
+using DBA.Refrences;
 
 namespace DB_Architect
 {
     partial class TablePreview : Window
     {
-        Table Subject;
-        List<int> Added=new List<int>();
+        Table Table;
         int StartRecCount = 0;
-        public TablePreview(Table T,Home P):base()
+
+        Client Cli;
+        bool Editor = false;
+
+        public TablePreview(Table _table,Client _cli, bool _editor=false)
         {
-            Subject = T;
+            Editor = _editor;
+            Table = _table;
+            Cli = _cli;
             InitializeComponent();
         }
 
-        bool editor = false;
-        string Database = "";
 
-        public TablePreview(Table T, Home P,bool Edit,string DB)
-            : base()
-        {
-            editor = Edit;
-            Database = DB;
-            Subject = T;
-            InitializeComponent();
-        }
 
         private void TablePreview_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
             int RecordsIndex=0;
-            foreach (Key K in Subject.Keys)
+            foreach (Key K in Table.Keys)
             {
                 TablePreviewGrid.Columns.Add(K.Name, K.Name);
             }
-            for (int u=0;u< Subject.Records;u++)
+            for (int u=0;u< Table.Records;u++)
             {
                 List<string> RowContent = new List<string>();
 
-                foreach (Key K2 in Subject.Keys)
+                foreach (Key K in Table.Keys)
                 {
-                    //RowContent.Add(K2.Records[RecordsIndex]);
+                    RowContent.Add(Datatypes.DecoderFunctions[K.Type](K.DATA[RecordsIndex]));
                 }
                 RecordsIndex++;
 
                 DataGridViewRow R = new DataGridViewRow();
                 R.CreateCells(TablePreviewGrid);
-                for (int i = 0; i < Subject.Keys.Count; i++)
+                for (int i = 0; i < Table.Keys.Count; i++)
                 {
                     R.Cells[i].Value = RowContent[i];
                 }
                 TablePreviewGrid.Rows.Add(R);
             }
             StartRecCount = TablePreviewGrid.Rows.Count-1;
-            if (editor)
-            {
-                TablePreviewGrid.ReadOnly = false;
-                TablePreviewGrid.CellValueChanged += (object obj, DataGridViewCellEventArgs DGEA) =>
-                {
-                    //if (DGEA.RowIndex <StartRecCount-1)
-                    try
-                    {
-                        int RecIndex = DGEA.RowIndex + 1;
-                        string Script = "Adjust " + Subject.Name + " [" + RecIndex.ToString() + "]" + " =";
-                        for (int i = 0; i < TablePreviewGrid.ColumnCount; i++)
-                        {
-                            string Temp = (string)TablePreviewGrid[i, DGEA.RowIndex].Value;
-                            if (Temp != null)
-                            {
-                                Temp = Temp.Replace(" ", "%20%");
-                                Script += " " + Temp;
-                            }
-                            else
-                            {
-                                Script += " 0";
-                            }
-                        }
-                        //Program.TA.ExecuteNonQueryScript(Script, Database);
-                    }
-                    //else
-                    catch
-                    {
-                        string Record = "";
-                        for (int i = 0; i < TablePreviewGrid.ColumnCount; i++)
-                        {
-                            if (TablePreviewGrid[i, DGEA.RowIndex].Value == null)
-                            {
-                                Record += "0";
-                            }
-                            else
-                            {
-                                Record += (string)TablePreviewGrid[i, DGEA.RowIndex].Value;
-                            }
-                            if (i != TablePreviewGrid.ColumnCount-1)
-                            {
-                                Record += ",";
-                            }
-                        }
-                        Added.Add(DGEA.RowIndex);
-                        string Script = "Add " + Subject.Name + " (" + Record + ")";
-                        //Program.TA.ExecuteNonQueryScript(Script, Database);
-                        StartRecCount = TablePreviewGrid.Rows.Count-1;
-                    }
-                };
 
-                TablePreviewGrid.RowsRemoved += (object obj, DataGridViewRowsRemovedEventArgs DGVRREA) =>
-                    {
-                        int i = 1 + DGVRREA.RowIndex;
-                        string Script = "Drop Record " + Subject.Name + " [" + i.ToString() +"]";
-                        //Program.TA.ExecuteNonQueryScript(Script, Database);
-                    };
-            }
+            if (Editor)
+                IntializeEditorWorkframe();
+        }
+
+        private void IntializeEditorWorkframe()
+        {
+            TablePreviewGrid.ReadOnly = false;
+            TablePreviewGrid.CellValueChanged += (object obj, DataGridViewCellEventArgs eGrid) =>
+            {
+                try
+                {
+                    int RecIndex = eGrid.RowIndex + 1;
+                    string Query = string.Format("UPDATE {0} SET {1} = {2} Where {3}={4}",
+                        Table.Name, Table.Keys[eGrid.ColumnIndex].Name,
+                        TablePreviewGrid[eGrid.ColumnIndex, eGrid.RowIndex],
+                        Table.Keys[0], TablePreviewGrid[0, eGrid.RowIndex]);
+                    string Response = Cli.QueryServer(Query).Attachment as string;
+                }
+                catch
+                {
+                }
+            };
+
+            TablePreviewGrid.RowsRemoved += (object obj, DataGridViewRowsRemovedEventArgs eGrid) =>
+            {
+                int RecIndex = eGrid.RowIndex + 1;
+                string Query = string.Format("DELETE FROM {0} Where {3}={4}",
+                    Table.Name, Table.Keys[0], TablePreviewGrid[0, eGrid.RowIndex]);
+                string Response = Cli.QueryServer(Query).Attachment as string;
+            };
         }
     }
 }

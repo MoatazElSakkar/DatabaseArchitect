@@ -157,12 +157,12 @@ namespace DBA.Refrences
 
         public static string Int32Decoder(byte[] input)
         {
-            return BitConverter.ToString(input, 0);
+            return BitConverter.ToInt32(input,0).ToString();
         }
 
         public static string SingleByteDecoder(byte[] input)
         {
-            return BitConverter.ToString(input, 0);
+            return input[0].ToString();
         }
 
         public delegate int Compare(byte[] A,byte[] B);

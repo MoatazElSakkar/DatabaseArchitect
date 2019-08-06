@@ -35,6 +35,7 @@
             // TablePreviewGrid
             // 
             this.TablePreviewGrid.BackgroundColor = System.Drawing.Color.White;
+            this.TablePreviewGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TablePreviewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.TablePreviewGrid.GridColor = System.Drawing.Color.White;
             this.TablePreviewGrid.Location = new System.Drawing.Point(12, 12);

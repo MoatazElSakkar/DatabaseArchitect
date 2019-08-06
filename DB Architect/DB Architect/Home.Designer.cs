@@ -50,8 +50,9 @@
             this.StatusPic = new System.Windows.Forms.PictureBox();
             this.ArchitectLogo = new System.Windows.Forms.PictureBox();
             this.ActivePanel = new System.Windows.Forms.Panel();
-            this.RightFormPanel = new System.Windows.Forms.Panel();
+            this.RightUpperPanel = new System.Windows.Forms.Panel();
             this.LeftFormPanel = new System.Windows.Forms.Panel();
+            this.RightLowerPanel = new System.Windows.Forms.Panel();
             this.Toolbox.SuspendLayout();
             this.Captionbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatusPic)).BeginInit();
@@ -94,7 +95,7 @@
             this.Toolbox.Name = "Toolbox";
             this.Toolbox.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.Toolbox.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.Toolbox.Size = new System.Drawing.Size(292, 28);
+            this.Toolbox.Size = new System.Drawing.Size(200, 28);
             this.Toolbox.TabIndex = 14;
             this.Toolbox.Text = "menuStrip1";
             // 
@@ -251,21 +252,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ActivePanel.BackColor = System.Drawing.Color.Transparent;
-            this.ActivePanel.Controls.Add(this.RightFormPanel);
+            this.ActivePanel.Controls.Add(this.RightLowerPanel);
+            this.ActivePanel.Controls.Add(this.RightUpperPanel);
             this.ActivePanel.Controls.Add(this.LeftFormPanel);
             this.ActivePanel.Location = new System.Drawing.Point(10, 86);
             this.ActivePanel.Name = "ActivePanel";
             this.ActivePanel.Size = new System.Drawing.Size(1328, 611);
             this.ActivePanel.TabIndex = 16;
             // 
-            // RightFormPanel
+            // RightUpperPanel
             // 
-            this.RightFormPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RightFormPanel.Location = new System.Drawing.Point(317, 0);
-            this.RightFormPanel.Name = "RightFormPanel";
-            this.RightFormPanel.Size = new System.Drawing.Size(1010, 605);
-            this.RightFormPanel.TabIndex = 1;
+            this.RightUpperPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RightUpperPanel.Location = new System.Drawing.Point(317, 0);
+            this.RightUpperPanel.Name = "RightUpperPanel";
+            this.RightUpperPanel.Size = new System.Drawing.Size(1010, 428);
+            this.RightUpperPanel.TabIndex = 1;
             // 
             // LeftFormPanel
             // 
@@ -275,6 +276,14 @@
             this.LeftFormPanel.Name = "LeftFormPanel";
             this.LeftFormPanel.Size = new System.Drawing.Size(309, 605);
             this.LeftFormPanel.TabIndex = 0;
+            // 
+            // RightLowerPanel
+            // 
+            this.RightLowerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.RightLowerPanel.Location = new System.Drawing.Point(317, 434);
+            this.RightLowerPanel.Name = "RightLowerPanel";
+            this.RightLowerPanel.Size = new System.Drawing.Size(1010, 174);
+            this.RightLowerPanel.TabIndex = 2;
             // 
             // Home
             // 
@@ -334,6 +343,7 @@
         private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
         private System.Windows.Forms.Panel ActivePanel;
         private System.Windows.Forms.Panel LeftFormPanel;
-        private System.Windows.Forms.Panel RightFormPanel;
+        private System.Windows.Forms.Panel RightUpperPanel;
+        private System.Windows.Forms.Panel RightLowerPanel;
     }
 }

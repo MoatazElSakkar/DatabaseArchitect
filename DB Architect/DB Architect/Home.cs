@@ -16,7 +16,7 @@ namespace DB_Architect
     {
         Client Cli;
 
-        public delegate void statusChange(string stat, int index);
+        public delegate void statusChange(string stat, int index,bool titlebar=false);
 
         List<Image> stati = new List<Image>()
         {
@@ -27,17 +27,19 @@ namespace DB_Architect
             Properties.Resources.DC,
             Properties.Resources.Server
         };
-        public void changeStatus(string stat, int index)
+        public void changeStatus(string stat, int index, bool Titlebar = false)
         {
             Status.Text = stat;
             StatusPic.Image = stati[index];
+            if (Titlebar)
+                Text = "Database Architect" + " - " + stat;
         }
 
         public Home()
         {
             //Loading configuration and contacting service
             InitializeComponent();
-            Cli = new Client(changeStatus);
+            Cli = new Client(changeStatus,RightUpperPanel,RightLowerPanel);
             Cli.Connected += Cli_Connected;
             this.FormBorderStyle = FormBorderStyle.None;
             this.DoubleBuffered = true;
@@ -46,7 +48,6 @@ namespace DB_Architect
 
         private void Cli_Connected(Client C, EventArgs E)
         {
-            LeftFormPanel.ControlAdded += ActivePanel_ControlAdded;
             LeftFormPanel.Controls.Add(new TreeView(Cli));
             Status.Text = "Syncronizing...";
             StatusPic.Image = Properties.Resources.Activity;
@@ -86,7 +87,7 @@ namespace DB_Architect
             base.WndProc(ref m);
         }
 
-        private class renderer : ToolStripProfessionalRenderer
+        public class renderer : ToolStripProfessionalRenderer
         {
             public renderer(ProfessionalColorTable PTC)
                 : base(new cols())
@@ -119,7 +120,7 @@ namespace DB_Architect
             }
         }
 
-        private class cols : ProfessionalColorTable
+        public class cols : ProfessionalColorTable
         {
             public override Color MenuItemSelected
             {
@@ -142,6 +143,9 @@ namespace DB_Architect
             Captionbox.Renderer = new renderer(new cols());
             //LeftFormPanel.Visible = false;
             //RightFormPanel.Visible = false;
+            RightLowerPanel.ControlAdded += ActivePanel_ControlAdded;
+            RightUpperPanel.ControlAdded += ActivePanel_ControlAdded;
+            LeftFormPanel.ControlAdded += ActivePanel_ControlAdded;
             ActivePanel.ControlAdded += ActivePanel_ControlAdded;
             ActivePanel.Controls.Add(new WelcomeScreen(Cli));
             StatusPic.Image = Properties.Resources.DC;
@@ -200,7 +204,7 @@ namespace DB_Architect
         {
             if (!Cli.CliSocket.Transit.Connected) { return; }
             Cli.Disconnect();
-            RightFormPanel.Controls.Clear();
+            RightUpperPanel.Controls.Clear();
             LeftFormPanel.Controls.Clear();
             ActivePanel.Controls.Add(new WelcomeScreen(Cli));
             StatusPic.Image = Properties.Resources.DC;

@@ -4,18 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DBA.GlaciaProtocol;
+using System.Windows.Forms;
 
 namespace DB_Architect
 {
     public class Client
     {
+        public Panel Workspace_Upper;
+        Panel Workspace_Lower;
+
         public delegate void AfterConnect(Client C, EventArgs E);
         public event AfterConnect Connected;
 
         public Home.statusChange UpdateHost;
 
-        public Client(Home.statusChange _updateHost)
+        public Client(Home.statusChange _updateHost,Panel _workspaceU,Panel _workspaceL)
         {
+            Workspace_Upper = _workspaceU;
+            Workspace_Lower = _workspaceL;
             UpdateHost = _updateHost;
         }
         public static Request CreateRequest(RequestType Rt, object attachment)

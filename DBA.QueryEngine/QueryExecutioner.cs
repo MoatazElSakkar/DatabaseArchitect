@@ -141,8 +141,10 @@ namespace DBA.QueryEngine
                     KeyIDs.Add(Kt);
                 }
             if (Root.Children.Count == 3) { Where(Root.Children[2]); }
+            else { Filter = Enumerable.Range(0, Tables.Last().Records).ToList(); }
 
             Table Response = new Table("Query Response");
+            Response.Records = Filter.Count;
             List<int> KIndices = new List<int>();
             foreach (Key Ki in KeyIDs)
             {

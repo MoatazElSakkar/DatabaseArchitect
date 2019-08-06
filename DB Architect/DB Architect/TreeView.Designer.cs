@@ -34,14 +34,12 @@
             this.TreeViewIcons = new System.Windows.Forms.ImageList(this.components);
             this.ServerMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SrvrMen_AddDatabase = new System.Windows.Forms.ToolStripMenuItem();
-            this.SrvrMen_Seprator = new System.Windows.Forms.ToolStripSeparator();
             this.SrvMen_Refresh = new System.Windows.Forms.ToolStripMenuItem();
             this.SrvMen_Properties = new System.Windows.Forms.ToolStripMenuItem();
             this.DatabaseMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DBMen_NewTable = new System.Windows.Forms.ToolStripMenuItem();
             this.DBMen_NewQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.DBMen_Relt = new System.Windows.Forms.ToolStripMenuItem();
-            this.DBmen_Sep = new System.Windows.Forms.ToolStripSeparator();
             this.DBMen_Drop = new System.Windows.Forms.ToolStripMenuItem();
             this.DBMen_Refresh = new System.Windows.Forms.ToolStripMenuItem();
             this.DBmen_Prop = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,13 +47,15 @@
             this.Tblmen_DesignView = new System.Windows.Forms.ToolStripMenuItem();
             this.Tblmen_EditRecords = new System.Windows.Forms.ToolStripMenuItem();
             this.Tblmen_ViewRecords = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tblmen_Sep = new System.Windows.Forms.ToolStripSeparator();
             this.Tblmen_ViewRecords_Drop = new System.Windows.Forms.ToolStripMenuItem();
             this.Tblmen_Rename = new System.Windows.Forms.ToolStripMenuItem();
             this.Tblmen_Properties = new System.Windows.Forms.ToolStripMenuItem();
+            this.Toolbar = new System.Windows.Forms.MenuStrip();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ServerMenu.SuspendLayout();
             this.DatabaseMenu.SuspendLayout();
             this.TableMenu.SuspendLayout();
+            this.Toolbar.SuspendLayout();
             this.SuspendLayout();
             // 
             // Tree
@@ -66,13 +66,11 @@
             this.Tree.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Tree.ImageIndex = 0;
             this.Tree.ImageList = this.TreeViewIcons;
-            this.Tree.Location = new System.Drawing.Point(0, 3);
+            this.Tree.Location = new System.Drawing.Point(0, 24);
             this.Tree.Name = "Tree";
             this.Tree.SelectedImageIndex = 0;
-            this.Tree.Size = new System.Drawing.Size(285, 460);
+            this.Tree.Size = new System.Drawing.Size(285, 444);
             this.Tree.TabIndex = 0;
-            this.Tree.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.Tree_BeforeCollapse);
-            this.Tree.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.Tree_BeforeExpand);
             this.Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseClick);
             this.Tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseDoubleClick);
             // 
@@ -92,14 +90,14 @@
             this.ServerMenu.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ServerMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SrvrMen_AddDatabase,
-            this.SrvrMen_Seprator,
             this.SrvMen_Refresh,
             this.SrvMen_Properties});
             this.ServerMenu.Name = "ServerMenu";
-            this.ServerMenu.Size = new System.Drawing.Size(150, 76);
+            this.ServerMenu.Size = new System.Drawing.Size(150, 70);
             // 
             // SrvrMen_AddDatabase
             // 
+            this.SrvrMen_AddDatabase.BackgroundImage = global::DB_Architect.Properties.Resources.MenustripBackground;
             this.SrvrMen_AddDatabase.Image = global::DB_Architect.Properties.Resources.Database_Frameless;
             this.SrvrMen_AddDatabase.Name = "SrvrMen_AddDatabase";
             this.SrvrMen_AddDatabase.Size = new System.Drawing.Size(149, 22);
@@ -107,13 +105,9 @@
             this.SrvrMen_AddDatabase.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.SrvrMen_AddDatabase.Click += new System.EventHandler(this.SrvrMen_AddDatabase_Click);
             // 
-            // SrvrMen_Seprator
-            // 
-            this.SrvrMen_Seprator.Name = "SrvrMen_Seprator";
-            this.SrvrMen_Seprator.Size = new System.Drawing.Size(146, 6);
-            // 
             // SrvMen_Refresh
             // 
+            this.SrvMen_Refresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SrvMen_Refresh.BackgroundImage")));
             this.SrvMen_Refresh.Image = global::DB_Architect.Properties.Resources.Activity;
             this.SrvMen_Refresh.Name = "SrvMen_Refresh";
             this.SrvMen_Refresh.Size = new System.Drawing.Size(149, 22);
@@ -122,6 +116,7 @@
             // 
             // SrvMen_Properties
             // 
+            this.SrvMen_Properties.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SrvMen_Properties.BackgroundImage")));
             this.SrvMen_Properties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.SrvMen_Properties.Name = "SrvMen_Properties";
             this.SrvMen_Properties.Size = new System.Drawing.Size(149, 22);
@@ -135,15 +130,15 @@
             this.DBMen_NewTable,
             this.DBMen_NewQuery,
             this.DBMen_Relt,
-            this.DBmen_Sep,
             this.DBMen_Drop,
             this.DBMen_Refresh,
             this.DBmen_Prop});
             this.DatabaseMenu.Name = "DatabaseMenu";
-            this.DatabaseMenu.Size = new System.Drawing.Size(191, 142);
+            this.DatabaseMenu.Size = new System.Drawing.Size(191, 136);
             // 
             // DBMen_NewTable
             // 
+            this.DBMen_NewTable.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DBMen_NewTable.BackgroundImage")));
             this.DBMen_NewTable.Image = global::DB_Architect.Properties.Resources.Table;
             this.DBMen_NewTable.Name = "DBMen_NewTable";
             this.DBMen_NewTable.Size = new System.Drawing.Size(190, 22);
@@ -152,6 +147,7 @@
             // 
             // DBMen_NewQuery
             // 
+            this.DBMen_NewQuery.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DBMen_NewQuery.BackgroundImage")));
             this.DBMen_NewQuery.Image = global::DB_Architect.Properties.Resources.Query_Frameless;
             this.DBMen_NewQuery.Name = "DBMen_NewQuery";
             this.DBMen_NewQuery.Size = new System.Drawing.Size(190, 22);
@@ -160,19 +156,16 @@
             // 
             // DBMen_Relt
             // 
+            this.DBMen_Relt.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DBMen_Relt.BackgroundImage")));
             this.DBMen_Relt.Image = global::DB_Architect.Properties.Resources.RelationShips2;
             this.DBMen_Relt.Name = "DBMen_Relt";
             this.DBMen_Relt.Size = new System.Drawing.Size(190, 22);
             this.DBMen_Relt.Text = "Manage Relationships";
             this.DBMen_Relt.Click += new System.EventHandler(this.DBMen_Relt_Click);
             // 
-            // DBmen_Sep
-            // 
-            this.DBmen_Sep.Name = "DBmen_Sep";
-            this.DBmen_Sep.Size = new System.Drawing.Size(187, 6);
-            // 
             // DBMen_Drop
             // 
+            this.DBMen_Drop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DBMen_Drop.BackgroundImage")));
             this.DBMen_Drop.Name = "DBMen_Drop";
             this.DBMen_Drop.Size = new System.Drawing.Size(190, 22);
             this.DBMen_Drop.Text = "Delete";
@@ -180,6 +173,7 @@
             // 
             // DBMen_Refresh
             // 
+            this.DBMen_Refresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DBMen_Refresh.BackgroundImage")));
             this.DBMen_Refresh.Image = global::DB_Architect.Properties.Resources.Activity;
             this.DBMen_Refresh.Name = "DBMen_Refresh";
             this.DBMen_Refresh.Size = new System.Drawing.Size(190, 22);
@@ -188,6 +182,7 @@
             // 
             // DBmen_Prop
             // 
+            this.DBmen_Prop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DBmen_Prop.BackgroundImage")));
             this.DBmen_Prop.Name = "DBmen_Prop";
             this.DBmen_Prop.Size = new System.Drawing.Size(190, 22);
             this.DBmen_Prop.Text = "Properties";
@@ -200,15 +195,15 @@
             this.Tblmen_DesignView,
             this.Tblmen_EditRecords,
             this.Tblmen_ViewRecords,
-            this.Tblmen_Sep,
             this.Tblmen_ViewRecords_Drop,
             this.Tblmen_Rename,
             this.Tblmen_Properties});
             this.TableMenu.Name = "Table_Menu";
-            this.TableMenu.Size = new System.Drawing.Size(145, 142);
+            this.TableMenu.Size = new System.Drawing.Size(145, 136);
             // 
             // Tblmen_DesignView
             // 
+            this.Tblmen_DesignView.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Tblmen_DesignView.BackgroundImage")));
             this.Tblmen_DesignView.Image = global::DB_Architect.Properties.Resources.DesignView;
             this.Tblmen_DesignView.Name = "Tblmen_DesignView";
             this.Tblmen_DesignView.Size = new System.Drawing.Size(144, 22);
@@ -217,6 +212,7 @@
             // 
             // Tblmen_EditRecords
             // 
+            this.Tblmen_EditRecords.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Tblmen_EditRecords.BackgroundImage")));
             this.Tblmen_EditRecords.Image = global::DB_Architect.Properties.Resources.EditRecords;
             this.Tblmen_EditRecords.Name = "Tblmen_EditRecords";
             this.Tblmen_EditRecords.Size = new System.Drawing.Size(144, 22);
@@ -225,19 +221,16 @@
             // 
             // Tblmen_ViewRecords
             // 
+            this.Tblmen_ViewRecords.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Tblmen_ViewRecords.BackgroundImage")));
             this.Tblmen_ViewRecords.Image = global::DB_Architect.Properties.Resources.ViewRecords;
             this.Tblmen_ViewRecords.Name = "Tblmen_ViewRecords";
             this.Tblmen_ViewRecords.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_ViewRecords.Text = "View Records";
             this.Tblmen_ViewRecords.Click += new System.EventHandler(this.Tblmen_ViewRecords_Click);
             // 
-            // Tblmen_Sep
-            // 
-            this.Tblmen_Sep.Name = "Tblmen_Sep";
-            this.Tblmen_Sep.Size = new System.Drawing.Size(141, 6);
-            // 
             // Tblmen_ViewRecords_Drop
             // 
+            this.Tblmen_ViewRecords_Drop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Tblmen_ViewRecords_Drop.BackgroundImage")));
             this.Tblmen_ViewRecords_Drop.Name = "Tblmen_ViewRecords_Drop";
             this.Tblmen_ViewRecords_Drop.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_ViewRecords_Drop.Text = "Delete";
@@ -245,6 +238,7 @@
             // 
             // Tblmen_Rename
             // 
+            this.Tblmen_Rename.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Tblmen_Rename.BackgroundImage")));
             this.Tblmen_Rename.Name = "Tblmen_Rename";
             this.Tblmen_Rename.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_Rename.Text = "Rename";
@@ -252,10 +246,29 @@
             // 
             // Tblmen_Properties
             // 
+            this.Tblmen_Properties.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Tblmen_Properties.BackgroundImage")));
             this.Tblmen_Properties.Name = "Tblmen_Properties";
             this.Tblmen_Properties.Size = new System.Drawing.Size(144, 22);
             this.Tblmen_Properties.Text = "Properties";
             this.Tblmen_Properties.Click += new System.EventHandler(this.Tblmen_Properties_Click);
+            // 
+            // Toolbar
+            // 
+            this.Toolbar.BackColor = System.Drawing.Color.White;
+            this.Toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshToolStripMenuItem});
+            this.Toolbar.Location = new System.Drawing.Point(0, 0);
+            this.Toolbar.Name = "Toolbar";
+            this.Toolbar.Size = new System.Drawing.Size(284, 24);
+            this.Toolbar.TabIndex = 3;
+            this.Toolbar.Text = "menuStrip1";
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Image = global::DB_Architect.Properties.Resources.syncronization;
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // TreeView
             // 
@@ -263,8 +276,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 465);
             this.ControlBox = false;
+            this.Controls.Add(this.Toolbar);
             this.Controls.Add(this.Tree);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MainMenuStrip = this.Toolbar;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TreeView";
@@ -274,7 +289,10 @@
             this.ServerMenu.ResumeLayout(false);
             this.DatabaseMenu.ResumeLayout(false);
             this.TableMenu.ResumeLayout(false);
+            this.Toolbar.ResumeLayout(false);
+            this.Toolbar.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -286,22 +304,21 @@
         private System.Windows.Forms.ToolStripMenuItem SrvMen_Refresh;
         private System.Windows.Forms.ToolStripMenuItem SrvrMen_AddDatabase;
         private System.Windows.Forms.ToolStripMenuItem SrvMen_Properties;
-        private System.Windows.Forms.ToolStripSeparator SrvrMen_Seprator;
         private System.Windows.Forms.ContextMenuStrip DatabaseMenu;
         private System.Windows.Forms.ToolStripMenuItem DBMen_NewTable;
         private System.Windows.Forms.ToolStripMenuItem DBMen_Refresh;
-        private System.Windows.Forms.ToolStripSeparator DBmen_Sep;
         private System.Windows.Forms.ToolStripMenuItem DBmen_Prop;
         private System.Windows.Forms.ToolStripMenuItem DBMen_Relt;
         private System.Windows.Forms.ContextMenuStrip TableMenu;
         private System.Windows.Forms.ToolStripMenuItem Tblmen_DesignView;
         private System.Windows.Forms.ToolStripMenuItem Tblmen_EditRecords;
         private System.Windows.Forms.ToolStripMenuItem Tblmen_ViewRecords;
-        private System.Windows.Forms.ToolStripSeparator Tblmen_Sep;
         private System.Windows.Forms.ToolStripMenuItem Tblmen_ViewRecords_Drop;
         private System.Windows.Forms.ToolStripMenuItem Tblmen_Properties;
         private System.Windows.Forms.ToolStripMenuItem DBMen_Drop;
         private System.Windows.Forms.ToolStripMenuItem DBMen_NewQuery;
         private System.Windows.Forms.ToolStripMenuItem Tblmen_Rename;
+        private System.Windows.Forms.MenuStrip Toolbar;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
     }
 }

@@ -32,11 +32,14 @@ namespace DBA.SplashScreen
         private void T_Tick(object sender, EventArgs e)
         {
             if (i == Limit)
+            {
+                T.Stop();
                 Close();
-
-            if (i == 200)
+            }
+            else if (i == 200)
+            {
                 i = 10;
-
+            }
             SplashBox.Image = Properties.Resources.ResourceManager.GetObject
                 ("SplashScr" + i++.ToString().PadLeft(4, '0')) as Image;
         }

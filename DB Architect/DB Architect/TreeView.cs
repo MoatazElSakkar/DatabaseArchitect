@@ -23,21 +23,16 @@ namespace DB_Architect
 
         private void TreeView_Load(object sender, EventArgs e)
         {
+            ServerMenu.Renderer = new Home.renderer(new Home.cols());
+            DatabaseMenu.Renderer = new Home.renderer(new Home.cols());
+            TableMenu.Renderer = new Home.renderer(new Home.cols());
+            Toolbar.Renderer = new Home.renderer(new Home.cols());
             WindowState = FormWindowState.Maximized;
             Database DB=Cli.GetServerInformation().Attachment as Database;
             TreeNode Tn=new TreeNode(DB.Name, 4,4);
             foreach (Table T in DB.Tables)
                 Tn.Nodes.Add(new TreeNode(T.Name, 5, 5));
             Tree.Nodes.Add(Tn);
-        }
-
-        private void Tree_BeforeExpand(object sender, TreeViewCancelEventArgs e)
-        {
-
-        }
-
-        private void Tree_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
-        {
         }
 
         private void Tree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -49,15 +44,15 @@ namespace DB_Architect
             Tree.SelectedNode = e.Node;
             if (e.Button == MouseButtons.Right)
             {
-                if (e.Node.ImageIndex == 0)
+                if (e.Node.ImageIndex == 3)
                 {
                     ServerMenu.Show(Cursor.Position);
                 }
-                else if (e.Node.ImageIndex == 1)
+                else if (e.Node.ImageIndex == 4)
                 {
                     DatabaseMenu.Show(Cursor.Position);
                 }
-                else if (e.Node.ImageIndex == 3)
+                else if (e.Node.ImageIndex == 5)
                 {
                     TableMenu.Show(Cursor.Position);
                 }
@@ -134,10 +129,9 @@ namespace DB_Architect
         {
             try
             {
-                string Script = "Select * From " + Tree.SelectedNode.Text;
-                //Table Tcx = Program.TA.Query(Script, Tree.SelectedNode.Parent.Text);
-                //Form F = new TablePreview(Tcx, ParentWindow);
-                //F.Show();
+                string Script = String.Format("SELECT * FROM {0};", Tree.SelectedNode.Text);
+                Table Tcx = Cli.QueryServer(Script).Attachment as Table;
+                Cli.Workspace_Upper.Controls.Add(new TablePreview(Tcx, Cli));
             }
             catch
             {
@@ -158,20 +152,30 @@ namespace DB_Architect
 
         private void Tblmen_Rename_Click(object sender, EventArgs e)
         {
-            TextBox Tx = new TextBox();
-            Tx.Location = new Point(Tree.SelectedNode.Bounds.X + 16, Tree.SelectedNode.Bounds.Y + 83);
-            Tx.Text = Tree.SelectedNode.Text;
-            Tx.Size = new Size(Tree.SelectedNode.Bounds.Width, Tree.SelectedNode.Bounds.Height);
-            this.Controls.Add(Tx);
-            Tx.BringToFront();
-            Tx.Focus();
-            Tx.Leave += (object obj, EventArgs EA) =>
+            TextBox RenameBox = new TextBox();
+            RenameBox.Location = new Point(Tree.SelectedNode.Bounds.X, Tree.SelectedNode.Bounds.Y+24);
+            RenameBox.Text = Tree.SelectedNode.Text;
+            RenameBox.Size = new Size(Tree.SelectedNode.Bounds.Width+10, Tree.SelectedNode.Bounds.Height);
+            this.Controls.Add(RenameBox);
+            RenameBox.BringToFront();
+            RenameBox.Focus();
+            RenameBox.Leave += (object obj, EventArgs EA) =>
                 {
-                    string TableI = Tree.SelectedNode.Text;
-                    Tree.SelectedNode.Text = Tx.Text;
-                    string Script = "Edit Table " + TableI + " (" + Tx.Text + ")";
-                    this.Controls.Remove(Tx);
+                    string Table_NewName = Tree.SelectedNode.Text;
+                    Tree.SelectedNode.Text = RenameBox.Text;
+                    this.Controls.Remove(RenameBox);
                 };
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Tree.Nodes.Clear();
+            Database DB = Cli.GetServerInformation().Attachment as Database;
+            TreeNode Tn = new TreeNode(DB.Name, 4, 4);
+            foreach (Table T in DB.Tables)
+                Tn.Nodes.Add(new TreeNode(T.Name, 5, 5));
+            Tree.Nodes.Add(Tn);
+            Tree.ExpandAll();
         }
     }
 }
