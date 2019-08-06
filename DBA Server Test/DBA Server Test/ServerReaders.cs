@@ -96,8 +96,8 @@ namespace DBA_Server_Test
                         break;
                     default:
                         Tableu.Keys.Add(new Key(
-                            bufferSplit[0], 
-                            Datatypes.Datatype_str[bufferSplit[1]], 
+                            bufferSplit[0],
+                            Datatypes.Datatype_str[bufferSplit[1]],
                             byte.Parse(bufferSplit[2])));
                         break;
                 }
@@ -125,6 +125,7 @@ namespace DBA_Server_Test
                 }
             }
             Tableu.Survayed = true;
+            Reader.Close();
         }
     }
 }

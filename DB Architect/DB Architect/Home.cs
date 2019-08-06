@@ -141,12 +141,13 @@ namespace DB_Architect
         {
             Toolbox.Renderer = new renderer(new cols());
             Captionbox.Renderer = new renderer(new cols());
-            //LeftFormPanel.Visible = false;
-            //RightFormPanel.Visible = false;
+
             RightLowerPanel.ControlAdded += ActivePanel_ControlAdded;
             RightUpperPanel.ControlAdded += ActivePanel_ControlAdded;
             LeftFormPanel.ControlAdded += ActivePanel_ControlAdded;
             ActivePanel.ControlAdded += ActivePanel_ControlAdded;
+
+
             ActivePanel.Controls.Add(new WelcomeScreen(Cli));
             StatusPic.Image = Properties.Resources.DC;
             Status.Text = "Database Architect disconnected";

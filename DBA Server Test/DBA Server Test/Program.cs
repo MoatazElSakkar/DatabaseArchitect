@@ -129,7 +129,14 @@ namespace DBA_Server_Test
                 QueryTree Qt = QP.Reorder();
 
                 QueryExecutioner Qexec = new QueryExecutioner(Qt, Server.Database, ServerReaders.ReadRecords);
+                
                 Table Ti = Qexec.ExecuteQuery();
+                if (Qexec.AfterEffect[0])
+                    Server.Database.Write();
+                if (Qexec.AfterEffect[1])
+                    Qexec.Tables.Last().Write();
+                if (Qexec.AfterEffect[2])
+                    Qexec.Tables.Last().WriteRecords();
 
                 if (Ti == null)
                     return Qexec.Result;

@@ -50,9 +50,9 @@
             this.StatusPic = new System.Windows.Forms.PictureBox();
             this.ArchitectLogo = new System.Windows.Forms.PictureBox();
             this.ActivePanel = new System.Windows.Forms.Panel();
+            this.RightLowerPanel = new System.Windows.Forms.Panel();
             this.RightUpperPanel = new System.Windows.Forms.Panel();
             this.LeftFormPanel = new System.Windows.Forms.Panel();
-            this.RightLowerPanel = new System.Windows.Forms.Panel();
             this.Toolbox.SuspendLayout();
             this.Captionbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatusPic)).BeginInit();
@@ -260,30 +260,33 @@
             this.ActivePanel.Size = new System.Drawing.Size(1328, 611);
             this.ActivePanel.TabIndex = 16;
             // 
+            // RightLowerPanel
+            // 
+            this.RightLowerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RightLowerPanel.Location = new System.Drawing.Point(312, 418);
+            this.RightLowerPanel.Name = "RightLowerPanel";
+            this.RightLowerPanel.Size = new System.Drawing.Size(1015, 190);
+            this.RightLowerPanel.TabIndex = 2;
+            // 
             // RightUpperPanel
             // 
-            this.RightUpperPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RightUpperPanel.Location = new System.Drawing.Point(317, 0);
+            this.RightUpperPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RightUpperPanel.Location = new System.Drawing.Point(312, 0);
             this.RightUpperPanel.Name = "RightUpperPanel";
-            this.RightUpperPanel.Size = new System.Drawing.Size(1010, 428);
+            this.RightUpperPanel.Size = new System.Drawing.Size(1015, 415);
             this.RightUpperPanel.TabIndex = 1;
             // 
             // LeftFormPanel
             // 
             this.LeftFormPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.LeftFormPanel.Location = new System.Drawing.Point(3, 3);
+            this.LeftFormPanel.Location = new System.Drawing.Point(0, 0);
             this.LeftFormPanel.Name = "LeftFormPanel";
-            this.LeftFormPanel.Size = new System.Drawing.Size(309, 605);
+            this.LeftFormPanel.Size = new System.Drawing.Size(310, 611);
             this.LeftFormPanel.TabIndex = 0;
-            // 
-            // RightLowerPanel
-            // 
-            this.RightLowerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.RightLowerPanel.Location = new System.Drawing.Point(317, 434);
-            this.RightLowerPanel.Name = "RightLowerPanel";
-            this.RightLowerPanel.Size = new System.Drawing.Size(1010, 174);
-            this.RightLowerPanel.TabIndex = 2;
             // 
             // Home
             // 

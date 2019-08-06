@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TreeView));
-            this.Tree = new System.Windows.Forms.TreeView();
             this.TreeViewIcons = new System.Windows.Forms.ImageList(this.components);
             this.ServerMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SrvrMen_AddDatabase = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,27 +51,12 @@
             this.Tblmen_Properties = new System.Windows.Forms.ToolStripMenuItem();
             this.Toolbar = new System.Windows.Forms.MenuStrip();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Tree = new System.Windows.Forms.TreeView();
             this.ServerMenu.SuspendLayout();
             this.DatabaseMenu.SuspendLayout();
             this.TableMenu.SuspendLayout();
             this.Toolbar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Tree
-            // 
-            this.Tree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Tree.ImageIndex = 0;
-            this.Tree.ImageList = this.TreeViewIcons;
-            this.Tree.Location = new System.Drawing.Point(0, 24);
-            this.Tree.Name = "Tree";
-            this.Tree.SelectedImageIndex = 0;
-            this.Tree.Size = new System.Drawing.Size(285, 444);
-            this.Tree.TabIndex = 0;
-            this.Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseClick);
-            this.Tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseDoubleClick);
             // 
             // TreeViewIcons
             // 
@@ -270,6 +254,22 @@
             this.refreshToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
+            // Tree
+            // 
+            this.Tree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tree.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Tree.ImageIndex = 0;
+            this.Tree.ImageList = this.TreeViewIcons;
+            this.Tree.Location = new System.Drawing.Point(0, 24);
+            this.Tree.Name = "Tree";
+            this.Tree.SelectedImageIndex = 0;
+            this.Tree.Size = new System.Drawing.Size(284, 444);
+            this.Tree.TabIndex = 0;
+            this.Tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseClick);
+            this.Tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tree_NodeMouseDoubleClick);
+            // 
             // TreeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,7 +278,6 @@
             this.ControlBox = false;
             this.Controls.Add(this.Toolbar);
             this.Controls.Add(this.Tree);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.Toolbar;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

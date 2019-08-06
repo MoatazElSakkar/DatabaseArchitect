@@ -12,19 +12,96 @@ namespace DB_Architect
 {
     public partial class NewQuery : Window
     {
-        string DBasic = "";
+        Client Cli;
 
-        public NewQuery(Home P)
+        int currentLocation = 0;
+        char Current
         {
-            InitializeComponent();
+            get
+            {
+                if (ArchiScript.Text.Length > currentLocation)
+                    return ArchiScript.Text[currentLocation];
+                else
+                    return '\0';
+            }
         }
 
-        public NewQuery(Home P,string DBBasic)
+        bool EndOfText
         {
-            DBasic = DBBasic;
-            InitializeComponent();
+            get
+            {
+                return currentLocation >= ArchiScript.Text.Length;
+            }
         }
-        
+        char[] delimiters = { ' ', '\t', '\n', '\r', ';' };
+
+        static List<string>OpRefrence = new List<string>
+        {
+                "OR",
+                "AN",
+                "NO",
+
+                ",",
+                "*",
+
+                "+",
+                "-",
+                "/",
+                "x",
+                "=",
+
+                ">",
+                "<",
+                "(",
+                ")",
+        };
+
+        string getToken()
+        {
+            string bufferText = "";
+
+            if (EndOfText)
+            {
+                //Register Inconsistency
+                return string.Empty;
+            }
+            else if (Current == ';')
+            {
+                return ";";
+            }
+
+            while (delimiters.Contains(Current)) { currentLocation++; }
+            if (OpRefrence.Contains(Current.ToString()))
+            {
+                bufferText += Current;
+                currentLocation++;
+                return bufferText;
+            }
+
+            bool Literal = (Current == '\"');
+            if (Literal) { currentLocation++; }
+            bool Escape = false;
+
+            while (!EndOfText &&
+                (!delimiters.Contains(Current) || Literal) &&
+                !OpRefrence.Contains(Current.ToString()) &&
+                (!Literal || Current != '\"') || Escape)
+            {
+                Escape = (Current == '\\') && !Escape;
+                bufferText += Current;
+                currentLocation++;
+            }
+            if (Literal) { currentLocation++; }
+            return bufferText;
+        }
+
+        public NewQuery(Client _cli)
+        {
+            Cli = _cli;
+            InitializeComponent();
+            (this as Control).Dock = DockStyle.Fill;
+        }
+
         int currentWordStartIndex = 0;
         int CharCount = 0;
 
@@ -39,10 +116,6 @@ namespace DB_Architect
             }
             else if (ArchiScript.TextLength > CharCount && ArchiScript.Text[ArchiScript.Text.Length - 1] == '\n')
             {
-                if (DBasic != "")
-                {
-                    ArchiScript.AppendText(DBasic + " => ");
-                }
                 CharCount = ArchiScript.TextLength;
                 DeHighlightLastWord();
                 currentWordStartIndex = ArchiScript.TextLength;
@@ -56,16 +129,11 @@ namespace DB_Architect
                     Reset();
                     CodeTune();
                 }
-                else if (CharCount==0)
+                else if (CharCount == 0)
                 {
-                    if (DBasic != "")
-                    {
-                        ArchiScript.AppendText(DBasic+" => ");
-                        CharCount += DBasic.Length + 4;
-                    }
                     ArchiScript.ForeColor = Color.Black;
                 }
-                currentWordStartIndex = ArchiScript.Text.LastIndexOf(' ')+1;
+                currentWordStartIndex = ArchiScript.Text.LastIndexOf(' ') + 1;
                 HighlightCurrentWord();
                 if (currentWordStartIndex == -1)
                 {
@@ -78,7 +146,7 @@ namespace DB_Architect
                 CharCount = ArchiScript.TextLength;
                 HighlightCurrentWord();
             }
-            
+
         }
 
         private void HighlightCurrentWord()
@@ -134,8 +202,8 @@ namespace DB_Architect
         {
             if (this.ArchiScript.Text.Contains(Word))
             {
-                int i=-1;
-                int Selection=this.ArchiScript.SelectionStart;
+                int i = -1;
+                int Selection = this.ArchiScript.SelectionStart;
 
                 while ((i = this.ArchiScript.Text.IndexOf(Word, (i + 1))) != -1)
                 {
@@ -149,10 +217,7 @@ namespace DB_Architect
 
         private void NewQuery_Load(object sender, EventArgs e)
         {
-            if (DBasic != "")
-            {
-                ArchiScript.AppendText(DBasic+" => ");
-            }
+            Toolbar.Renderer = new Home.renderer(new Home.cols());
         }
 
         private void NewQuery_Move(object sender, EventArgs e)
@@ -169,20 +234,9 @@ namespace DB_Architect
                 string[] Codes = Script.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string CodeX in Codes)
                 {
-                    if (Script.Contains("Select"))
-                    {
-                        string[] Pars = CodeX.Split(new string[] { " => " }, StringSplitOptions.RemoveEmptyEntries);
-                        //Table T = Program.TA.Query(Pars[1], Pars[0]);
-                        //Form F = new TablePreview(T, ParentWindow);
-                        //F.Show();
-                    }
-                    else
-                    {
-                        string[] Pars = CodeX.Split(new string[] { " => " }, StringSplitOptions.RemoveEmptyEntries);
-                        //string response = Program.TA.ExecuteNonQueryScript(Pars[1], Pars[0]);
-                    }
+
                 }
-                stats_lbl.Text = "ArchiScript Execution Complete";
+                stats_lbl.Text = "";
                 ErrorPanel.Visible = true;
                 ErrorSign.Visible = false;
             }
@@ -193,25 +247,5 @@ namespace DB_Architect
                 ErrorSign.Visible = true;
             }
         }
-
-        private void Execute_btn_MouseEnter(object sender, EventArgs e)
-        {
-            Execute_btn.Image = Properties.Resources.Execute_Higlihht;
-        }
-
-        private void Execute_btn_MouseLeave(object sender, EventArgs e)
-        {
-            Execute_btn.Image = Properties.Resources.Execute;
-        }
-
-        private void QueryFile_Btn_MouseEnter(object sender, EventArgs e)
-        {
-            QueryFile_Btn.Image = Properties.Resources.QueryFileHighlight;
-        }
-
-        private void QueryFile_Btn_MouseLeave(object sender, EventArgs e)
-        {
-            QueryFile_Btn.Image = Properties.Resources.QueryFile;
-        }
-        }
     }
+}

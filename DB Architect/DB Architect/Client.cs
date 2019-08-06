@@ -18,12 +18,21 @@ namespace DB_Architect
 
         public Home.statusChange UpdateHost;
 
-        public Client(Home.statusChange _updateHost,Panel _workspaceU,Panel _workspaceL)
+        public Client(Home.statusChange _updateHost, Panel _workspaceU, Panel _workspaceL)
         {
             Workspace_Upper = _workspaceU;
             Workspace_Lower = _workspaceL;
+            Workspace_Upper.ControlAdded += Workspace_ControlAdded;
+            Workspace_Lower.ControlAdded += Workspace_ControlAdded;
             UpdateHost = _updateHost;
         }
+
+        private void Workspace_ControlAdded(object sender, ControlEventArgs e)
+        {
+            if ((sender as Panel).Controls.Count > 1)
+                (sender as Panel).Controls.RemoveAt(0);
+        }
+
         public static Request CreateRequest(RequestType Rt, object attachment)
         {
             Request Ri = new Request();

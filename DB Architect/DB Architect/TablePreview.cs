@@ -13,7 +13,7 @@ namespace DB_Architect
 {
     partial class TablePreview : Window
     {
-        Table Table;
+        Table Source;
         int StartRecCount = 0;
 
         Client Cli;
@@ -22,27 +22,27 @@ namespace DB_Architect
         public TablePreview(Table _table,Client _cli, bool _editor=false)
         {
             Editor = _editor;
-            Table = _table;
+            Source = _table;
             Cli = _cli;
             InitializeComponent();
+            this.Dock = DockStyle.Fill;
         }
 
 
 
         private void TablePreview_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
             int RecordsIndex=0;
-            foreach (Key K in Table.Keys)
+            foreach (Key K in Source.Keys)
             {
                 TablePreviewGrid.Columns.Add(K.Name, K.Name);
             }
-            for (int u=0;u< Table.Records;u++)
+            for (int u=0;u< Source.Records;u++)
             {
                 List<string> RowContent = new List<string>();
 
-                foreach (Key K in Table.Keys)
+                foreach (Key K in Source.Keys)
                 {
                     RowContent.Add(Datatypes.DecoderFunctions[K.Type](K.DATA[RecordsIndex]));
                 }
@@ -50,7 +50,7 @@ namespace DB_Architect
 
                 DataGridViewRow R = new DataGridViewRow();
                 R.CreateCells(TablePreviewGrid);
-                for (int i = 0; i < Table.Keys.Count; i++)
+                for (int i = 0; i < Source.Keys.Count; i++)
                 {
                     R.Cells[i].Value = RowContent[i];
                 }
@@ -69,11 +69,28 @@ namespace DB_Architect
             {
                 try
                 {
-                    int RecIndex = eGrid.RowIndex + 1;
-                    string Query = string.Format("UPDATE {0} SET {1} = {2} Where {3}={4}",
-                        Table.Name, Table.Keys[eGrid.ColumnIndex].Name,
-                        TablePreviewGrid[eGrid.ColumnIndex, eGrid.RowIndex],
-                        Table.Keys[0], TablePreviewGrid[0, eGrid.RowIndex]);
+                    string Query;
+                    if (eGrid.RowIndex >= Source.Records)
+                    {
+                        if (TablePreviewGrid[0, eGrid.RowIndex].Value as string == "")
+                            throw new Exception("Primary Key has to be assigned first");
+
+                        Source.Records++;
+
+                        Query = string.Format("INSERT INTO {0} ({1}) VALUES ({2});",
+                        Source.Name, Source.Keys[eGrid.ColumnIndex].Name,
+                        TablePreviewGrid[eGrid.ColumnIndex, eGrid.RowIndex].Value);
+
+                    }
+                    else
+                    {
+                        string Value = TablePreviewGrid[eGrid.ColumnIndex, eGrid.RowIndex].Value as string;
+                        if (Source.Keys[eGrid.ColumnIndex].Type == DATATYPE.STRING)
+                            Value = "\"" + Value + "\"";
+                        Query = string.Format("UPDATE {0} SET {1} = {2} Where {3}={4};",
+                            Source.Name, Source.Keys[eGrid.ColumnIndex].Name,Value,
+                            Source.Keys[0].Name, TablePreviewGrid[0, eGrid.RowIndex].Value);
+                    }
                     string Response = Cli.QueryServer(Query).Attachment as string;
                 }
                 catch
@@ -85,7 +102,7 @@ namespace DB_Architect
             {
                 int RecIndex = eGrid.RowIndex + 1;
                 string Query = string.Format("DELETE FROM {0} Where {3}={4}",
-                    Table.Name, Table.Keys[0], TablePreviewGrid[0, eGrid.RowIndex]);
+                    Source.Name, Source.Keys[0], TablePreviewGrid[0, eGrid.RowIndex]);
                 string Response = Cli.QueryServer(Query).Attachment as string;
             };
         }

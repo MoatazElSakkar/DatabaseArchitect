@@ -10,6 +10,13 @@ namespace DBA.QueryEngine
 {
     public class QueryExecutioner
     {
+        public bool[] AfterEffect =
+        {
+            false,  //Deserialize database
+            false,  //Deserialize Table structure
+            false,  //Deserialize Table Records
+            false   //Desireialize Index
+        };
         public delegate void TouchTable(Table Tableu);
         public TouchTable Touch;
 
@@ -82,7 +89,7 @@ namespace DBA.QueryEngine
 
         List<Key> KeyIDs = new List<Key>();
         List<int> KeyCodes = new List<int>();
-        List<Table> Tables = new List<Table>();
+        public List<Table> Tables = new List<Table>();
         List<int> Filter = new List<int>();
 
         QueryTree Query;
@@ -143,7 +150,7 @@ namespace DBA.QueryEngine
             if (Root.Children.Count == 3) { Where(Root.Children[2]); }
             else { Filter = Enumerable.Range(0, Tables.Last().Records).ToList(); }
 
-            Table Response = new Table("Query Response");
+            Table Response = new Table(Tables.Last().Name);
             Response.Records = Filter.Count;
             List<int> KIndices = new List<int>();
             foreach (Key Ki in KeyIDs)
@@ -281,6 +288,8 @@ namespace DBA.QueryEngine
             }
             Tables.Last().AppendRecord(Record);
             Result = "1 record appended";
+            AfterEffect[1] = true;
+            AfterEffect[2] = true;
             return null;
         }
 
@@ -310,6 +319,7 @@ namespace DBA.QueryEngine
                     Ki.DATA[i] = Values[Ki];
                 }
             }
+            AfterEffect[2] = true;
             Result = Filter.Count.ToString() + " records affected";
             return null;
         }
@@ -323,6 +333,8 @@ namespace DBA.QueryEngine
                 Tables.Last().RemoveRecord(i);
             }
             Result = Filter.Count.ToString() + " records affected";
+            AfterEffect[1] = true;
+            AfterEffect[2] = true;
             return null;
         }
 

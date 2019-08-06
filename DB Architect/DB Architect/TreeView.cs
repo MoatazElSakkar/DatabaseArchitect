@@ -18,6 +18,7 @@ namespace DB_Architect
         {
             InitializeComponent();
             Cli = _cli;
+            (this as Control).Dock = DockStyle.Fill;
         }
 
 
@@ -27,7 +28,6 @@ namespace DB_Architect
             DatabaseMenu.Renderer = new Home.renderer(new Home.cols());
             TableMenu.Renderer = new Home.renderer(new Home.cols());
             Toolbar.Renderer = new Home.renderer(new Home.cols());
-            WindowState = FormWindowState.Maximized;
             Database DB=Cli.GetServerInformation().Attachment as Database;
             TreeNode Tn=new TreeNode(DB.Name, 4,4);
             foreach (Table T in DB.Tables)
@@ -82,6 +82,8 @@ namespace DB_Architect
 
         private void DBMen_NewQuery_Click(object sender, EventArgs e)
         {
+            Cli.Workspace_Upper.Controls.Clear();
+            Cli.Workspace_Upper.Controls.Add(new NewQuery(Cli));
         }
 
         private void DBMen_Relt_Click(object sender, EventArgs e)
@@ -114,11 +116,9 @@ namespace DB_Architect
         {
             try
             {
-                string Script = "Select * From " + Tree.SelectedNode.Text;
-                //Table Tcx = Program.TA.Query(Script, Tree.SelectedNode.Parent.Text);
-                //Tcx.Name = Tree.SelectedNode.Text;
-                //Form F = new TablePreview(Tcx, ParentWindow, true, Tree.SelectedNode.Parent.Text);
-                //F.Show();
+                string Script = String.Format("SELECT * FROM {0};", Tree.SelectedNode.Text);
+                Table Tcx = Cli.QueryServer(Script).Attachment as Table;
+                Cli.Workspace_Upper.Controls.Add(new TablePreview(Tcx, Cli,true));
             }
             catch
             {

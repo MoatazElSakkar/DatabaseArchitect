@@ -32,7 +32,7 @@ namespace DBA.GlaciaProtocol
             {
                 AfterConnect(this);
             }
-            catch
+            catch (Exception E)
             {
 
             }

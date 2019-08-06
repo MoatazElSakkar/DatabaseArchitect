@@ -88,6 +88,7 @@ namespace DBA.Structure
                 else
                     Keys[i].AddRecord(Datatypes.Intializations[Keys[i].Type]);
             }
+            Records++;
         }
 
         internal Table GetShallowCopy()
