@@ -6,71 +6,58 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DBA.Structure;
+using DBA.Refrences;
 
 namespace DB_Architect
 {
     public partial class DesignView : Window
     {
-        string DBname;
-        string Tabname;
+        Table Table;
+        Client Cli;
         bool editorIntialized=false;
 
-        List<string> DataTypes = new List<string>(){"Int", "String", "Float", "Boolean"};
+        object[] items = Datatypes.Datatype_str.Keys.ToArray();
         List<string> AddedKeys = new List<string>();
         List<string> Keys = new List<string>();
         List<string> DeletedKeys = new List<string>();
         List<string> KeysBackup = new List<string>();
 
-        public DesignView(Home P,string Database,string Table)
+        public DesignView(Table _tab,Client _cli)
         {
-            DBname = Database;
-            Tabname = Table;
+            Table= _tab;
+            Cli = _cli;
             InitializeComponent();
         }
 
         private void TableView_Load(object sender, EventArgs e)
         {
-            //Keys=Program.TA.Survey(Tabname + "." + DBname, "Table Keys");
-            KeysBackup = new List<string>(Keys);
-
-            foreach (string Sx in Keys)
+            FormBorderStyle = FormBorderStyle.None;
+            (this as Control).Dock = DockStyle.Fill;
+            (TableGrid.Columns[1] as DataGridViewComboBoxColumn).Items.AddRange(items);
+            foreach (Key Ki in Table.Keys)
             {
-                string[] KeyData = Sx.Split('-');
-                DataGridViewRow DGVR = new DataGridViewRow();
-                var DGVC = new DataGridViewTextBoxCell();
-                DGVC.Value = KeyData[0];
-                DGVR.Cells.Add(DGVC);
-                DataGridViewComboBoxCell DGVCBC = TableGridComboboxCell();
-                DGVCBC.Value = KeyData[2];
-                DGVR.Cells.Add(DGVCBC);
-                TableGrid.Rows.Add(DGVR);
+                DataGridViewRow KiRow = new DataGridViewRow();
+                var KiName = new DataGridViewTextBoxCell();
+                KiName.Value = Ki.Name;
+                KiRow.Cells.Add(KiName);
+                DataGridViewComboBoxCell KiType = TableGridComboboxCell();
+                KiType.Value = Ki.Type.ToString();
+                KiRow.Cells.Add(KiType);
+                TableGrid.Rows.Add(KiRow);
             }
-
-            PKBox.Checked = false;
-            UKBox.Checked = false;
-            UKBox.Enabled = true;
-            MaxBox.Clear();
-            MinBox.Clear();
-            AllowedChars.Clear();
-            KeyName.Text = "";
-            TableGrid[1, TableGrid.Rows.Count - 1].Value = "Int";
-            editorIntialized = true;
-            
+            editorIntialized = true;            
         }
 
         DataGridViewComboBoxCell TableGridComboboxCell()
         {
-            DataGridViewComboBoxCell DGVCBC=new DataGridViewComboBoxCell();
-            foreach (string S in DataTypes)
-            {
-                DGVCBC.Items.Add(S);
-            }
-            return DGVCBC;
+            DataGridViewComboBoxCell TypeBox=new DataGridViewComboBoxCell();
+            TypeBox.Items.AddRange(items);
+            return TypeBox;
         }
 
         private void Execute_Click(object sender, EventArgs e)
         {
-
             foreach (DataGridViewRow R in TableGrid.Rows)
             {
 
@@ -94,59 +81,16 @@ namespace DB_Architect
                 }
                 else
                 {
-                    PKBox.Checked = false;
-                    UKBox.Checked = false;
-                    UKBox.Enabled = true;
-                    MaxBox.Clear();
-                    MinBox.Clear();
-                    AllowedChars.Clear();
-                    KeyName.Text = "";
+
                 }
             }
         }
 
         void DisplayProperties(string[] KeyData)
         {
-            KeyName.Text = KeyData[0] + " : " + KeyData[2];
-            if (KeyData[1] == "PK")
-            {
-                PKBox.Checked = true;
-                UKBox.Checked = true;
-                UKBox.Enabled = false;
-            }
-            else if (KeyData[1] == "UK")
-            {
-                PKBox.Checked = false;
-                UKBox.Checked = true;
-                UKBox.Enabled = true;
-            }
-            else if (KeyData[1] == "SK")
-            {
-                PKBox.Checked = false;
-                UKBox.Checked = false;
-                UKBox.Enabled = true;
-            }
 
-            MinBox.Text = int.Parse(KeyData[3]).ToString();
-            if (KeyData[4] == "%")
-            {
-                MaxBox.Text = int.MaxValue.ToString();
-            }
-            else
-            {
-                MaxBox.Text = KeyData[4];
-            }
         }
 
-        private void SaveBtn_MouseEnter(object sender, EventArgs e)
-        {
-            SaveBtn.Image = Properties.Resources.SaveHighlight;
-        }
-
-        private void SaveBtn_MouseLeave(object sender, EventArgs e)
-        {
-            SaveBtn.Image = Properties.Resources.Save;
-        }
 
         private void TableGrid_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
@@ -189,81 +133,7 @@ namespace DB_Architect
 
         string assembleRestrictions(int Row)
         {
-            string Restr = "";
-
-            if (PKBox.Checked)
-            {
-                Restr += "-PK";
-            }
-            else if (UKBox.Checked)
-            {
-                Restr += "-UK";
-            }
-            else
-            {
-                Restr += "-SK";
-            }
-
-            Restr += "-"+TableGrid[1, Row].Value;
-
-            if (MinBox.Text != "")
-            {
-                int Min = 0;
-                int.TryParse(MinBox.Text,out Min);
-                Restr += "-" + Min.ToString();
-            }
-            else if (MaxBox.Text=="")
-            {
-                Restr += "-0";
-            }
-
-            if (MaxBox.Text != "")
-            {
-                int Max = 0;
-                int.TryParse(MaxBox.Text,out Max);
-                Restr += "-" + Max.ToString() ;
-            }
-            else if (MaxBox.Text=="")
-            {
-                Restr += "-"+int.MaxValue.ToString();
-            }
-
-            return Restr;
-        }
-
-        private void SaveBtn_Click(object sender, EventArgs e)
-        {
-            SaveBtn.Image = Properties.Resources.Save;
-            Timer T = new Timer();
-            T.Interval=150;
-            T.Start();
-            T.Tick += (object obj, EventArgs EA) =>
-                {
-                    T.Stop();
-                    SaveBtn.Image = Properties.Resources.SaveHighlight;
-                };
-            try
-            {
-                foreach (string S in Keys)
-                {
-                    string Script = "Edit Key " + KeysBackup[Keys.IndexOf(S)].Split('-')[0] + " (" + S.Split(new char[] { '-' }, 2)[0] + ",-" + S.Split(new char[] { '-' }, 2)[1] + "," + Tabname + ")";
-                }
-
-                foreach (string S in DeletedKeys)
-                {
-                    string Script = "Drop Key " + S.Split('-')[0] + "." + Tabname;
-                }
-
-                foreach (string S in AddedKeys)
-                {
-                    string Script = "Create Key" + " (" + S.Split(new char[] { '-' }, 2)[0] + ",-" + S.Split(new char[] { '-' }, 2)[1].Replace(int.MaxValue.ToString(), "%") + "," + Tabname + ")";
-                }
-            }
-            catch
-            {
-                Stats.Text = "Database inconsistent with the attempted modifications";
-                Error.Visible = true;
-            }
+            return "";
         }
 
         private void TableGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)

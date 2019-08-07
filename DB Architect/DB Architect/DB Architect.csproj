@@ -118,12 +118,6 @@
     <Compile Include="NewQuery.Designer.cs">
       <DependentUpon>NewQuery.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewDatabase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewDatabase.Designer.cs">
-      <DependentUpon>NewDatabase.cs</DependentUpon>
-    </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,10 +155,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewQuery.resx">
       <DependentUpon>NewQuery.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NewDatabase.resx">
-      <DependentUpon>NewDatabase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Options.resx">

@@ -134,8 +134,7 @@ namespace DBA.QueryEngine
 
             if (EndOfText)
             {
-                //Register Inconsistency
-                return string.Empty;
+                throw new Exception("End of file was found before proper termination");
             }
             else if (Current==';')
             {
@@ -154,12 +153,16 @@ namespace DBA.QueryEngine
             if (Literal) { currentLocation++; }
             bool Escape = false;
 
-            while (!EndOfText&&
-                (!delimiters.Contains(Current)||Literal) && 
-                !OpRefrence.ContainsKey(Current.ToString()) &&
+            while (!EndOfText &&
+                //Text didn't end                                         
+                (!delimiters.Contains(Current)||Literal) &&
+                //Didn't encounter a delimiter or scanning a literal ""
+                (!OpRefrence.ContainsKey(Current.ToString())||Literal) &&
+                //Didn't encounter an operator or scanning a literal "", used for cases like x=5
                 (!Literal || Current!='\"') || Escape)
+                //This condition is only activated when literal is then it returns Current!='\"' else true
             {
-                Escape = (Current == '\\') && !Escape;
+                Escape = (Current == '\\') && !Escape; //used to ignore what's after a \ even if it's a \
                 bufferText += Current;
                 currentLocation++;
             }

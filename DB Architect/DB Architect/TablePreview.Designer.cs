@@ -34,14 +34,19 @@
             // 
             // TablePreviewGrid
             // 
+            this.TablePreviewGrid.AllowUserToResizeRows = false;
             this.TablePreviewGrid.BackgroundColor = System.Drawing.Color.White;
             this.TablePreviewGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TablePreviewGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.TablePreviewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.TablePreviewGrid.GridColor = System.Drawing.Color.White;
             this.TablePreviewGrid.Location = new System.Drawing.Point(12, 12);
             this.TablePreviewGrid.MultiSelect = false;
             this.TablePreviewGrid.Name = "TablePreviewGrid";
             this.TablePreviewGrid.ReadOnly = true;
+            this.TablePreviewGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.TablePreviewGrid.RowHeadersWidth = 24;
+            this.TablePreviewGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.TablePreviewGrid.Size = new System.Drawing.Size(690, 452);
             this.TablePreviewGrid.TabIndex = 0;
             // 

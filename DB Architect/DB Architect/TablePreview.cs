@@ -28,8 +28,6 @@ namespace DB_Architect
             this.Dock = DockStyle.Fill;
         }
 
-
-
         private void TablePreview_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.None;
@@ -60,6 +58,8 @@ namespace DB_Architect
 
             if (Editor)
                 IntializeEditorWorkframe();
+            else
+                TablePreviewGrid.AllowUserToDeleteRows=false;
         }
 
         private void IntializeEditorWorkframe()
@@ -100,9 +100,10 @@ namespace DB_Architect
 
             TablePreviewGrid.RowsRemoved += (object obj, DataGridViewRowsRemovedEventArgs eGrid) =>
             {
-                int RecIndex = eGrid.RowIndex + 1;
-                string Query = string.Format("DELETE FROM {0} Where {3}={4}",
-                    Source.Name, Source.Keys[0], TablePreviewGrid[0, eGrid.RowIndex]);
+                int RecIndex = eGrid.RowIndex;
+                string Query = string.Format("DELETE FROM {0} Where {1}={2};",
+                    Source.Name, Source.Keys[0].Name, 
+                    Datatypes.DecoderFunctions[Source.Keys[0].Type](Source.Keys[0].DATA[eGrid.RowIndex]));
                 string Response = Cli.QueryServer(Query).Attachment as string;
             };
         }

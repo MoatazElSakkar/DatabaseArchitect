@@ -1,3 +1,4 @@
-ID{1,2,3,4,5,6,8}
-Name{"Omniscience","DatabaseArchitect","Software Architect","Dimension","Near Creative","ActiveShell","New World Order"}
-Rating{90,95,99,40,101,200,80}
+ID{1,2,3,4,5,6}
+Name{"Omniscience","DatabaseArchitect","Software Architect","Dimension","Near Creative","ActiveShell"}
+Rating{90,95,99,93,97,97}
+Description{"Omniscience is game in which the player answers (yes/no) questions","DatabaseArchitect","Software Architect","Dimension","Near Creative","ActiveShell"}

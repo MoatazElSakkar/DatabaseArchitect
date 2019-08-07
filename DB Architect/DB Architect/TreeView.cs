@@ -110,6 +110,8 @@ namespace DB_Architect
         #region TableMenu
         private void Tblmen_DesignView_Click(object sender, EventArgs e)
         {
+            Database DB=Cli.GetServerInformation().Attachment as Database;
+            Cli.Workspace_Upper.Controls.Add(new DesignView(DB.getTable(Tree.SelectedNode.Text), Cli));
         }
 
         private void Tblmen_EditRecords_Click(object sender, EventArgs e)
