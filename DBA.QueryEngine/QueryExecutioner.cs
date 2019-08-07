@@ -160,7 +160,7 @@ namespace DBA.QueryEngine
             }
             for (int i=0;i<Filter.Count;i++)
             {
-                List<byte[]> Record = Tables.Last().RetrieveRecord(KIndices, i);
+                List<byte[]> Record = Tables.Last().RetrieveRecord(KIndices, Filter[i]);
                 Response.AppendRecord(Enumerable.Range(0,KIndices.Count).ToList(), Record);
             }
 
@@ -335,6 +335,7 @@ namespace DBA.QueryEngine
             Result = Filter.Count.ToString() + " records affected";
             AfterEffect[1] = true;
             AfterEffect[2] = true;
+            Tables.Last().Records -= Filter.Count;
             return null;
         }
 

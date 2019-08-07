@@ -33,7 +33,7 @@
             this.ErrorSign = new System.Windows.Forms.PictureBox();
             this.stats_lbl = new System.Windows.Forms.Label();
             this.Toolbar = new System.Windows.Forms.MenuStrip();
-            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RunQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.NumberLine = new System.Windows.Forms.RichTextBox();
             this.ErrorPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorSign)).BeginInit();
@@ -57,18 +57,20 @@
             // 
             // ErrorPanel
             // 
+            this.ErrorPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ErrorPanel.BackColor = System.Drawing.Color.LightYellow;
             this.ErrorPanel.Controls.Add(this.ErrorSign);
             this.ErrorPanel.Controls.Add(this.stats_lbl);
-            this.ErrorPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ErrorPanel.Location = new System.Drawing.Point(0, 446);
+            this.ErrorPanel.Location = new System.Drawing.Point(-4, 446);
             this.ErrorPanel.Name = "ErrorPanel";
-            this.ErrorPanel.Size = new System.Drawing.Size(746, 21);
+            this.ErrorPanel.Size = new System.Drawing.Size(754, 21);
             this.ErrorPanel.TabIndex = 3;
             this.ErrorPanel.Visible = false;
             // 
             // ErrorSign
             // 
+            this.ErrorSign.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ErrorSign.Image = global::DB_Architect.Properties.Resources.Exclaim;
             this.ErrorSign.Location = new System.Drawing.Point(5, -1);
             this.ErrorSign.Name = "ErrorSign";
@@ -92,18 +94,19 @@
             // 
             this.Toolbar.BackColor = System.Drawing.Color.White;
             this.Toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refreshToolStripMenuItem});
+            this.RunQuery});
             this.Toolbar.Location = new System.Drawing.Point(0, 0);
             this.Toolbar.Name = "Toolbar";
             this.Toolbar.Size = new System.Drawing.Size(746, 24);
             this.Toolbar.TabIndex = 4;
             this.Toolbar.Text = "menuStrip1";
             // 
-            // refreshToolStripMenuItem
+            // RunQuery
             // 
-            this.refreshToolStripMenuItem.Image = global::DB_Architect.Properties.Resources.Execute1;
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.RunQuery.Image = global::DB_Architect.Properties.Resources.Execute1;
+            this.RunQuery.Name = "RunQuery";
+            this.RunQuery.Size = new System.Drawing.Size(28, 20);
+            this.RunQuery.Click += new System.EventHandler(this.RunQuery_Click);
             // 
             // NumberLine
             // 
@@ -120,9 +123,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(746, 467);
+            this.Controls.Add(this.ErrorPanel);
             this.Controls.Add(this.NumberLine);
             this.Controls.Add(this.Toolbar);
-            this.Controls.Add(this.ErrorPanel);
             this.Controls.Add(this.ArchiScript);
             this.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -152,7 +155,7 @@
         private System.Windows.Forms.PictureBox ErrorSign;
         private System.Windows.Forms.Label stats_lbl;
         private System.Windows.Forms.MenuStrip Toolbar;
-        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RunQuery;
         private System.Windows.Forms.RichTextBox NumberLine;
     }
 }

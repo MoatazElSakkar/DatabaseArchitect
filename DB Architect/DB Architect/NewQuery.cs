@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using DBA.GlaciaProtocol;
+using DBA.Structure;
 
 namespace DB_Architect
 {
@@ -15,6 +17,7 @@ namespace DB_Architect
         Client Cli;
 
         int currentLocation = 0;
+        bool literal = false;
         char Current
         {
             get
@@ -36,25 +39,7 @@ namespace DB_Architect
         char[] delimiters = { ' ', '\t', '\n', '\r', ';' };
 
         static List<string>OpRefrence = new List<string>
-        {
-                "OR",
-                "AN",
-                "NO",
-
-                ",",
-                "*",
-
-                "+",
-                "-",
-                "/",
-                "x",
-                "=",
-
-                ">",
-                "<",
-                "(",
-                ")",
-        };
+        {"OR","AN","NO",",","*","+","-","/","x","=",">","<","(",")"};
 
         string getToken()
         {
@@ -79,7 +64,12 @@ namespace DB_Architect
             }
 
             bool Literal = (Current == '\"');
-            if (Literal) { currentLocation++; }
+            literal = Literal;
+            if (Literal)
+            {
+                bufferText += Current;
+                currentLocation++;
+            }
             bool Escape = false;
 
             while (!EndOfText &&
@@ -93,6 +83,51 @@ namespace DB_Architect
             }
             if (Literal) { currentLocation++; }
             return bufferText;
+
+        }
+        Dictionary<string, Color> Colors = new Dictionary<string, Color>()
+        {
+            {"SELECT",Color.Purple },
+            {"FROM",Color.Purple },
+            {"WHERE",Color.Purple },
+            {"UPDATE",Color.Purple },
+            {"SET",Color.Purple },
+            {"DELETE",Color.Purple },
+            {"INSERT",Color.Purple },
+            {"INTO",Color.Purple },
+            {"DROP",Color.Purple },
+
+        };
+        int maxCharted=0;
+
+        void scanUntil(bool accumaltive=false)
+        {
+            int current = accumaltive? maxCharted: 0;
+            while (current<ArchiScript.SelectionStart && !EndOfText)
+            {
+                string Token = getToken();
+                if (Colors.ContainsKey(Token.ToUpper()))
+                {
+                    int Selection = ArchiScript.SelectionStart;
+                    ArchiScript.Select(currentLocation - Token.Length, Token.Length);
+                    ArchiScript.SelectionColor = Colors[Token.ToUpper()];
+                    ArchiScript.Select(Selection, 0);
+                    ArchiScript.SelectionColor = Color.Black;
+                    current += Token.Length;
+                    maxCharted = current+1;
+                }
+                else
+                {
+                    int Selection = ArchiScript.SelectionStart;
+                    ArchiScript.Select(ArchiScript.SelectionStart - Token.Length, Token.Length);
+                    ArchiScript.SelectionColor = literal?Color.DarkRed: Color.Black;
+                    literal = false;
+                    ArchiScript.Select(Selection, 0);
+                    ArchiScript.SelectionColor = Color.Black;
+                    current += Token.Length;
+                }
+            }
+            currentLocation = maxCharted;
         }
 
         public NewQuery(Client _cli)
@@ -102,116 +137,32 @@ namespace DB_Architect
             (this as Control).Dock = DockStyle.Fill;
         }
 
-        int currentWordStartIndex = 0;
         int CharCount = 0;
 
         private void ArchiScript_TextChanged(object sender, EventArgs e)
         {
-            if (ArchiScript.TextLength > CharCount && ArchiScript.Text[ArchiScript.Text.Length - 1] == ' ')
-            {
-                CharCount = ArchiScript.TextLength;
-                DeHighlightLastWord();
-                currentWordStartIndex = ArchiScript.TextLength;
-                CodeTune();
-            }
-            else if (ArchiScript.TextLength > CharCount && ArchiScript.Text[ArchiScript.Text.Length - 1] == '\n')
-            {
-                CharCount = ArchiScript.TextLength;
-                DeHighlightLastWord();
-                currentWordStartIndex = ArchiScript.TextLength;
-                CodeTune();
-            }
-            else if (ArchiScript.TextLength < CharCount)
+            if (ArchiScript.TextLength < CharCount)
             {
                 CharCount = ArchiScript.TextLength;
                 if (CharCount != 0)
                 {
-                    Reset();
-                    CodeTune();
+                    if (CharCount < maxCharted)
+                        maxCharted = 0;
+                    currentLocation = 0;
+                    scanUntil();
                 }
                 else if (CharCount == 0)
                 {
-                    ArchiScript.ForeColor = Color.Black;
+                    ArchiScript.Select(0, 0);
+                    ArchiScript.SelectionColor = Color.Black;
+                    currentLocation = 0;
+                    maxCharted = 0;
                 }
-                currentWordStartIndex = ArchiScript.Text.LastIndexOf(' ') + 1;
-                HighlightCurrentWord();
-                if (currentWordStartIndex == -1)
-                {
-                    currentWordStartIndex = 0;
-                }
-
             }
             else
             {
                 CharCount = ArchiScript.TextLength;
-                HighlightCurrentWord();
-            }
-
-        }
-
-        private void HighlightCurrentWord()
-        {
-            int pos = this.ArchiScript.SelectionStart;
-            ArchiScript.SelectionStart = currentWordStartIndex;
-            ArchiScript.SelectionLength = ArchiScript.TextLength - currentWordStartIndex;
-            ArchiScript.SelectionBackColor = Color.Gainsboro;
-            this.ArchiScript.Select(pos, 0);
-        }
-
-        private void DeHighlightLastWord()
-        {
-            int pos = this.ArchiScript.SelectionStart;
-            ArchiScript.SelectionStart = currentWordStartIndex;
-            ArchiScript.SelectionLength = ArchiScript.TextLength - currentWordStartIndex;
-            ArchiScript.SelectionBackColor = Color.White;
-            this.ArchiScript.Select(pos, 0);
-        }
-
-        private void CodeTune()
-        {
-            Reset();
-            AutoColor("Select ", Color.SteelBlue, 0);
-            AutoColor("From ", Color.SteelBlue, 0);
-            AutoColor("Where ", Color.SteelBlue, 0);
-            AutoColor("Create ", Color.SteelBlue, 0);
-            AutoColor("Add ", Color.SteelBlue, 0);
-            AutoColor("Adjust ", Color.SteelBlue, 0);
-            AutoColor("Edit ", Color.SteelBlue, 0);
-            AutoColor("Drop ", Color.SteelBlue, 0);
-            AutoColor("And ", Color.SteelBlue, 0);
-            AutoColor("Or ", Color.SteelBlue, 0);
-            AutoColor("#Max", Color.DarkCyan, 0);
-            AutoColor("#Min", Color.DarkCyan, 0);
-            AutoColor("True", Color.DarkCyan, 0);
-            AutoColor("False", Color.DarkCyan, 0);
-            AutoColor("Table ", Color.SteelBlue, 0);
-            AutoColor("Key ", Color.SteelBlue, 0);
-            AutoColor("Database ", Color.SteelBlue, 0);
-        }
-
-        private void Reset()
-        {
-            int pos = this.ArchiScript.SelectionStart;
-            ArchiScript.SelectionStart = 0;
-            ArchiScript.SelectionLength = ArchiScript.TextLength;
-            ArchiScript.SelectionColor = Color.Black;
-            this.ArchiScript.Select(pos, 0);
-        }
-
-        private void AutoColor(string Word, Color C, int index)
-        {
-            if (this.ArchiScript.Text.Contains(Word))
-            {
-                int i = -1;
-                int Selection = this.ArchiScript.SelectionStart;
-
-                while ((i = this.ArchiScript.Text.IndexOf(Word, (i + 1))) != -1)
-                {
-                    this.ArchiScript.Select((i + index), Word.Length);
-                    this.ArchiScript.SelectionColor = C;
-                    this.ArchiScript.Select(Selection, 0);
-                    this.ArchiScript.SelectionColor = Color.Black;
-                }
+                scanUntil(true);
             }
         }
 
@@ -225,20 +176,18 @@ namespace DB_Architect
             Program.Settings.Windows["NewQuery"] = this.Location;
         }
 
-        private void Execute_btn_Click(object sender, EventArgs e)
+        private void RunQuery_Click(object sender, EventArgs e)
         {
             try
             {
                 string Script = ArchiScript.Text;
-
-                string[] Codes = Script.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string CodeX in Codes)
-                {
-
-                }
-                stats_lbl.Text = "";
+                Response R = Cli.QueryServer(Script) as Response;
+                if (R.Attachment is string)
+                    stats_lbl.Text = R.Attachment as string;
+                else if (R.Attachment is Table)
+                    Cli.Workspace_Upper.Controls.Add(new TablePreview(R.Attachment as Table, Cli));
                 ErrorPanel.Visible = true;
-                ErrorSign.Visible = false;
+                ErrorSign.Visible = true;
             }
             catch (Exception ex)
             {

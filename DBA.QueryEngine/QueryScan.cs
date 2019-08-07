@@ -519,7 +519,7 @@ namespace DBA.QueryEngine
                     else if (Parsers.ContainsKey(Token.ToUpper())) { break; }
                     else { throw new Exception("Unexpected lexim encountered"); }
                 }
-            Parsers[Token](Path, Token);
+            Parsers[Token.ToUpper()](Path, Token);
         }
 
         void From(List<Token> Path, string Literal)
@@ -556,6 +556,7 @@ namespace DBA.QueryEngine
                 {
                     break;
                 }
+                else if (Token=="") { throw new Exception("End of file was encountered before semicolon \';\'"); }
                 Path.Add(new Token(Token, TokenType.Identifier_Key));
 
                 Token = getToken();
