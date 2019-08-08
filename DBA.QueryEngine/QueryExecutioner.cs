@@ -349,6 +349,9 @@ namespace DBA.QueryEngine
                     if (database.getTable(Tx.Name) != null)
                         throw new Exception("Table with duplicate name exists");
                     database.Tables.Add(Tx);
+                    Tables.Add(Tx);
+                    AfterEffect[1] = true;
+                    AfterEffect[2] = true;
                     res = "1 table added";
                     break;
             }
@@ -369,8 +372,8 @@ namespace DBA.QueryEngine
 
                 Ti.AddKey(Root.Children[i].Children[0].literal,
                     Datatypes.Datatype_str[Root.Children[i].Children[1].literal],false);
-
             }
+            Ti.SchemaFile = Ti.Name + Extensions.TableSchemaExtension;
             return Ti;
         }
 

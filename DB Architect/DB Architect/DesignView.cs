@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using DBA.Structure;
 using DBA.Refrences;
+using DBA.GlaciaProtocol;
 
 namespace DB_Architect
 {
@@ -16,6 +17,7 @@ namespace DB_Architect
         Table Table;
         Client Cli;
         bool editorIntialized=false;
+        bool NewTable;
 
         object[] items = Datatypes.Datatype_str.Keys.ToArray();
         List<string> AddedKeys = new List<string>();
@@ -23,10 +25,14 @@ namespace DB_Architect
         List<string> DeletedKeys = new List<string>();
         List<string> KeysBackup = new List<string>();
 
-        public DesignView(Table _tab,Client _cli)
+        string Query = "ALTER TABLE ";
+
+        public DesignView(Table _tab,Client _cli,bool createNew= false)
         {
             Table= _tab;
             Cli = _cli;
+            NewTable = createNew;
+            Query += Table.Name;
             InitializeComponent();
         }
 
@@ -35,6 +41,7 @@ namespace DB_Architect
             FormBorderStyle = FormBorderStyle.None;
             (this as Control).Dock = DockStyle.Fill;
             (TableGrid.Columns[1] as DataGridViewComboBoxColumn).Items.AddRange(items);
+            TabName.Text = Table.Name;
             foreach (Key Ki in Table.Keys)
             {
                 DataGridViewRow KiRow = new DataGridViewRow();
@@ -56,37 +63,11 @@ namespace DB_Architect
             return TypeBox;
         }
 
-        private void Execute_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow R in TableGrid.Rows)
-            {
-
-            }
-        }
-
         private void TableGrid_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView DGV = (DataGridView)sender;
-            if (e.RowIndex >= 0)
-            {
-                if (e.RowIndex < Keys.Count)
-                {
-                    string[] KeyData = Keys[e.RowIndex].Split('-');
-                    DisplayProperties(KeyData);
-                }
-                else if (e.RowIndex < Keys.Count + AddedKeys.Count)
-                {
-                    string[] KeyData = AddedKeys[e.RowIndex-Keys.Count].Split('-');
-                    DisplayProperties(KeyData);
-                }
-                else
-                {
-
-                }
-            }
         }
 
-        void DisplayProperties(string[] KeyData)
+        void DisplayProperties()
         {
 
         }
@@ -94,41 +75,14 @@ namespace DB_Architect
 
         private void TableGrid_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
-            TableGrid[1, e.Row.Index].Value = "Int";
-        }
 
-        private void TableGrid_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            
         }
 
         private void TableGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (editorIntialized)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    if (e.RowIndex < Keys.Count)
-                    {
-                        Keys[e.RowIndex] = TableGrid[0, e.RowIndex].Value + assembleRestrictions(e.RowIndex);
-                    }
-                    else
-                    {
-                        if (e.RowIndex<Keys.Count+AddedKeys.Count)
-                        {
-                            AddedKeys[e.RowIndex - Keys.Count] = TableGrid[0, e.RowIndex].Value + assembleRestrictions(e.RowIndex);
-                        }
-                        else
-                        {
+            if (!editorIntialized)
+                return;
 
-                           if ((string)TableGrid[0, e.RowIndex].Value != "" && (string)TableGrid[0, e.RowIndex].Value != null)
-                           {
-                               AddedKeys.Add((string)TableGrid[0, e.RowIndex].Value + assembleRestrictions(e.RowIndex));
-                           }
-                        }
-                    }
-                }
-            }
         }
 
         string assembleRestrictions(int Row)
@@ -136,17 +90,46 @@ namespace DB_Architect
             return "";
         }
 
-        private void TableGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+
+        private void Apply_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex < Keys.Count && e.RowIndex >= 0)
+            Response R;
+            //Case it was editing a table
+            if (!NewTable)
             {
-                DeletedKeys.Add(Keys[e.RowIndex].Split('-')[0]);
-                Keys.RemoveAt(e.RowIndex);
+                R = Cli.QueryServer(Query);
+                if (R.Attachment is string)
+                {
+                    Error.Visible = true;
+                    Stats.Text = R.Attachment as string;
+                }
+                return;
             }
-            else
+
+            //Case it was a New table
+            Query = "CREATE TABLE {0}(";
+            for(int i=0;;Query+=',')
             {
-                AddedKeys.RemoveAt(e.RowIndex - (Keys.Count + DeletedKeys.Count));
+                Query += TableGrid.Rows[i].Cells[0].Value +
+                    " " + TableGrid.Rows[i].Cells[1].Value;
+
+                if (i++ == TableGrid.Rows.Count-1)
+                    break;
             }
+
+            Query += ");";
+            R=Cli.QueryServer(string.Format(Query,TabName.Text));
+            NewTable = false;
+            if (R.Attachment is string)
+            {
+                Error.Visible = true;
+                Stats.Text = R.Attachment as string;
+            }
+        }
+
+        private void Add_Row_Click(object sender, EventArgs e)
+        {
+            TableGrid.Rows.Add(1);
         }
     }
 }

@@ -98,7 +98,7 @@
             this.lbl2.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl2.Location = new System.Drawing.Point(297, 95);
             this.lbl2.Name = "lbl2";
-            this.lbl2.Size = new System.Drawing.Size(43, 20);
+            this.lbl2.Size = new System.Drawing.Size(42, 20);
             this.lbl2.TabIndex = 9;
             this.lbl2.Text = "Port:";
             // 
@@ -125,7 +125,7 @@
             this.label2.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(13, 173);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 20);
+            this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 12;
             this.label2.Text = "XML Parser";
             // 
@@ -144,7 +144,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(450, 255);
+            this.ClientSize = new System.Drawing.Size(925, 451);
             this.Controls.Add(this.XMLParse);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.bl3);

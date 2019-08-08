@@ -100,12 +100,6 @@
     <Compile Include="Dialog.Designer.cs">
       <DependentUpon>Dialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="New Table.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="New Table.Designer.cs">
-      <DependentUpon>New Table.cs</DependentUpon>
-    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,10 +137,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialog.resx">
       <DependentUpon>Dialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="New Table.resx">
-      <DependentUpon>New Table.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
@@ -246,6 +236,7 @@
   <ItemGroup>
     <Content Include="Architect.ico" />
     <Content Include="Icon.ico" />
+    <None Include="Resources\Table.png" />
     <None Include="Resources\Exclaim.png" />
     <None Include="Resources\syncronization.png" />
     <None Include="Resources\DatabaseSync.png" />
@@ -303,7 +294,6 @@
     <None Include="Resources\AddNew.png" />
     <None Include="Resources\MenuBG.png" />
     <None Include="Resources\TableHighlight.png" />
-    <None Include="Resources\Table.png" />
     <None Include="Resources\Question.png" />
     <None Include="Resources\Query Highlight.png" />
     <None Include="Resources\Query Frameless.png" />

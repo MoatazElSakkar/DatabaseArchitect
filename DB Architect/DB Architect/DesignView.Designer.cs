@@ -33,20 +33,25 @@
             this.Stats = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.PK_lbl = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.TableGrid = new System.Windows.Forms.DataGridView();
-            this.DesignTabs = new System.Windows.Forms.TabControl();
-            this.Toolbar = new System.Windows.Forms.MenuStrip();
-            this.Apply = new System.Windows.Forms.ToolStripMenuItem();
             this.Key_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Key_DataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DesignTabs = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.TabName = new System.Windows.Forms.TextBox();
+            this.tabname_lbl = new System.Windows.Forms.Label();
+            this.Toolbar = new System.Windows.Forms.MenuStrip();
+            this.Apply = new System.Windows.Forms.ToolStripMenuItem();
+            this.Add_Row = new System.Windows.Forms.ToolStripMenuItem();
             this.Error.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TableGrid)).BeginInit();
             this.DesignTabs.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.Toolbar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +70,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::DB_Architect.Properties.Resources.ErrorIcon;
+            this.pictureBox1.Image = global::DB_Architect.Properties.Resources.Exclaim;
             this.pictureBox1.Location = new System.Drawing.Point(2, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(22, 22);
@@ -87,7 +92,7 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.comboBox1);
-            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.PK_lbl);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -105,14 +110,14 @@
             this.comboBox1.Size = new System.Drawing.Size(223, 21);
             this.comboBox1.TabIndex = 1;
             // 
-            // label1
+            // PK_lbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Primary Key";
+            this.PK_lbl.AutoSize = true;
+            this.PK_lbl.Location = new System.Drawing.Point(32, 45);
+            this.PK_lbl.Name = "PK_lbl";
+            this.PK_lbl.Size = new System.Drawing.Size(62, 13);
+            this.PK_lbl.TabIndex = 0;
+            this.PK_lbl.Text = "Primary Key";
             // 
             // tabPage1
             // 
@@ -127,6 +132,7 @@
             // 
             // TableGrid
             // 
+            this.TableGrid.AllowUserToAddRows = false;
             this.TableGrid.AllowUserToResizeColumns = false;
             this.TableGrid.AllowUserToResizeRows = false;
             this.TableGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
@@ -146,36 +152,6 @@
             this.TableGrid.Size = new System.Drawing.Size(676, 394);
             this.TableGrid.TabIndex = 3;
             // 
-            // DesignTabs
-            // 
-            this.DesignTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DesignTabs.Controls.Add(this.tabPage1);
-            this.DesignTabs.Controls.Add(this.tabPage2);
-            this.DesignTabs.Location = new System.Drawing.Point(12, 25);
-            this.DesignTabs.Name = "DesignTabs";
-            this.DesignTabs.SelectedIndex = 0;
-            this.DesignTabs.Size = new System.Drawing.Size(690, 426);
-            this.DesignTabs.TabIndex = 7;
-            // 
-            // Toolbar
-            // 
-            this.Toolbar.BackColor = System.Drawing.Color.White;
-            this.Toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Apply});
-            this.Toolbar.Location = new System.Drawing.Point(0, 0);
-            this.Toolbar.Name = "Toolbar";
-            this.Toolbar.Size = new System.Drawing.Size(714, 24);
-            this.Toolbar.TabIndex = 8;
-            this.Toolbar.Text = "menuStrip1";
-            // 
-            // Apply
-            // 
-            this.Apply.Image = global::DB_Architect.Properties.Resources.Execute1;
-            this.Apply.Name = "Apply";
-            this.Apply.Size = new System.Drawing.Size(28, 20);
-            // 
             // Key_Name
             // 
             this.Key_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -194,6 +170,74 @@
             this.Key_DataType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Key_DataType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Key_DataType.Width = 130;
+            // 
+            // DesignTabs
+            // 
+            this.DesignTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DesignTabs.Controls.Add(this.tabPage3);
+            this.DesignTabs.Controls.Add(this.tabPage1);
+            this.DesignTabs.Controls.Add(this.tabPage2);
+            this.DesignTabs.Location = new System.Drawing.Point(12, 25);
+            this.DesignTabs.Name = "DesignTabs";
+            this.DesignTabs.SelectedIndex = 0;
+            this.DesignTabs.Size = new System.Drawing.Size(690, 426);
+            this.DesignTabs.TabIndex = 7;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.TabName);
+            this.tabPage3.Controls.Add(this.tabname_lbl);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(682, 400);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Table data";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // TabName
+            // 
+            this.TabName.Location = new System.Drawing.Point(95, 39);
+            this.TabName.Name = "TabName";
+            this.TabName.Size = new System.Drawing.Size(190, 20);
+            this.TabName.TabIndex = 11;
+            // 
+            // tabname_lbl
+            // 
+            this.tabname_lbl.AutoSize = true;
+            this.tabname_lbl.Location = new System.Drawing.Point(24, 42);
+            this.tabname_lbl.Name = "tabname_lbl";
+            this.tabname_lbl.Size = new System.Drawing.Size(65, 13);
+            this.tabname_lbl.TabIndex = 10;
+            this.tabname_lbl.Text = "Table Name";
+            // 
+            // Toolbar
+            // 
+            this.Toolbar.BackColor = System.Drawing.Color.White;
+            this.Toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Add_Row,
+            this.Apply});
+            this.Toolbar.Location = new System.Drawing.Point(0, 0);
+            this.Toolbar.Name = "Toolbar";
+            this.Toolbar.Size = new System.Drawing.Size(714, 24);
+            this.Toolbar.TabIndex = 8;
+            this.Toolbar.Text = "menuStrip1";
+            // 
+            // Apply
+            // 
+            this.Apply.Image = global::DB_Architect.Properties.Resources.Execute1;
+            this.Apply.Name = "Apply";
+            this.Apply.Size = new System.Drawing.Size(28, 20);
+            this.Apply.Click += new System.EventHandler(this.Apply_Click);
+            // 
+            // Add_Row
+            // 
+            this.Add_Row.Image = global::DB_Architect.Properties.Resources.AddNew;
+            this.Add_Row.Name = "Add_Row";
+            this.Add_Row.Size = new System.Drawing.Size(28, 20);
+            this.Add_Row.Click += new System.EventHandler(this.Add_Row_Click);
             // 
             // DesignView
             // 
@@ -221,6 +265,8 @@
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TableGrid)).EndInit();
             this.DesignTabs.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.Toolbar.ResumeLayout(false);
             this.Toolbar.PerformLayout();
             this.ResumeLayout(false);
@@ -237,10 +283,14 @@
         private System.Windows.Forms.DataGridView TableGrid;
         private System.Windows.Forms.TabControl DesignTabs;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label PK_lbl;
         private System.Windows.Forms.MenuStrip Toolbar;
         private System.Windows.Forms.ToolStripMenuItem Apply;
         private System.Windows.Forms.DataGridViewTextBoxColumn Key_Name;
         private System.Windows.Forms.DataGridViewComboBoxColumn Key_DataType;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label tabname_lbl;
+        private System.Windows.Forms.TextBox TabName;
+        private System.Windows.Forms.ToolStripMenuItem Add_Row;
     }
 }

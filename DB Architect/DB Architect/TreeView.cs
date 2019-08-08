@@ -78,6 +78,7 @@ namespace DB_Architect
         #region Database Menu
         private void DBMen_NewTable_Click(object sender, EventArgs e)
         {
+            Cli.Workspace_Upper.Controls.Add(new DesignView(new Table("Unnamed table"), Cli,true));
         }
 
         private void DBMen_NewQuery_Click(object sender, EventArgs e)
@@ -98,8 +99,13 @@ namespace DB_Architect
 
         private void DBMen_Refresh_Click(object sender, EventArgs e)
         {
-            Tree.SelectedNode.Collapse();
-            Tree.SelectedNode.Expand();
+            Tree.Nodes.Clear();
+            Database DB = Cli.GetServerInformation().Attachment as Database;
+            TreeNode Tn = new TreeNode(DB.Name, 4, 4);
+            foreach (Table T in DB.Tables)
+                Tn.Nodes.Add(new TreeNode(T.Name, 5, 5));
+            Tree.Nodes.Add(Tn);
+            Tree.ExpandAll();
         }
 
         private void DBmen_Prop_Click(object sender, EventArgs e)
