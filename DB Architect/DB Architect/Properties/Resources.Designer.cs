@@ -103,16 +103,6 @@ namespace DB_Architect.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Architect_Welcome_Screen {
-            get {
-                object obj = ResourceManager.GetObject("Architect Welcome Screen", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Close {
             get {
                 object obj = ResourceManager.GetObject("Close", resourceCulture);
@@ -273,16 +263,6 @@ namespace DB_Architect.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MenuBG {
-            get {
-                object obj = ResourceManager.GetObject("MenuBG", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap MenustripBackground {
             get {
                 object obj = ResourceManager.GetObject("MenustripBackground", resourceCulture);
@@ -413,16 +393,6 @@ namespace DB_Architect.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Splash {
-            get {
-                object obj = ResourceManager.GetObject("Splash", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap syncronization {
             get {
                 object obj = ResourceManager.GetObject("syncronization", resourceCulture);
@@ -456,6 +426,16 @@ namespace DB_Architect.Properties {
         internal static System.Drawing.Bitmap ViewRecords {
             get {
                 object obj = ResourceManager.GetObject("ViewRecords", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WelcomeScreen {
+            get {
+                object obj = ResourceManager.GetObject("WelcomeScreen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Runtime.InteropServices;
 using DBA.GlaciaProtocol;
 using DBA.Structure;
 
@@ -14,6 +15,32 @@ namespace DB_Architect
 {
     public partial class NewQuery : Window
     {
+        public enum ScrollBarType : uint
+        {
+            SbHorz = 0,
+            SbVert = 1,
+            SbCtl = 2,
+            SbBoth = 3
+        }
+
+        public enum Message : uint
+        {
+            WM_VSCROLL = 0x0115
+        }
+
+        public enum ScrollBarCommands : uint
+        {
+            SB_THUMBPOSITION = 4
+        }
+
+        [DllImport("User32.dll")]
+        public extern static int GetScrollPos(IntPtr hWnd, int nBar);
+
+        [DllImport("User32.dll")]
+        public extern static int SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+
+        Output OutStream = new Output();
+
         Client Cli;
 
         int currentLocation = 0;
@@ -169,6 +196,11 @@ namespace DB_Architect
         private void NewQuery_Load(object sender, EventArgs e)
         {
             Toolbar.Renderer = new Home.renderer(new Home.cols());
+            Cli.Workspace_Lower.Controls.Clear();
+            for (int i = 1; i <= 200; i++)
+            {
+                NumberLine.Text += i.ToString().PadLeft(5,' ') + "\n";
+            }
         }
 
         private void NewQuery_Move(object sender, EventArgs e)
@@ -181,20 +213,34 @@ namespace DB_Architect
             try
             {
                 string Script = ArchiScript.Text;
+                Cli.UpdateHost("Processing query...", 0,false,true);
                 Response R = Cli.QueryServer(Script) as Response;
                 if (R.Attachment is string)
-                    stats_lbl.Text = R.Attachment as string;
+                {
+                    OutStream.Write(R.Attachment as string);
+                    Cli.Workspace_Lower.Controls.Add(OutStream);
+                }
                 else if (R.Attachment is Table)
-                    Cli.Workspace_Upper.Controls.Add(new TablePreview(R.Attachment as Table, Cli));
-                ErrorPanel.Visible = true;
-                ErrorSign.Visible = true;
+                {
+                    Cli.Workspace_Lower.Controls.Add(new TablePreview(R.Attachment as Table, Cli,false,true));
+                }
+                Cli.UpdateHost("Ready", 6);
             }
             catch (Exception ex)
             {
                 stats_lbl.Text = ex.Message;
                 ErrorPanel.Visible = true;
                 ErrorSign.Visible = true;
+                ErrorPanel.BringToFront();
             }
+        }
+
+        private void ArchiScript_VScroll(object sender, EventArgs e)
+        {
+            int nPos = GetScrollPos(ArchiScript.Handle, (int)ScrollBarType.SbVert);
+            nPos <<= 16;
+            uint wParam = (uint)ScrollBarCommands.SB_THUMBPOSITION | (uint)nPos;
+            SendMessage(NumberLine.Handle, (int)Message.WM_VSCROLL, new IntPtr(wParam), new IntPtr(0));
         }
     }
 }

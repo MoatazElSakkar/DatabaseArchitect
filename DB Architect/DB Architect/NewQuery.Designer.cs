@@ -28,32 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ArchiScript = new System.Windows.Forms.RichTextBox();
             this.ErrorPanel = new System.Windows.Forms.Panel();
             this.ErrorSign = new System.Windows.Forms.PictureBox();
             this.stats_lbl = new System.Windows.Forms.Label();
+            this.NumberLine = new System.Windows.Forms.RichTextBox();
             this.Toolbar = new System.Windows.Forms.MenuStrip();
             this.RunQuery = new System.Windows.Forms.ToolStripMenuItem();
-            this.NumberLine = new System.Windows.Forms.RichTextBox();
+            this.ArchiScript = new System.Windows.Forms.RichTextBox();
             this.ErrorPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorSign)).BeginInit();
             this.Toolbar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ArchiScript
-            // 
-            this.ArchiScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArchiScript.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ArchiScript.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ArchiScript.Location = new System.Drawing.Point(32, 24);
-            this.ArchiScript.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ArchiScript.Name = "ArchiScript";
-            this.ArchiScript.Size = new System.Drawing.Size(715, 444);
-            this.ArchiScript.TabIndex = 0;
-            this.ArchiScript.Text = "";
-            this.ArchiScript.TextChanged += new System.EventHandler(this.ArchiScript_TextChanged);
             // 
             // ErrorPanel
             // 
@@ -90,6 +75,20 @@
             this.stats_lbl.TabIndex = 2;
             this.stats_lbl.Text = "Unable to establish connection to the server";
             // 
+            // NumberLine
+            // 
+            this.NumberLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.NumberLine.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NumberLine.Enabled = false;
+            this.NumberLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.NumberLine.Location = new System.Drawing.Point(1, 24);
+            this.NumberLine.Name = "NumberLine";
+            this.NumberLine.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.NumberLine.Size = new System.Drawing.Size(27, 442);
+            this.NumberLine.TabIndex = 5;
+            this.NumberLine.Text = "";
+            // 
             // Toolbar
             // 
             this.Toolbar.BackColor = System.Drawing.Color.White;
@@ -108,14 +107,21 @@
             this.RunQuery.Size = new System.Drawing.Size(28, 20);
             this.RunQuery.Click += new System.EventHandler(this.RunQuery_Click);
             // 
-            // NumberLine
+            // ArchiScript
             // 
-            this.NumberLine.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NumberLine.Location = new System.Drawing.Point(0, 24);
-            this.NumberLine.Name = "NumberLine";
-            this.NumberLine.Size = new System.Drawing.Size(27, 422);
-            this.NumberLine.TabIndex = 5;
-            this.NumberLine.Text = "";
+            this.ArchiScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ArchiScript.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ArchiScript.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ArchiScript.Location = new System.Drawing.Point(32, 24);
+            this.ArchiScript.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ArchiScript.Name = "ArchiScript";
+            this.ArchiScript.Size = new System.Drawing.Size(715, 444);
+            this.ArchiScript.TabIndex = 0;
+            this.ArchiScript.Text = "";
+            this.ArchiScript.VScroll += new System.EventHandler(this.ArchiScript_VScroll);
+            this.ArchiScript.TextChanged += new System.EventHandler(this.ArchiScript_TextChanged);
             // 
             // NewQuery
             // 

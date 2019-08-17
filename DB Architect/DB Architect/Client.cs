@@ -11,7 +11,7 @@ namespace DB_Architect
     public class Client
     {
         public Panel Workspace_Upper;
-        Panel Workspace_Lower;
+        public Panel Workspace_Lower;
 
         public delegate void AfterConnect(Client C, EventArgs E);
         public event AfterConnect Connected;

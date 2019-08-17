@@ -118,6 +118,12 @@
     <Compile Include="Options.Designer.cs">
       <DependentUpon>Options.cs</DependentUpon>
     </Compile>
+    <Compile Include="Output.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Output.Designer.cs">
+      <DependentUpon>Output.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties_Dialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +156,9 @@
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Output.resx">
+      <DependentUpon>Output.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties_Dialog.resx">
       <DependentUpon>Properties_Dialog.cs</DependentUpon>
@@ -236,6 +245,7 @@
   <ItemGroup>
     <Content Include="Architect.ico" />
     <Content Include="Icon.ico" />
+    <None Include="Resources\WelcomeScreen.png" />
     <None Include="Resources\Table.png" />
     <None Include="Resources\Exclaim.png" />
     <None Include="Resources\syncronization.png" />

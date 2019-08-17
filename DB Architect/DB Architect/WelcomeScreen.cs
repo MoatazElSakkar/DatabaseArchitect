@@ -27,7 +27,8 @@ namespace DB_Architect
             Response R = Cli.VerifyCredentials(Password.Text);
             if (R.Header==ResponseType.IdentityVerified)
             {
-                Cli.UpdateHost("Database Architect Connected", 5);
+                Cli.UpdateHost("Database Architect Connected", 5,false,true);
+                Cli.UpdateHost("Ready", 6);
                 Close();
             }
             else
@@ -54,7 +55,7 @@ namespace DB_Architect
                 pos = this.PointToClient(pos);
                 if (pos.Y < cCaption)
                 {
-                    m.Result = (IntPtr)2;  // HTCAPTION
+                    //m.Result = (IntPtr)2;  // HTCAPTION
                     return;
                 }
             }

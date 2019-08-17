@@ -123,11 +123,11 @@
             this.Error.TabIndex = 2;
             this.Error.Visible = false;
             // 
-            // pictureBox1
+            // statusImage
             // 
             this.statusImage.Image = global::DB_Architect.Properties.Resources.Exclaim;
             this.statusImage.Location = new System.Drawing.Point(3, 0);
-            this.statusImage.Name = "pictureBox1";
+            this.statusImage.Name = "statusImage";
             this.statusImage.Size = new System.Drawing.Size(22, 22);
             this.statusImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.statusImage.TabIndex = 1;
@@ -149,14 +149,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::DB_Architect.Properties.Resources.Architect_Welcome_Screen;
+            this.BackgroundImage = global::DB_Architect.Properties.Resources.WelcomeScreen;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(674, 326);
             this.ControlBox = false;
             this.Controls.Add(this.Error);
             this.Controls.Add(this.Credentials);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.DoubleBuffered = true;
             this.Location = new System.Drawing.Point(300, 120);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(674, 326);
             this.MinimizeBox = false;
             this.Name = "WelcomeScreen";
             this.ShowIcon = false;

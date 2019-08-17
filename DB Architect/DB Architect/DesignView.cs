@@ -18,6 +18,7 @@ namespace DB_Architect
         Client Cli;
         bool editorIntialized=false;
         bool NewTable;
+        Output OutStream = new Output();
 
         object[] items = Datatypes.Datatype_str.Keys.ToArray();
         List<string> AddedKeys = new List<string>();
@@ -31,6 +32,7 @@ namespace DB_Architect
         {
             Table= _tab;
             Cli = _cli;
+            Cli.Workspace_Lower.Controls.Add(OutStream);
             NewTable = createNew;
             Query += Table.Name;
             InitializeComponent();
@@ -118,6 +120,7 @@ namespace DB_Architect
             }
 
             Query += ");";
+            OutStream.Write(Query);
             R=Cli.QueryServer(string.Format(Query,TabName.Text));
             NewTable = false;
             if (R.Attachment is string)

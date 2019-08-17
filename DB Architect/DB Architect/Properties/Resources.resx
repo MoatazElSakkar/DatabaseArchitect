@@ -151,9 +151,6 @@
   <data name="RelationShips" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RelationShips.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Splash.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="TableHighlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TableHighlight.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -184,9 +181,6 @@
   <data name="Execute_Higlihht" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Execute Higlihht.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MenuBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MenuBG.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="History_wider" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\History_wider.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -195,9 +189,6 @@
   </data>
   <data name="EditRecords" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EditRecords.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Architect Welcome Screen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Architect Welcome Screen1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Question" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Question.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -237,5 +228,8 @@
   </data>
   <data name="syncronization" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\syncronization.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WelcomeScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WelcomeScreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

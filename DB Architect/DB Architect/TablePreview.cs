@@ -19,14 +19,22 @@ namespace DB_Architect
         Client Cli;
         bool Editor = false;
 
-        public TablePreview(Table _table,Client _cli, bool _editor=false)
+        public TablePreview(Table _table,Client _cli, bool _editor=false,bool QueryResponse=false)
         {
             Editor = _editor;
             Source = _table;
             Cli = _cli;
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+            if (!QueryResponse)
+            {
+                Cli.Workspace_Lower.Controls.Clear();
+                Cli.Workspace_Lower.Controls.Add(StreamOut);
+                StreamOut.Write("SELECT * FROM " + Source.Name);
+            }
         }
+
+        Output StreamOut = new Output();
 
         private void TablePreview_Load(object sender, EventArgs e)
         {
@@ -80,7 +88,6 @@ namespace DB_Architect
                         Query = string.Format("INSERT INTO {0} ({1}) VALUES ({2});",
                         Source.Name, Source.Keys[eGrid.ColumnIndex].Name,
                         TablePreviewGrid[eGrid.ColumnIndex, eGrid.RowIndex].Value);
-
                     }
                     else
                     {
@@ -91,6 +98,7 @@ namespace DB_Architect
                             Source.Name, Source.Keys[eGrid.ColumnIndex].Name,Value,
                             Source.Keys[0].Name, TablePreviewGrid[0, eGrid.RowIndex].Value);
                     }
+                    StreamOut.Write(Query);
                     string Response = Cli.QueryServer(Query).Attachment as string;
                 }
                 catch
@@ -104,6 +112,7 @@ namespace DB_Architect
                 string Query = string.Format("DELETE FROM {0} Where {1}={2};",
                     Source.Name, Source.Keys[0].Name, 
                     Datatypes.DecoderFunctions[Source.Keys[0].Type](Source.Keys[0].DATA[eGrid.RowIndex]));
+                StreamOut.Write(Query);
                 string Response = Cli.QueryServer(Query).Attachment as string;
             };
         }

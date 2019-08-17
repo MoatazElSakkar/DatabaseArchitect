@@ -100,6 +100,7 @@ namespace DB_Architect
         private void DBMen_Refresh_Click(object sender, EventArgs e)
         {
             Tree.Nodes.Clear();
+            Cli.UpdateHost("Updating...", 1, false, true);
             Database DB = Cli.GetServerInformation().Attachment as Database;
             TreeNode Tn = new TreeNode(DB.Name, 4, 4);
             foreach (Table T in DB.Tables)
@@ -116,6 +117,7 @@ namespace DB_Architect
         #region TableMenu
         private void Tblmen_DesignView_Click(object sender, EventArgs e)
         {
+            Cli.UpdateHost("Processing Query...", 0, false, true);
             Database DB=Cli.GetServerInformation().Attachment as Database;
             Cli.Workspace_Upper.Controls.Add(new DesignView(DB.getTable(Tree.SelectedNode.Text), Cli));
         }
@@ -124,6 +126,7 @@ namespace DB_Architect
         {
             try
             {
+                Cli.UpdateHost("Processing Query...", 0, false, true);
                 string Script = String.Format("SELECT * FROM {0};", Tree.SelectedNode.Text);
                 Table Tcx = Cli.QueryServer(Script).Attachment as Table;
                 Cli.Workspace_Upper.Controls.Add(new TablePreview(Tcx, Cli,true));
@@ -138,6 +141,7 @@ namespace DB_Architect
             try
             {
                 string Script = String.Format("SELECT * FROM {0};", Tree.SelectedNode.Text);
+                Cli.UpdateHost("Processing Query...", 0, false, true);
                 Table Tcx = Cli.QueryServer(Script).Attachment as Table;
                 Cli.Workspace_Upper.Controls.Add(new TablePreview(Tcx, Cli));
             }
@@ -178,6 +182,7 @@ namespace DB_Architect
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Tree.Nodes.Clear();
+            Cli.UpdateHost("Updating...", 1, false, true);
             Database DB = Cli.GetServerInformation().Attachment as Database;
             TreeNode Tn = new TreeNode(DB.Name, 4, 4);
             foreach (Table T in DB.Tables)

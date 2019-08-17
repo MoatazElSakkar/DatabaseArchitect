@@ -38,16 +38,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Iconic)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = global::DB_Architect.Properties.Resources.MenuBG;
-            this.panel1.Controls.Add(this.Lbl1);
-            this.panel1.Controls.Add(this.Iconic);
-            this.panel1.Location = new System.Drawing.Point(-19, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(485, 86);
-            this.panel1.TabIndex = 1;
-            // 
             // Lbl1
             // 
             this.Lbl1.AutoSize = true;

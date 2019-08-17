@@ -80,15 +80,6 @@
             this.Apply.UseVisualStyleBackColor = true;
             this.Apply.Click += new System.EventHandler(this.Apply_Click);
             // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = global::DB_Architect.Properties.Resources.MenuBG;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(331, 62);
-            this.panel1.TabIndex = 5;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;

@@ -16,7 +16,14 @@ namespace DB_Architect
     {
         Client Cli;
 
-        public delegate void statusChange(string stat, int index,bool titlebar=false);
+        System.Windows.Forms.Timer StatusTimer = new System.Windows.Forms.Timer()
+        {
+            Interval = 400
+        };
+        
+        Queue<KeyValuePair<string, int>> StatusQueue = new Queue<KeyValuePair<string, int>>();
+
+        public delegate void statusChange(string stat, int index,bool titlebar=false,bool instant=false);
 
         List<Image> stati = new List<Image>()
         {
@@ -25,25 +32,43 @@ namespace DB_Architect
             Properties.Resources.QMark,
             Properties.Resources.Exclaim,
             Properties.Resources.DC,
-            Properties.Resources.Server
+            Properties.Resources.Server,
+            null
         };
-        public void changeStatus(string stat, int index, bool Titlebar = false)
+        public void changeStatus(string stat, int index, bool Titlebar = false,bool instant=false)
         {
-            Status.Text = stat;
-            StatusPic.Image = stati[index];
+            if (instant)
+            {
+                Status.Text = stat;
+                StatusPic.Image = stati[index];
+                changeStatus("Ready", 6);
+            }
+            else
+            {
+                StatusQueue.Enqueue(new KeyValuePair<string, int>(stat, index));
+                StatusTimer.Start();
+            }
             if (Titlebar)
                 Text = "Database Architect" + " - " + stat;
         }
 
         public Home()
         {
-            //Loading configuration and contacting service
             InitializeComponent();
+            Size = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
             Cli = new Client(changeStatus,RightUpperPanel,RightLowerPanel);
             Cli.Connected += Cli_Connected;
             this.FormBorderStyle = FormBorderStyle.None;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
+            StatusTimer.Tick += (sender,e) =>
+              {
+                  KeyValuePair<string, int> Value = StatusQueue.Dequeue();
+                  Status.Text = Value.Key;
+                  StatusPic.Image = stati[Value.Value];
+                  if (StatusQueue.Count == 0)
+                      StatusTimer.Stop();
+              };
         }
 
         private void Cli_Connected(Client C, EventArgs E)
@@ -158,12 +183,6 @@ namespace DB_Architect
             e.Control.BringToFront();
             e.Control.Show();
         }
-     
-        private void Disconnect_Click(object sender, EventArgs e)
-        {
-            changeStatus("Disconnecting...", 0);
-            Application.Exit();
-        }
 
         private void Home_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -207,6 +226,7 @@ namespace DB_Architect
             Cli.Disconnect();
             RightUpperPanel.Controls.Clear();
             LeftFormPanel.Controls.Clear();
+            RightLowerPanel.Controls.Clear();
             ActivePanel.Controls.Add(new WelcomeScreen(Cli));
             StatusPic.Image = Properties.Resources.DC;
             Status.Text = "Database Architect disconnected";
