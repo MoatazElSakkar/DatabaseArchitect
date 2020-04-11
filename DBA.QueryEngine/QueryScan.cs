@@ -32,6 +32,12 @@ namespace DBA.QueryEngine
         KEY_KW,                   //KEY
         ADD_KW,                   //ADD
         RENAME_cmd,               //RENAME
+        INNER_KW,
+        OUTER_KW,
+        LEFT_KW,
+        RIGHT_KW,
+        JOIN_KW,
+        ON_KW,
 
         COLUMN,                   //Structure Column
 
@@ -61,7 +67,7 @@ namespace DBA.QueryEngine
                                
         GreaterThan,             // '>'
         LessThan,                 // '<'
-
+        TO_KW,
     }
 
     public class Token
@@ -252,7 +258,7 @@ namespace DBA.QueryEngine
                 case "RENAME":
                     Path.Add(new Token(Literal, TokenType.RENAME_cmd));
                     Token = getToken();
-                    if (Token.ToUpper() != "COLUMN") {/*Register Inconsistency*/ return; }
+                    if (Token.ToUpper() != "COLUMN" && Token.ToUpper()!="TO") {/*Register Inconsistency*/ return; }
                     RenameColumn(Path, Token);
                     break;
                 default:
@@ -265,13 +271,19 @@ namespace DBA.QueryEngine
 
         private void RenameColumn(List<Token> Path, string Literal)
         {
-            Path.Add(new Token(Literal, TokenType.COLUMN));
-
             string Token = getToken();
-            Path.Add(new Token(Token, TokenType.Identifier_Key));
-
-            Token = getToken();
-            Path.Add(new Token(Token, TokenType.Identifier_Key));
+            if (Literal.ToUpper() == "COLUMN")
+            {
+                Path.Add(new Token(Literal, TokenType.COLUMN));
+                Path.Add(new Token(Token, TokenType.Identifier_Key));
+                Token = getToken();
+                Path.Add(new Token(Token, TokenType.Identifier_Key));
+            }
+            else if (Literal.ToUpper() == "TO")
+            {
+                Path.Add(new Token(Literal, TokenType.TO_KW));
+                Path.Add(new Token(Token, TokenType.Identifier_Table));
+            }
         }
 
         private void AlterColumn(List<Token> Path, string Literal)

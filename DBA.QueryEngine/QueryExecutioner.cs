@@ -86,7 +86,6 @@ namespace DBA.QueryEngine
         }
 
 
-
         List<Key> KeyIDs = new List<Key>();
         List<int> KeyCodes = new List<int>();
         public List<Table> Tables = new List<Table>();
@@ -98,6 +97,9 @@ namespace DBA.QueryEngine
 
         public delegate Table Executive(Node Root);
         static Dictionary<TokenType, Executive> Execs;
+        static Dictionary<TokenType, Executive> Joiners;
+        static Dictionary<TokenType, Executive> Alters;
+        static Dictionary<TokenType, Executive> Conditionals;
         public QueryExecutioner(QueryTree Q_Entry, Database DB,TouchTable t)
         {
             Touch = t;
@@ -112,6 +114,47 @@ namespace DBA.QueryEngine
                 {TokenType.CREATE_cmd,Create },
                 {TokenType.ALTER_cmd,Alter }
             };
+
+            Joiners = new Dictionary<TokenType, Executive>()
+            {
+                {TokenType.INNER_KW,InnerJoin },
+                {TokenType.OUTER_KW,OuterJoin },
+                {TokenType.LEFT_KW,LeftJoin },
+                {TokenType.RIGHT_KW,RightJoin },
+            };
+
+            Alters = new Dictionary<TokenType, Executive>()
+            {
+                {TokenType.ADD_KW, AlterAdd },
+                {TokenType.DROP_cmd,AlterDrop },
+                {TokenType.ALTER_cmd,AlterModify },
+                {TokenType.RENAME_cmd,AltereName }
+            };
+
+            Conditionals = new Dictionary<TokenType, Executive>()
+            {
+                {TokenType.WHERE_KW, AlterAdd }
+            };
+        }
+
+        private Table RightJoin(Node Root)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Table LeftJoin(Node Root)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Table OuterJoin(Node Root)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Table InnerJoin(Node Root)
+        {
+            throw new NotImplementedException();
         }
 
         private void From(Node Root)
@@ -147,8 +190,14 @@ namespace DBA.QueryEngine
                     }
                     KeyIDs.Add(Kt);
                 }
-            if (Root.Children.Count == 3) { Where(Root.Children[2]); }
-            else { Filter = Enumerable.Range(0, Tables.Last().Records).ToList(); }
+
+            Filter = Enumerable.Range(0, Tables.Last().Records).ToList();
+
+            for (int i = 2; i < Root.Children.Count; i++)
+                if (Joiners.ContainsKey(Root.Children[i].HostedToken.Type))
+                    Joiners[Root.Children[i].HostedToken.Type](Root.Children[i]);
+                else if (Conditionals.ContainsKey(Root.Children[i].HostedToken.Type))
+                    Conditionals[Root.Children[i].HostedToken.Type](Root.Children[i]);
 
             Table Response = new Table(Tables.Last().Name);
             Response.Records = Filter.Count;
@@ -379,7 +428,44 @@ namespace DBA.QueryEngine
 
         private Table Alter(Node Root)
         {
+            From(Root.Children[1]);
+            if (Alters.ContainsKey(Root.Children[2].HostedToken.Type))
+                Alters[Root.Children[2].HostedToken.Type](Root.Children[2]);
+            else
+                throw new Exception("Invalid Alter command");
+            AfterEffect[1] = true;
+            AfterEffect[2] = true;
+            return null;
+        }
+
+        private Table AlterModify(Node Root)
+        {
             throw new NotImplementedException();
+        }
+
+        private Table AlterDrop(Node Root)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Table AlterAdd(Node Root)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Table AltereName(Node Root)
+        {
+            int subjectKeyID = -1;
+            if (Root.Children[0].HostedToken.Type == TokenType.Identifier_Key)
+                subjectKeyID = Tables.Last().getKeyIndex(Root.Children[0].HostedToken.TokenData);
+            if (subjectKeyID == -1)
+                Tables.Last().Name = Root.Children[1].HostedToken.TokenData;
+            else
+                Tables.Last().Keys[subjectKeyID].Name = Root.Children[1].HostedToken.TokenData;
+
+            AfterEffect[1] = true;
+            AfterEffect[2] = true;
+            return null;
         }
     }
 }

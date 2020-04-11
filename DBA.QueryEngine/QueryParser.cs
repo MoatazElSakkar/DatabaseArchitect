@@ -35,6 +35,8 @@ namespace DBA.QueryEngine
 
         public delegate Node ParserFunction();
 
+        static Dictionary<TokenType, ParserFunction> Conditional;
+
         static Dictionary<TokenType, ParserFunction> Parsers;
 
         Query Subject;
@@ -45,7 +47,6 @@ namespace DBA.QueryEngine
             {
                 {TokenType.SELECT_cmd,Select },
                 {TokenType.FROM_KW,From },
-                {TokenType.WHERE_KW,Where },
                 {TokenType.INSERT_cmd,Insert },
                 {TokenType.UPDATE_cmd,Update },
                 {TokenType.DELETE_cmd,Delete },
@@ -53,6 +54,39 @@ namespace DBA.QueryEngine
                 {TokenType.ALTER_cmd,Alter },
                 {TokenType.DROP_cmd,Drop }
             };
+
+            Conditional = new Dictionary<TokenType, ParserFunction>()
+            {
+                {TokenType.WHERE_KW,Where },
+                {TokenType.OUTER_KW,JOIN },
+                {TokenType.INNER_KW,JOIN },
+                {TokenType.LEFT_KW,JOIN },
+                {TokenType.RIGHT_KW,JOIN },
+            };
+        }
+
+
+        private Node JOIN()
+        {
+            Node N = new Node(Read);
+            Match(Peak, TokenType.JOIN_KW);
+            N.Children.Add(new Node(Read));
+            N.Children.Add(new Node(Read));
+            if (Peak.Type == TokenType.ON_KW)
+                N.Children.Add(RelationshipON());
+            return N;
+        }
+
+        private Node RelationshipON()
+        {
+            Node N = new Node(Read);
+            Node Expression = new Node(new Token("", TokenType.Composite));
+            Expression.Children.Add(new Node(Read));
+            Match(Peak, TokenType.Equal);
+            Expression.Children.Add(new Node(Read));
+            Expression.Children.Add(new Node(Read));
+            N.Children.Add(Expression);
+            return N;
         }
 
         int currentToken = 0;
@@ -126,7 +160,7 @@ namespace DBA.QueryEngine
                     N.Children.Add(new Node(Match(Read, TokenType.Identifier_Table)));
                     Match(Read, TokenType.SemiColon);
                     break;
-                case TokenType.KEY_KW:
+                case TokenType.COLUMN:
                     N.Children.Add(new Node(Match(Read, TokenType.Identifier_Key)));
                     Match(Read, TokenType.SemiColon);
                     break;
@@ -136,35 +170,62 @@ namespace DBA.QueryEngine
 
         private Node Alter()
         {
+            /* 
+                Alter--TableKeyword         [0]
+                    |\_Identifier           [1]
+                    |__ADD/ALTER/DROP/RENAME[2]
+            */
             Node N = new Node(Read);
+
+            Match(Peak, TokenType.TABLE_KW);
             N.Children.Add(new Node(Read));
 
-            switch (N.Children.Last().HostedToken.Type)
+            N.Children.Add(new Node(Match(Read, TokenType.Identifier_Table)));
+
+            switch (Peak.Type)
             {
-                case TokenType.DATABASE_KW:
+                case TokenType.ADD_KW:
+                    N.Children.Add(Add());
                     break;
-                case TokenType.TABLE_KW:
-                    N.Children.Add(new Node(Match(Read, TokenType.Identifier_Table)));
-                    switch(Peak.Type)
-                    {
-                        case TokenType.CREATE_cmd:
-                            N.Children.Add(Create());
-                            break;
-                        case TokenType.ALTER_cmd:
-                            N.Children.Add(Alter());
-                            break;
-                        case TokenType.DROP_cmd:
-                            N.Children.Add(Drop());
-                            break;
-                    }
+                case TokenType.ALTER_cmd:
+                    N.Children.Add(Modify());
                     break;
-                case TokenType.KEY_KW:
-                    N.Children.Add(new Node(Match(Read, TokenType.Identifier_Key)));
-                    N.Children.Add(new Node(Match(Read, TokenType.DATATYPE)));
-                    Match(Read, TokenType.SemiColon);
+                case TokenType.DROP_cmd:
+                    N.Children.Add(Drop());
+                    break;
+                case TokenType.RENAME_cmd:
+                    N.Children.Add(Rename());
                     break;
             }
+
             return N;
+        }
+
+        private Node Rename()
+        {
+            Node N = new Node(Read);
+            if (Peak.Type == TokenType.Identifier_Key)
+                N.Children.Add(new Node(Read));
+            Match(Read, TokenType.TO_KW);
+            N.Children.Add(new Node(Read));
+            return N;
+        }
+
+        private Node Add()
+        {
+            Node Pair = new Node(new Token("", TokenType.Composite));
+            Pair.Children.Add(new Node(Match(Read, TokenType.Identifier_Key)));
+            Pair.Children.Add(new Node(Match(Read, TokenType.DATATYPE)));
+            return Pair;
+        }
+
+        private Node Modify()
+        {
+            Match(Read, TokenType.COLUMN);
+            Node Pair = new Node(new Token("", TokenType.Composite));
+            Pair.Children.Add(new Node(Match(Read, TokenType.Identifier_Key)));
+            Pair.Children.Add(new Node(Match(Read, TokenType.DATATYPE)));
+            return Pair;
         }
 
         private Node Create()
@@ -381,9 +442,9 @@ namespace DBA.QueryEngine
             N.Children.Add(Keys);
             N.Children.Add(From());
 
-            if (Peak.Type == TokenType.WHERE_KW)
+            while (Conditional.ContainsKey(Peak.Type))
             {
-                N.Children.Add(Where());
+                N.Children.Add(Conditional[Peak.Type]());
             }
             return N;
         }

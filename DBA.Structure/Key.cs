@@ -21,9 +21,9 @@ namespace DBA.Structure
 
         public byte Constraint = 0x00; //Default value at 0
 
-        public bool CheckConstraint(byte input)
+        public bool CheckConstraint(byte Mask)
         {
-            return (Constraint & input) != 0;
+            return (Constraint & Mask) != 0;
         }
 
         public string Name
@@ -107,6 +107,23 @@ namespace DBA.Structure
         }
 
         public virtual bool Verify(byte[] Input)
+        {
+            bool verified = true;
+
+            if (CheckConstraint(UNIQUE) || CheckConstraint(PRIMARYKEY))
+                verified= verified& VerifyUnique(Input);
+            if (CheckConstraint(NOTNULL))
+                verified = verified & VerifyNotNull(Input); 
+
+            return verified;
+        }
+
+        private bool VerifyNotNull(byte[] input)
+        {
+            return true;
+        }
+
+        private bool VerifyUnique(byte[] input)
         {
             return true;
         }
