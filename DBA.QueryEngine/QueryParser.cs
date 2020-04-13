@@ -68,6 +68,11 @@ namespace DBA.QueryEngine
 
         private Node JOIN()
         {
+            /*   
+            Node ━━━ Join Type
+                ┃┗━  JOIN ━ Table Name
+                ┗━━  ON   ━ Condition
+            */
             Node N = new Node(Read);
             Match(Peak, TokenType.JOIN_KW);
             N.Children.Add(new Node(Read));
@@ -171,16 +176,15 @@ namespace DBA.QueryEngine
         private Node Alter()
         {
             /* 
-                Alter--TableKeyword         [0]
-                    |\_Identifier           [1]
-                    |__ADD/ALTER/DROP/RENAME[2]
+                Alter--TableKeyword---Identifier   [0]
+                     \__ADD/ALTER/DROP/RENAME      [1]
             */
             Node N = new Node(Read);
 
             Match(Peak, TokenType.TABLE_KW);
             N.Children.Add(new Node(Read));
 
-            N.Children.Add(new Node(Match(Read, TokenType.Identifier_Table)));
+            N.Children.Last().Children.Add(new Node(Match(Read, TokenType.Identifier_Table)));
 
             switch (Peak.Type)
             {
@@ -206,7 +210,8 @@ namespace DBA.QueryEngine
             Node N = new Node(Read);
             if (Peak.Type == TokenType.Identifier_Key)
                 N.Children.Add(new Node(Read));
-            Match(Read, TokenType.TO_KW);
+            Match(Peak, TokenType.TO_KW);
+            N.Children.Add(new Node(Read));
             N.Children.Add(new Node(Read));
             return N;
         }
@@ -423,22 +428,45 @@ namespace DBA.QueryEngine
 
         private Node Select()
         {
+
+            /*   
+                                      *
+                                    /
+            Node ━━━ Keys ━━━━━ Identifier
+                                    \  Tablename.Identifier
+                ┃┗  JOIN ━ Table Name
+                ┗━  ON   ━ Condition
+            */
+
             Node N = new Node(Read);
             Node Keys = new Node(new Token("",TokenType.Composite));
-            for (; currentToken < Path.Count; currentToken++)
-            {
-                if (Peak.Type != TokenType.Closure)
-                    Match(Peak, TokenType.Identifier_Key);
+            if (Peak.Type != TokenType.Closure)
+                for (; currentToken < Path.Count; currentToken++)
+                {
+                    if (Peak.Type == TokenType.Identifier_Table)
+                    {
+                        Keys.Children.Add(new Node(new Token("", TokenType.Composite)));
+                        Keys.Children.Last().Children.Add(new Node(Read));
+                        Match(Read, TokenType.Dot);
+                        Match(Peak, TokenType.Identifier_Key);
+                        Keys.Children.Last().HostedToken.TokenData = Peak.TokenData;
+                    }
+                    else
+                    {
+                        Match(Peak, TokenType.Identifier_Key);
+                        Keys.Children.Add(new Node(Read));
+                    }
 
+                    if (currentToken < Path.Count &&
+                         Peak.Type != TokenType.Comma)
+                    {
+                        Match(Peak, TokenType.FROM_KW);
+                        break;
+                    }
+                }
+            else
                 Keys.Children.Add(new Node(Read));
 
-                if (currentToken < Path.Count && 
-                     Peak.Type != TokenType.Comma)
-                {
-                    Match(Peak, TokenType.FROM_KW);
-                    break;
-                }
-            }
             N.Children.Add(Keys);
             N.Children.Add(From());
 

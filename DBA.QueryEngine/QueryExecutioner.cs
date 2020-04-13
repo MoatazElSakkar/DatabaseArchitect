@@ -85,11 +85,15 @@ namespace DBA.QueryEngine
             public Node ChildCondition;
         }
 
+        Dictionary<string,List<Key>> KeyIDs = new Dictionary<string, List<Key>>();
 
-        List<Key> KeyIDs = new List<Key>();
-        List<int> KeyCodes = new List<int>();
         public List<Table> Tables = new List<Table>();
-        List<int> Filter = new List<int>();
+
+        //Filters contain the indicies that will be displayed hashed by the table itself
+        Dictionary<string, List<int>> Filters = new Dictionary<string, List<int>>();
+
+        //Only recording the Reordered Records
+        Dictionary<string, Dictionary<int, int>> Order = new Dictionary<string, Dictionary<int, int>>();
 
         QueryTree Query;
         Database database;
@@ -139,7 +143,9 @@ namespace DBA.QueryEngine
 
         private Table RightJoin(Node Root)
         {
-            throw new NotImplementedException();
+            From(Root.Children[1]);
+            Where(Root.Children[2]);
+            return null;
         }
 
         private Table LeftJoin(Node Root)
@@ -167,52 +173,79 @@ namespace DBA.QueryEngine
             }
             if (!T.Survayed)
                 Touch(T);
+            //We add a filter for each table added --Join Case
             Tables.Add(T);
+            Filters.Add(T.Name,Enumerable.Range(0, Tables.Last().Records).ToList());
+        }
+
+        void SelectKeys(Node Keys)
+        {
+            if (Keys.Children[0].HostedToken.Type == TokenType.Closure)
+                foreach (Key K in Tables.Last().Keys)
+                {
+                    KeyIDs[Tables.Last().Name].Add(K);
+                }
+            else
+                foreach (Node Child in Keys.Children)
+                {
+                    string TableName = Tables.Last().Name;
+
+                    if (Child.HostedToken.Type == TokenType.Composite 
+                        && TableName != Child.Children[0].literal)
+                        continue;
+
+                    Key Kt = Tables.Last().getKey(Child.literal);
+                    if (Kt == null)
+                        throw new Exception(string.Format("Designated key \"{0}\" was not found in Table \"{1}\"",Child.literal,TableName));
+
+                    KeyIDs[TableName].Add(Kt);
+                }
         }
 
         private Table Select(Node Root)
         {
             From(Root.Children[1]);
-            if (Root.Children[0].Children.Count == 1 && Root.Children[0].Children[0].HostedToken.Type == TokenType.Closure)
-                foreach (Key K in Tables[0].Keys)
-                {
-                    KeyIDs.Add(K);
-                }
-            else
-                foreach (Node Child in Root.Children[0].Children)
-                {
-                    Key Kt = Tables[0].getKey(Child.HostedToken.TokenData);
-                    if (Kt == null)
-                    {
-                        throw new Exception("Designated key " +
-                            Child.HostedToken.TokenData +
-                            " was not found");
-                    }
-                    KeyIDs.Add(Kt);
-                }
 
-            Filter = Enumerable.Range(0, Tables.Last().Records).ToList();
+            SelectKeys(Root.Children[0]);
 
             for (int i = 2; i < Root.Children.Count; i++)
                 if (Joiners.ContainsKey(Root.Children[i].HostedToken.Type))
+                {
                     Joiners[Root.Children[i].HostedToken.Type](Root.Children[i]);
+                    SelectKeys(Root.Children[0]);
+                }
                 else if (Conditionals.ContainsKey(Root.Children[i].HostedToken.Type))
+                {
                     Conditionals[Root.Children[i].HostedToken.Type](Root.Children[i]);
+                }
 
-            Table Response = new Table(Tables.Last().Name);
-            Response.Records = Filter.Count;
-            List<int> KIndices = new List<int>();
-            foreach (Key Ki in KeyIDs)
+            Table Response = new Table(Tables[0].Name+((Tables.Count>1)?"featuring "+Tables[1].Name:""));
+
+            Response.Records = Filters.First().Value.Count;
+            foreach (List<int> Li in Filters.Values)
+                if (Li.Count > Response.Records)
+                    Response.Records = Li.Count;
+
+            Dictionary<string,List<int>> KIndices = new Dictionary <string, List<int>>();
+
+            foreach (Table Ti in Tables)
             {
-                Response.Keys.Add(new Key(Ki,true));
-                KIndices.Add(Tables.Last().getKeyIndex(Ki.Name));
+                KIndices.Add(Ti.Name, new List<int>());
+                foreach (Key Ki in KeyIDs[Ti.Name])
+                {
+                    Response.Keys.Add(new Key(Ki, true));
+                    KIndices[Ti.Name].Add(Ti.getKeyIndex(Ki.Name));
+                }
             }
-            for (int i=0;i<Filter.Count;i++)
+
+            for (int i=0;i<Filters.Count;i++)
             {
-                List<byte[]> Record = Tables.Last().RetrieveRecord(KIndices, Filter[i]);
+                List<byte[]> Record = new List<byte[]>();
+                foreach (Table Ti in Tables)     //Assembling records that span multiple tables
+                    Record.AddRange(Ti.RetrieveRecord(KIndices[Ti.Name], Filters[Ti.Name][i]));
                 Response.AppendRecord(Enumerable.Range(0,KIndices.Count).ToList(), Record);
             }
-
+            
             return Response;
         }
 
@@ -250,7 +283,7 @@ namespace DBA.QueryEngine
             foreach (Node N in Root.Children)
                 PartialFilters=AndCombine(PartialFilters,WhereSearch(CompileComparison(N)));
 
-            Filter = PartialFilters;
+            Filters[Filters.Count-1] = PartialFilters;
         }
 
 
@@ -363,13 +396,13 @@ namespace DBA.QueryEngine
             }
             foreach (Key Ki in Values.Keys)
             {
-                foreach (int i in Filter)
+                foreach (int i in Filters)
                 {
                     Ki.DATA[i] = Values[Ki];
                 }
             }
             AfterEffect[2] = true;
-            Result = Filter.Count.ToString() + " records affected";
+            Result = Filters.Count.ToString() + " records affected";
             return null;
         }
 
@@ -377,14 +410,14 @@ namespace DBA.QueryEngine
         {
             From(Root.Children[0]);
             if (Root.Children.Count > 1) { Where(Root.Children[1]); }
-            foreach (int i in Filter)
+            foreach (int i in Filters.Last())
             {
                 Tables.Last().RemoveRecord(i);
             }
-            Result = Filter.Count.ToString() + " records affected";
+            Result = Filters.Last().Count.ToString() + " records affected";
             AfterEffect[1] = true;
             AfterEffect[2] = true;
-            Tables.Last().Records -= Filter.Count;
+            Tables.Last().Records -= Filters.Last().Count;
             return null;
         }
 
@@ -428,9 +461,9 @@ namespace DBA.QueryEngine
 
         private Table Alter(Node Root)
         {
-            From(Root.Children[1]);
-            if (Alters.ContainsKey(Root.Children[2].HostedToken.Type))
-                Alters[Root.Children[2].HostedToken.Type](Root.Children[2]);
+            From(Root.Children[0]);
+            if (Alters.ContainsKey(Root.Children[1].HostedToken.Type))
+                Alters[Root.Children[1].HostedToken.Type](Root.Children[1]);
             else
                 throw new Exception("Invalid Alter command");
             AfterEffect[1] = true;

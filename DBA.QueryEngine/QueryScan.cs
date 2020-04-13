@@ -66,8 +66,9 @@ namespace DBA.QueryEngine
         Equal,                   // '='
                                
         GreaterThan,             // '>'
-        LessThan,                 // '<'
-        TO_KW,
+        LessThan,                // '<'
+        TO_KW,                   //TO_KW
+        Dot                      //'.'
     }
 
     public class Token
@@ -104,6 +105,7 @@ namespace DBA.QueryEngine
                 {"<",TokenType.LessThan       },         // '<'
                 {"(",TokenType.LBracket       },        // '<'
                 {")",TokenType.RBracket       },         // '<'
+                {".",TokenType.Dot }                    // '.'
         };
 
         char[] delimiters = {' ','\t','\n','\r',';'};
@@ -238,25 +240,25 @@ namespace DBA.QueryEngine
             switch(Token.ToUpper())
             {
                 case "ADD":
-                    Path.Add(new Token(Literal, TokenType.ADD_KW));
+                    Path.Add(new Token(Token.ToUpper(), TokenType.ADD_KW));
                     Token = getToken();
-                    Path.Add(new Token(Literal, TokenType.Identifier_Key));
+                    Path.Add(new Token(Token, TokenType.Identifier_Key));
                     Token = getToken();
-                    Path.Add(new Token(Literal, TokenType.DATATYPE));
+                    Path.Add(new Token(Token, TokenType.DATATYPE));
                     break;
                 case "DROP":
-                    Path.Add(new Token(Literal, TokenType.ADD_KW));
+                    Path.Add(new Token(Token.ToUpper(), TokenType.ADD_KW));
                     Token = getToken();
-                    Path.Add(new Token(Literal, TokenType.Identifier_Key));
+                    Path.Add(new Token(Token, TokenType.Identifier_Key));
                     break;
                 case "ALTER":
-                    Path.Add(new Token(Literal, TokenType.ALTER_cmd));
+                    Path.Add(new Token(Token.ToUpper(), TokenType.ALTER_cmd));
                     Token = getToken();
                     if (Token.ToUpper() != "COLUMN") {/*Register Inconsistency*/ return; }
                     AlterColumn(Path, Token);
                     break;
                 case "RENAME":
-                    Path.Add(new Token(Literal, TokenType.RENAME_cmd));
+                    Path.Add(new Token(Token.ToUpper(), TokenType.RENAME_cmd));
                     Token = getToken();
                     if (Token.ToUpper() != "COLUMN" && Token.ToUpper()!="TO") {/*Register Inconsistency*/ return; }
                     RenameColumn(Path, Token);
@@ -272,17 +274,20 @@ namespace DBA.QueryEngine
         private void RenameColumn(List<Token> Path, string Literal)
         {
             string Token = getToken();
-            if (Literal.ToUpper() == "COLUMN")
+            switch (Literal.ToUpper())
             {
-                Path.Add(new Token(Literal, TokenType.COLUMN));
-                Path.Add(new Token(Token, TokenType.Identifier_Key));
-                Token = getToken();
-                Path.Add(new Token(Token, TokenType.Identifier_Key));
-            }
-            else if (Literal.ToUpper() == "TO")
-            {
-                Path.Add(new Token(Literal, TokenType.TO_KW));
-                Path.Add(new Token(Token, TokenType.Identifier_Table));
+                case "COLUMN":
+                    Path.Add(new Token(Token, TokenType.Identifier_Key));
+                    Token = getToken();
+                    Path.Add(new Token(Token, TokenType.TO_KW));
+                    Token = getToken();
+                    Path.Add(new Token(Token, TokenType.Identifier_Key));
+                    break;
+
+                case "TO":
+                    Path.Add(new Token(Literal, TokenType.TO_KW));
+                    Path.Add(new Token(Token, TokenType.Identifier_Table));
+                    break;
             }
         }
 
@@ -530,6 +535,13 @@ namespace DBA.QueryEngine
                         Path.Add(new Token(Token, TokenType.Comma));
                         Token = getToken();
                         continue;
+                    }
+                    else if (Token==".")
+                    {
+                        Path.Last().Type = TokenType.Identifier_Table;
+                        Path.Add(new Token(Token, TokenType.Dot));
+                        Token = getToken();
+                        Path.Add(new Token(Token, TokenType.Identifier_Key));
                     }
                     else if (Parsers.ContainsKey(Token.ToUpper())) { break; }
                     else { throw new Exception("Unexpected lexim encountered"); }

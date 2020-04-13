@@ -88,9 +88,7 @@ namespace DBA_Server_Test
                                 return;
                             }
                             break;
-                    }
-
-            
+                    }            
             }
         }
 
