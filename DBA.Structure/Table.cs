@@ -38,8 +38,10 @@ namespace DBA.Structure
 
         public int KeysCount
         {
-            get;
-            set;
+            get
+            {
+                return Keys.Count;
+            }
         }
 
 
@@ -53,7 +55,6 @@ namespace DBA.Structure
         {
             Name = T.Name;
             Records = T.Records;
-            KeysCount = T.KeysCount;
             foreach (Key k in T.Keys)
             {
                 Keys.Add(new Key(k,Shallow));

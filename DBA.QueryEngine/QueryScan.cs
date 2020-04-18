@@ -392,6 +392,7 @@ namespace DBA.QueryEngine
             {
                 throw new Exception("Keyword unrecognized, SET Expected");
             }
+
             Path.Add(new Token(Token, TokenType.SET_cmd));
 
             while(!EndOfText)
@@ -405,7 +406,13 @@ namespace DBA.QueryEngine
                 else if (Token.ToUpper() == "WHERE" || Token==";") { break; }
                 
                 Path.Add(new Token(Token, TokenType.Identifier_Key));
-
+                if (Token == ".")
+                {
+                    Path.Last().Type = TokenType.Identifier_Table;
+                    Path.Add(new Token(Token, TokenType.Dot));
+                    Token = getToken();
+                    Path.Add(new Token(Token, TokenType.Identifier_Key));
+                }
                 Token = getToken();
                 if (Token!="=")
                 {
@@ -463,7 +470,7 @@ namespace DBA.QueryEngine
 
             if (Token.ToUpper()!="VALUES")
             {
-                //Register Inconsistency
+                throw new Exception("Expected keyword VALUES");
             }
             else
             {

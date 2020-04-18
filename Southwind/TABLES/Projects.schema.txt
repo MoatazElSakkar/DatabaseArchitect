@@ -1,4 +1,4 @@
-TAB-NAME:MyProjects
+TAB-NAME:Projects
 RECORDS:7
 KEYS:4
 ID:INT32:4

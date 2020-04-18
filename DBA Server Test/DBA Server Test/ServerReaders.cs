@@ -92,7 +92,7 @@ namespace DBA_Server_Test
                         Tableu.Records = int.Parse(bufferSplit[1]);
                         break;
                     case "KEYS":
-                        Tableu.KeysCount= int.Parse(bufferSplit[1]);
+                        int.Parse(bufferSplit[1]);
                         break;
                     default:
                         Tableu.Keys.Add(new Key(

@@ -30,7 +30,7 @@ namespace DB_Architect
             {
                 Cli.Workspace_Lower.Controls.Clear();
                 Cli.Workspace_Lower.Controls.Add(StreamOut);
-                StreamOut.Write("SELECT * FROM " + Source.Name);
+                StreamOut.Write("SELECT * FROM " + Source.Name+";");
             }
         }
 
@@ -80,6 +80,8 @@ namespace DB_Architect
                     string Query;
                     if (eGrid.RowIndex >= Source.Records)
                     {
+                        //TODO: ARCHITECT STUDIO | Primary key error
+
                         if (TablePreviewGrid[0, eGrid.RowIndex].Value as string == "")
                             throw new Exception("Primary Key has to be assigned first");
 
@@ -108,6 +110,7 @@ namespace DB_Architect
 
             TablePreviewGrid.RowsRemoved += (object obj, DataGridViewRowsRemovedEventArgs eGrid) =>
             {
+                //TODO: ARCHITECT STUDIO | Lay the groundwork for Primary key being editable
                 int RecIndex = eGrid.RowIndex;
                 string Query = string.Format("DELETE FROM {0} Where {1}={2};",
                     Source.Name, Source.Keys[0].Name, 

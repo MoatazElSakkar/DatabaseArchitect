@@ -370,6 +370,12 @@ namespace DBA.QueryEngine
 
         private Node Where()
         {
+            /*   
+            Node ━━━ Where
+                ┃┗━  BooleanExpression ━ ORed Boolean Expression
+                ┗━━  ANDed Boolean Expression   ━ Ored Boolean Expression
+            */
+
             Node N = new Node(Read);
             
             while (currentToken < Path.Count)

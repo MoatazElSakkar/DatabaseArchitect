@@ -98,7 +98,6 @@ namespace DBA.QueryEngine
         QueryTree Query;
         Database database;
 
-
         public delegate Table Executive(Node Root);
         static Dictionary<TokenType, Executive> Execs;
         static Dictionary<TokenType, Executive> Joiners;
@@ -137,7 +136,7 @@ namespace DBA.QueryEngine
 
             Conditionals = new Dictionary<TokenType, Executive>()
             {
-                {TokenType.WHERE_KW, AlterAdd }
+                {TokenType.WHERE_KW, Where }
             };
         }
 
@@ -176,6 +175,7 @@ namespace DBA.QueryEngine
             //We add a filter for each table added --Join Case
             Tables.Add(T);
             Filters.Add(T.Name,Enumerable.Range(0, Tables.Last().Records).ToList());
+            KeyIDs.Add(T.Name, new List<Key>());
         }
 
         void SelectKeys(Node Keys)
@@ -238,12 +238,12 @@ namespace DBA.QueryEngine
                 }
             }
 
-            for (int i=0;i<Filters.Count;i++)
+            for (int i=0;i<Response.Records;i++)
             {
                 List<byte[]> Record = new List<byte[]>();
                 foreach (Table Ti in Tables)     //Assembling records that span multiple tables
                     Record.AddRange(Ti.RetrieveRecord(KIndices[Ti.Name], Filters[Ti.Name][i]));
-                Response.AppendRecord(Enumerable.Range(0,KIndices.Count).ToList(), Record);
+                Response.AppendRecord(Enumerable.Range(0,Response.KeysCount).ToList(), Record);
             }
             
             return Response;
@@ -275,15 +275,25 @@ namespace DBA.QueryEngine
             return new Comparison(ID, ID2,Immediate, N.Children[1].HostedToken);
         }
 
-        private void Where(Node Root)
+        
+        private Table Where(Node Root)
         {
+            /*
+            This where implmentation is tricky so pay attention
+            PartialFilters stores records that satisfy the conditions evaluated cumulatively
+            Where each WhereSearch function call would take the node with 
+            the condition and then filter the last table in "Tables" with that condition,
+            then AndCombine function call would combine the outputs with the cumulative list.
+            */
+
             List<int> PartialFilters = new List<int>();
             PartialFilters = Enumerable.Range(0, Tables.Last().Records).ToList();
 
             foreach (Node N in Root.Children)
                 PartialFilters=AndCombine(PartialFilters,WhereSearch(CompileComparison(N)));
 
-            Filters[Filters.Count-1] = PartialFilters;
+            Filters[Tables.Last().Name] = PartialFilters;
+            return null;
         }
 
 
@@ -295,6 +305,17 @@ namespace DBA.QueryEngine
         };
         private List<int> WhereSearch(Comparison C)
         {
+            /*
+            Single parameter "WhereSearch" is the most primitive version of WhereSearch, 
+            It itirates on all indicies from both Keys.
+            "And" conditions are evaluated itirativly
+            "Or" Conditions are evaluated recursivly when needed
+            Database Architect Parser ensures all Ands are evaluated by maintaining levels
+
+            --Refer to the parser's documentation for exact details of how 
+            boolean expressions are evaluated. 
+            */
+
             List<int> Filter = new List<int>();
             
             for (int i1 = 0, i2 = 0;i1<C.Capacity;i1++)
@@ -310,12 +331,21 @@ namespace DBA.QueryEngine
                         Filter.Add(i1);
                     }
                 }
+                i2 += C.Immediate ? 0 : 1;  //Incrementing if the second key wasn't virtual
             }
             return Filter;
         }
 
         private bool WhereSearch(Node Ni, int index)
         {
+            /*
+            Dual parameter "WhereSearch" is more controlled, 
+            It's used to evaluate Expressions paired with an OR operator
+            these expressions can include sub expressions with AND & OR
+            however for the sake of optimization an OR expression is evaluated
+            at a single specific index via the index given.
+            */
+
             bool allTrue = true;
             foreach (Node Ci in Ni.Children)
             {
@@ -340,6 +370,7 @@ namespace DBA.QueryEngine
         private List<int> AndCombine(List<int> a,List<int> b)
         {
             List<int> Combined = new List<int>();
+            //Uses 2 variables comparator design for a singular loop design.
             for (int i1=0,i2=0;i1<a.Count && i2<b.Count;)
             {
                 if (a[i1] == b[i2])
@@ -378,7 +409,18 @@ namespace DBA.QueryEngine
         private Table Update(Node Root)
         {
             From(Root);
-            if (Root.Children.Count > 2) { Where(Root.Children[2]); }
+
+            SelectKeys(Root.Children[0]);
+            for (int i = 2; i < Root.Children.Count; i++)
+                if (Joiners.ContainsKey(Root.Children[i].HostedToken.Type))
+                {
+                    Joiners[Root.Children[i].HostedToken.Type](Root.Children[i]);
+                    SelectKeys(Root.Children[0]);
+                }
+                else if (Conditionals.ContainsKey(Root.Children[i].HostedToken.Type))
+                {
+                    Conditionals[Root.Children[i].HostedToken.Type](Root.Children[i]);
+                }
             Dictionary<Key, byte[]> Values = new Dictionary<Key, byte[]>();
             foreach (Node ni in Root.Children[1].Children)
             {
@@ -394,11 +436,14 @@ namespace DBA.QueryEngine
                     throw new Exception("Invalid input data");
                 }
             }
-            foreach (Key Ki in Values.Keys)
+            foreach (Table Ti in Tables)
             {
-                foreach (int i in Filters)
+                foreach (Key Ki in Ti.Keys)
                 {
-                    Ki.DATA[i] = Values[Ki];
+                    foreach (int i in Filters[Ti.Name])
+                    {
+                        Ki.DATA[i] = Values[Ki];
+                    }
                 }
             }
             AfterEffect[2] = true;
@@ -408,16 +453,19 @@ namespace DBA.QueryEngine
 
         private Table Delete(Node Root)
         {
+            int Impact = 0;
             From(Root.Children[0]);
             if (Root.Children.Count > 1) { Where(Root.Children[1]); }
-            foreach (int i in Filters.Last())
+            foreach (Table Ti in Tables)
             {
-                Tables.Last().RemoveRecord(i);
+                foreach (int i in Filters[Ti.Name])
+                    Ti.RemoveRecord(i);
+                Impact = Math.Max(Impact, Filters[Ti.Name].Count);
+                Ti.Records -= Filters[Ti.Name].Count;
             }
-            Result = Filters.Last().Count.ToString() + " records affected";
+            Result = Impact.ToString() + " records affected";
             AfterEffect[1] = true;
             AfterEffect[2] = true;
-            Tables.Last().Records -= Filters.Last().Count;
             return null;
         }
 
