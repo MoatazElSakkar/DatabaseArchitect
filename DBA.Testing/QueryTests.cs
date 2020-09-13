@@ -80,6 +80,24 @@ namespace DBA.Testing
         }
 
         [TestMethod]
+        public void RightJoinTest()
+        {
+            Database DB = new Database(@"C:\Users\Moataz\Workspace\Software\Database Architect\Active Code\DatabaseArchitect\Southwind\Database.db.txt");
+            DB.Read();
+            foreach (Table T in DB.Tables)
+            {
+                T.ReadRecords();
+            }
+            Query Q = new Query("SELECT * FROM Projects RIGHT JOIN Grades ON GradeID=ID;");
+            QueryScanner QS = new QueryScanner(Q);
+            Q = QS.Scan();
+            QueryParser QP = new QueryParser(Q);
+            QueryTree QT = QP.Reorder();
+            QueryExecutioner QE = new QueryExecutioner(QT, DB, null);
+            Table Ti = QE.ExecuteQuery();
+        }
+
+        [TestMethod]
         public void UpdateTest2()
         {
             TokenType[] Tokens = {TokenType.UPDATE_cmd,TokenType.Identifier_Table,TokenType.SET_cmd,

@@ -193,8 +193,62 @@ namespace DBA.QueryEngine
                 {"DELETE",Delete },
                 {"CREATE",Create },
                 {"ALTER",Alter },
-                {"DROP",Drop }
+                {"DROP",Drop },
+                {"RIGHT",RightJoin },
+                {"LEFT",LeftJoin },
+                {"INNER", InnerJoin }
             };
+        }
+
+        private void InnerJoin(List<Token> Path, string Literal)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void LeftJoin(List<Token> Path, string Literal)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RightJoin(List<Token> Path, string Literal)
+        {
+            Path.Add(new Token(Literal, TokenType.RIGHT_KW));
+            
+            string Token = getToken();
+
+            if (Token.ToUpper()!="JOIN")
+                throw new Exception("JOIN Expected but " + Token + " encountered");
+
+            Path.Add(new Token(Token, TokenType.JOIN_KW));
+
+            Token = getToken();
+
+            Path.Add(new Token(Token, TokenType.Identifier_Table));
+
+            Token = getToken();
+
+
+            if (Token.ToUpper() != "ON")
+                throw new Exception("JOIN Expected but " + Token + " encountered");
+            else
+                ON(Path, Token);
+        }
+
+        void ON(List<Token> Path, string Literal)
+        {
+            Path.Add(new Token(Literal, TokenType.ON_KW));
+
+
+            string Token = getToken();
+            Path.Add(new Token(Token, TokenType.Identifier_Key));
+
+            Token = getToken();
+            if (Token != "=")
+                throw new Exception("= Expected but " + Token + " encountered");
+            Path.Add(new Token(Token, TokenType.Equal));
+
+            Token = getToken();
+            Path.Add(new Token(Token, TokenType.Identifier_Key));
         }
 
         private void Drop(List<Token> Path, string Literal)

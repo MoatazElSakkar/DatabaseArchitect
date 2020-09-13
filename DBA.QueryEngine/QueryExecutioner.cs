@@ -97,7 +97,7 @@ namespace DBA.QueryEngine
 
         QueryTree Query;
         Database database;
-
+        Dictionary<string, Dictionary<int, int>> tempIndex = new Dictionary<string, Dictionary<int, int>>();
         public delegate Table Executive(Node Root);
         static Dictionary<TokenType, Executive> Execs;
         static Dictionary<TokenType, Executive> Joiners;
@@ -142,9 +142,9 @@ namespace DBA.QueryEngine
 
         private Table RightJoin(Node Root)
         {
-            From(Root.Children[1]);
-            Where(Root.Children[2]);
-            return null;
+            From(Root.Children[1].literal);
+            Filters[Tables.Last().Name] = Enumerable.Range(0, Tables.Last().Records).ToList();
+            return new Table("ForeignTable") { Keys = new List<Key>() { Tables.First().getKey(Root.Children[2].Children[0].Children[0].HostedToken.TokenData )} };
         }
 
         private Table LeftJoin(Node Root)
@@ -162,6 +162,8 @@ namespace DBA.QueryEngine
             throw new NotImplementedException();
         }
 
+
+
         private void From(Node Root)
         {
             Table T = database.getTable(Root.Children[0].HostedToken.TokenData);
@@ -178,6 +180,20 @@ namespace DBA.QueryEngine
             KeyIDs.Add(T.Name, new List<Key>());
         }
 
+        private void From(string TableName)
+        {
+            Table T = database.getTable(TableName);
+            if (T == null)
+                throw new Exception("Designated table " +TableName +" was not found");
+            
+            if (!T.Survayed)
+                Touch(T);
+            //We add a filter for each table added --Join Case
+            Tables.Add(T);
+            Filters.Add(T.Name, Enumerable.Range(0, Tables.Last().Records).ToList());
+            KeyIDs.Add(T.Name, new List<Key>());
+        }
+
         void SelectKeys(Node Keys)
         {
             if (Keys.Children[0].HostedToken.Type == TokenType.Closure)
@@ -189,12 +205,15 @@ namespace DBA.QueryEngine
                 foreach (Node Child in Keys.Children)
                 {
                     string TableName = Tables.Last().Name;
+                    string KeyName;
+                    if (Child.HostedToken.Type == TokenType.Composite)
+                        KeyName = Child.Children[0].literal;
+                    else if (Child.Children[0].literal.Contains(TableName + "."))
+                        KeyName = Child.literal.Replace(TableName + ".", "");
+                    else
+                        KeyName = Child.literal;
 
-                    if (Child.HostedToken.Type == TokenType.Composite 
-                        && TableName != Child.Children[0].literal)
-                        continue;
-
-                    Key Kt = Tables.Last().getKey(Child.literal);
+                        Key Kt = Tables.Last().getKey(KeyName);
                     if (Kt == null)
                         throw new Exception(string.Format("Designated key \"{0}\" was not found in Table \"{1}\"",Child.literal,TableName));
 
@@ -208,10 +227,12 @@ namespace DBA.QueryEngine
 
             SelectKeys(Root.Children[0]);
 
+            Key ForeignKey=Tables.Last().Keys.First();
+
             for (int i = 2; i < Root.Children.Count; i++)
                 if (Joiners.ContainsKey(Root.Children[i].HostedToken.Type))
                 {
-                    Joiners[Root.Children[i].HostedToken.Type](Root.Children[i]);
+                    ForeignKey=Joiners[Root.Children[i].HostedToken.Type](Root.Children[i]).Keys.First();
                     SelectKeys(Root.Children[0]);
                 }
                 else if (Conditionals.ContainsKey(Root.Children[i].HostedToken.Type))
@@ -221,10 +242,9 @@ namespace DBA.QueryEngine
 
             Table Response = new Table(Tables[0].Name+((Tables.Count>1)?"featuring "+Tables[1].Name:""));
 
-            Response.Records = Filters.First().Value.Count;
-            foreach (List<int> Li in Filters.Values)
-                if (Li.Count > Response.Records)
-                    Response.Records = Li.Count;
+            Response.Records = Filters.Last().Value.Count; //the last table is treated as a reference point for joiners
+                                                            //therfore left join inverse the 2 tables to maintain
+                                                            //Where the last table will be joined completely
 
             Dictionary<string,List<int>> KIndices = new Dictionary <string, List<int>>();
 
@@ -238,15 +258,36 @@ namespace DBA.QueryEngine
                 }
             }
 
+            Dictionary<int, int> assistiveIndex=indexFilter(ForeignKey);
+            byte[] nullarr = { 0, 0, 0, 0, 0, 0, 0, 0 }; // \u0000 standard null
             for (int i=0;i<Response.Records;i++)
             {
-                List<byte[]> Record = new List<byte[]>();
-                foreach (Table Ti in Tables)     //Assembling records that span multiple tables
-                    Record.AddRange(Ti.RetrieveRecord(KIndices[Ti.Name], Filters[Ti.Name][i]));
-                Response.AppendRecord(Enumerable.Range(0,Response.KeysCount).ToList(), Record);
+                List<byte[]> Record = new List<byte[]>();     //Assembling records that span multiple tables
+
+                if (assistiveIndex.ContainsKey(BitConverter.ToInt32(Tables.Last().Keys[0].DATA[Filters[Tables.Last().Name][i]], 0))
+                    && i<Filters[Tables.First().Name].Count)
+                {
+                    Record.AddRange(Tables.First().RetrieveRecord(KIndices[Tables.First().Name], assistiveIndex[BitConverter.ToInt32(Tables.Last().Keys[0].DATA[Filters[Tables.Last().Name][i]], 0)]));
+                    if (Tables.Count > 1)
+                        Record.AddRange(Tables.Last().RetrieveRecord(KIndices[Tables.Last().Name], Filters[Tables.Last().Name][i]));
+                }
+                else
+                {
+                    Record.AddRange(Enumerable.Repeat(nullarr, (KIndices[Tables.First().Name].Count)));
+                    Record.AddRange(Tables.Last().RetrieveRecord(KIndices[Tables.Last().Name], Filters[Tables.Last().Name][i]));
+                }
+                Response.AppendRecord(Enumerable.Range(0, Response.KeysCount).ToList(), Record);
             }
-            
+
             return Response;
+        }
+
+        private Dictionary<int, int> indexFilter(Key foreignKey)
+        {
+            Dictionary<int, int> Index = new Dictionary<int, int>();
+            for (int i = 0; i < Filters.First().Value.Count; i++)
+                Index.Add(BitConverter.ToInt32(foreignKey.DATA[Filters.First().Value[i]], 0), Filters.First().Value[i]);
+            return Index;
         }
 
         public Table ExecuteQuery()
@@ -256,7 +297,7 @@ namespace DBA.QueryEngine
 
         private Comparison CompileComparison(Node N)
         {
-            Key ID = Tables.Last().getKey(N.Children[0].HostedToken.TokenData);
+            Key ID = Tables.First().getKey(N.Children[0].HostedToken.TokenData);
             Key ID2;
             bool Immediate = false;
             if (N.Children[2].HostedToken.Type == TokenType.Identifier_Key)
@@ -318,7 +359,7 @@ namespace DBA.QueryEngine
 
             List<int> Filter = new List<int>();
             
-            for (int i1 = 0, i2 = 0;i1<C.Capacity;i1++)
+            for (int i1 = 0, i2 = 0;i1<C.K1.DATA.Count&&i2<C.K2.DATA.Count;i1++)
             {
                 if (Datatypes.CompareFunctions[C.Datatype](C.K1.DATA[i1], C.K2.DATA[i2])==ComparisonDecoder[C.Condition.TokenData[0]])
                 {
@@ -331,6 +372,7 @@ namespace DBA.QueryEngine
                         Filter.Add(i1);
                     }
                 }
+                
                 i2 += C.Immediate ? 0 : 1;  //Incrementing if the second key wasn't virtual
             }
             return Filter;
@@ -410,7 +452,7 @@ namespace DBA.QueryEngine
         {
             From(Root);
 
-            SelectKeys(Root.Children[0]);
+            SelectKeys(Root.Children[1]);
             for (int i = 2; i < Root.Children.Count; i++)
                 if (Joiners.ContainsKey(Root.Children[i].HostedToken.Type))
                 {
@@ -438,13 +480,15 @@ namespace DBA.QueryEngine
             }
             foreach (Table Ti in Tables)
             {
-                foreach (Key Ki in Ti.Keys)
-                {
-                    foreach (int i in Filters[Ti.Name])
+                if (KeyIDs.ContainsKey(Ti.Name))
+                    foreach (Key Ki in KeyIDs[Ti.Name])
                     {
-                        Ki.DATA[i] = Values[Ki];
+                        foreach (int i in Filters[Ti.Name])
+                        {
+                            if (Values.ContainsKey(Ki))
+                                Ki.DATA[i] = Values[Ki];
+                        }
                     }
-                }
             }
             AfterEffect[2] = true;
             Result = Filters.Count.ToString() + " records affected";

@@ -28,6 +28,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBA.SplashScreen", "DBA.Spl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controls", "Controls", "{FC5DF063-4857-4ED2-A098-3E17D8F9874D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBA.Bookkeeper", "DBA.Bookkeeper\DBA.Bookkeeper.csproj", "{0059E8BE-CAEB-4742-9C7C-A907E45A2E9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBA.Definitions", "DBA.Definitions\DBA.Definitions.csproj", "{655C1E22-E4B9-47B0-9ECB-0B6CB3F83D83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,14 @@ Global
 		{5AF3E6AA-0CF7-4A82-9D01-465FFD0E8ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AF3E6AA-0CF7-4A82-9D01-465FFD0E8ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AF3E6AA-0CF7-4A82-9D01-465FFD0E8ABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0059E8BE-CAEB-4742-9C7C-A907E45A2E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0059E8BE-CAEB-4742-9C7C-A907E45A2E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0059E8BE-CAEB-4742-9C7C-A907E45A2E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0059E8BE-CAEB-4742-9C7C-A907E45A2E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655C1E22-E4B9-47B0-9ECB-0B6CB3F83D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655C1E22-E4B9-47B0-9ECB-0B6CB3F83D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655C1E22-E4B9-47B0-9ECB-0B6CB3F83D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655C1E22-E4B9-47B0-9ECB-0B6CB3F83D83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

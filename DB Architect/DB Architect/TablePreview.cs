@@ -35,6 +35,7 @@ namespace DB_Architect
         }
 
         Output StreamOut = new Output();
+        byte[] nullArr = { 0,0,0,0,0,0,0,0 };
 
         private void TablePreview_Load(object sender, EventArgs e)
         {
@@ -50,7 +51,10 @@ namespace DB_Architect
 
                 foreach (Key K in Source.Keys)
                 {
-                    RowContent.Add(Datatypes.DecoderFunctions[K.Type](K.DATA[RecordsIndex]));
+                    if (!K.DATA[RecordsIndex].SequenceEqual(nullArr))
+                        RowContent.Add(Datatypes.DecoderFunctions[K.Type](K.DATA[RecordsIndex]));
+                    else
+                        RowContent.Add("");
                 }
                 RecordsIndex++;
 
